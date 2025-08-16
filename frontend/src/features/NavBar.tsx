@@ -19,14 +19,14 @@ export default function Navbar (){
 
     const [whatTheme, setTheme] = useState<boolean>(true);
 
-    const changeTheme = () => {
-        setTheme(prevTheme => !prevTheme)
+    const changeTheme = ():void => {
+        setTheme((prevTheme):boolean => !prevTheme)
     }
 
     return(
         <>
-        <div className="flex flex-row justify-evenly items-center w-screen h-18 bg-blue-800">
-            <input className="bg-white rounded-2xl pl-2"/>
+        <div className="flex flex-row justify-between items-center w-screen h-18 bg-blue-800 pl-10 pr-20">
+            <input className="bg-white rounded-2xl pl-2 h-8"/>
             <div className="flex flex-row justify-evenly items-center w-1/4">
                 <label className="cursor-pointer text-white hover:text-yellow-500">AMZN</label>
                 <label className="cursor-pointer text-white hover:text-red-500">AAPL</label>
@@ -35,7 +35,7 @@ export default function Navbar (){
                 <label className="cursor-pointer text-white hover:text-green-500">NVDA</label>
             </div>
 
-            <img className="w-10 cursor-pointer" src={whatTheme ? lightMode: darkMode} onClick={() =>changeTheme()}/>
+            <img className="w-10 cursor-pointer" src={whatTheme ? lightMode: darkMode} onClick={():void =>changeTheme()}/>
         </div>
         </>
     )
