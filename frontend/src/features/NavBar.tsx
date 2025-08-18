@@ -28,17 +28,23 @@ export default function Navbar (){
     return(
         <>
         <div className="flex flex-row justify-between items-center w-screen h-18 bg-blue-800 pl-10 pr-20">
-            <input className="bg-white rounded-2xl pl-2 h-8" 
-            onMouseEnter={():void => showTimeFrames()}
-            onMouseLeave={():void => showTimeFrames()}/>
+            <div className="">
+                <input className={isTimeFrameShown ? "bg-white rounded-xl pl-3 h-8 w-20 outline-0" : " bg-white pl-3 h-8 w-20 outline-0 rounded-t-xl"}
+                onMouseEnter={():void => showTimeFrames()}
+                onMouseLeave={():void => showTimeFrames()}/>
 
-            <div className={isTimeFrameShown ? "hidden absolute h-25 w-20 bg-white" : "flex absolute h-25 w-20 bg-white"} onMouseEnter={() => holdVisible()} onMouseLeave={() => makeInvisible()}>
-                <ul className="flex flex-col justify-start items-center m-0">
-                    <li className="hover:bg-blue-100 m-0">1 Day</li>
-                    <li className="hover:bg-blue-100">1 Week</li>
-                    <li className="hover:bg-blue-100">1 Month</li>
-                    <li className="hover:bg-blue-100">1 Year</li>
-                </ul>
+                <div className={isTimeFrameShown ? "hidden absolute h-25 w-20 bg-white" : "flex absolute h-25 w-20 bg-white"} 
+                onMouseEnter={():void => holdVisible()} 
+                onMouseLeave={():void => makeInvisible()}>
+
+                    <ul className="flex flex-col justify-start items-center m-0">
+                        <li className="hover:bg-blue-100 m-0 cursor-pointer">1 Day</li>
+                        <li className="hover:bg-blue-100 cursor-pointer">1 Week</li>
+                        <li className="hover:bg-blue-100 cursor-pointer">1 Month</li>
+                        <li className="hover:bg-blue-100 cursor-pointer">1 Year</li>
+                    </ul>
+
+                </div>
             </div>
 
             <div className="flex flex-row justify-evenly items-center w-1/4">
