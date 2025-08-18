@@ -15,12 +15,15 @@ export default function Navbar (){
 
     const showTimeFrames = ():void => {
         setTimeFrameVisible((prevBox):boolean => !prevBox)
-        console.log("hovered")
     }
 
-    // const holdVisible = ():void =>{
-    //     setTimeFrameVisible(():boolean => true)
-    // }
+    const holdVisible = ():void =>{
+        setTimeFrameVisible(():boolean => false)
+    }
+
+    const makeInvisible = ():void =>{
+        setTimeFrameVisible(():boolean => true)
+    }
 
     return(
         <>
@@ -29,7 +32,7 @@ export default function Navbar (){
             onMouseEnter={():void => showTimeFrames()}
             onMouseLeave={():void => showTimeFrames()}/>
 
-            <div className={isTimeFrameShown ? "hidden absolute h-20 w-20 bg-white" : "flex absolute h-20 w-20 bg-white"}>
+            <div className={isTimeFrameShown ? "hidden absolute h-25 w-20 bg-white" : "flex absolute h-25 w-20 bg-white"} onMouseEnter={() => holdVisible()} onMouseLeave={() => makeInvisible()}>
                 <ul className="flex flex-col justify-start items-center m-0">
                     <li className="hover:bg-blue-100 m-0">1 Day</li>
                     <li className="hover:bg-blue-100">1 Week</li>
