@@ -19,12 +19,8 @@ export default function Navbar (): React.ReactElement{
         setTimeFrameVisible((prevBox):boolean => !prevBox)
     }
 
-    const holdVisible = ():void =>{
-        setTimeFrameVisible(():boolean => false)
-    }
-
-    const makeInvisible = ():void =>{
-        setTimeFrameVisible(():boolean => true)
+    const setVisible = (isVisible:boolean):void =>{
+        setTimeFrameVisible(isVisible)
     }
 
     const changeValue = (time:string):void => {
@@ -41,8 +37,8 @@ export default function Navbar (): React.ReactElement{
                 onMouseLeave={():void => showTimeFrames()}/>
 
                 <div className={isTimeFrameShown ? "hidden absolute h-24 w-20 bg-white rounded-b-xl" : "flex absolute h-24 w-20 bg-white rounded-b-xl"} 
-                onMouseEnter={():void => holdVisible()} 
-                onMouseLeave={():void => makeInvisible()}>
+                onMouseEnter={():void => setVisible(!true)} 
+                onMouseLeave={():void => setVisible(!false)}>
 
                     <ul className="flex flex-col justify-start items-start m-0 w-full">
                         <li className="hover:bg-blue-200 cursor-pointer w-full pl-2"
