@@ -2,6 +2,7 @@ import { useState } from "react";
 import darkMode from "../assets/dark_mode.png";
 import lightMode from "../assets/light_mode.png";
 import logo from "../assets/microsoft.png";
+import {Link} from 'react-router'
 
 export default function Navbar (): React.ReactElement{
     // TODO: Implement and fix theme toggle functionality
@@ -31,10 +32,10 @@ export default function Navbar (): React.ReactElement{
     }
 
     return(
-        <> 
-        <div className="flex flex-row justify-between items-center w-screen h-18 bg-blue-800 pl-10 pr-20">
+        <>
+        <div className="flex flex-row justify-between items-center w-screen h-18 bg-blue-800 pl-10 pr-20 ">
             <div className="">
-                <input className={isTimeFrameShown ? "bg-white rounded-xl pl-2 h-8 w-20 outline-0" : " bg-white pl-2 h-8 w-20 outline-0 rounded-t-xl"}
+                <input className={isTimeFrameShown ? "bg-white rounded-xl pl-2 h-8 w-20 outline-0" : "bg-white pl-2 h-8 w-20 outline-0 rounded-t-xl"}
                 value={value}
                 onMouseEnter={():void => showTimeFrames()}
                 onMouseLeave={():void => showTimeFrames()}/>
@@ -58,11 +59,21 @@ export default function Navbar (): React.ReactElement{
             </div>
 
             <div className="flex flex-row justify-evenly items-center w-1/4">
+                <Link to='/Amazon'>
                 <label className="cursor-pointer text-white hover:text-yellow-500">AMZN</label>
+                </Link>
+                <Link to='/Apple'>
                 <label className="cursor-pointer text-white hover:text-red-500">AAPL</label>
+                </Link>
+                <Link to='/'>
                 <img className="w-10" src={logo}/>
+                </Link>
+                <Link to='/Microsoft'>
                 <label className="cursor-pointer text-white hover:text-orange-500">MSFT</label>
+                </Link>
+                <Link to='/Nvidia'>
                 <label className="cursor-pointer text-white hover:text-green-500">NVDA</label>
+                </Link>
             </div>
 
             <img className="w-10 cursor-pointer" src={whatTheme ? lightMode : darkMode} onClick={():void =>changeTheme()}/>
