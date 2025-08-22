@@ -1,4 +1,4 @@
 /venv
 /backend/training/datasets
-
+/backend/training/plots
 .vscode
