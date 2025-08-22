@@ -32,7 +32,7 @@ export default function Navbar (): React.ReactElement{
         <div className="flex flex-row justify-between items-center w-screen h-18 bg-blue-800 pl-10 pr-20 ">
             <div className="">
                 <input className={isTimeFrameShown ? "bg-white rounded-xl pl-2 h-8 w-20 outline-0" : "bg-white pl-2 h-8 w-20 outline-0 rounded-t-xl"}
-                value={value}
+                value={value ? value : '1 Day'}
                 onMouseEnter={():void => showTimeFrames()}
                 onMouseLeave={():void => showTimeFrames()}/>
 
@@ -56,19 +56,19 @@ export default function Navbar (): React.ReactElement{
 
             <div className="flex flex-row justify-evenly items-center w-1/4">
                 <Link to='/Amazon'>
-                <label className="cursor-pointer text-white hover:text-yellow-500">AMZN</label>
+                <label className="cursor-pointer text-white hover:text-yellow-500 duration-300">AMZN</label>
                 </Link>
                 <Link to='/Apple'>
-                <label className="cursor-pointer text-white hover:text-red-500">AAPL</label>
+                <label className="cursor-pointer text-white hover:text-red-500 duration-300">AAPL</label>
                 </Link>
                 <Link to='/'>
-                <img className="w-10" src={logo}/>
+                <img className="w-10 hover:scale-115 transition duration-300" src={logo}/>
                 </Link>
                 <Link to='/Microsoft'>
-                <label className="cursor-pointer text-white hover:text-orange-500">MSFT</label>
+                <label className="cursor-pointer text-white hover:text-orange-500 duration-300">MSFT</label>
                 </Link>
                 <Link to='/Nvidia'>
-                <label className="cursor-pointer text-white hover:text-green-500">NVDA</label>
+                <label className="cursor-pointer text-white hover:text-green-500 duration-300">NVDA</label>
                 </Link>
             </div>
 

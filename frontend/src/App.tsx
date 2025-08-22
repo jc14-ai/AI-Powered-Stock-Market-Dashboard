@@ -16,7 +16,7 @@ export default function App() {
         <Route path="/Apple" element={<Apple/>}/>
         <Route path="/Nvidia" element={<Nvidia/>}/>
         <Route path="/Microsoft" element={<Microsoft/>}/>
-        </Routes>
+      </Routes>
     </>
   )
 }

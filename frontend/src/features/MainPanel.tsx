@@ -12,12 +12,12 @@ export default function MainPanel(): React.ReactElement {
                 <button className='bg-amber-50 rounded-xl w-20 cursor-pointer' onClick={():void => showFullChart(false)}>Close</button>
             </div>
             <div className="flex justify-evenly items-center flex-row h-1/2 w-screen pt-3.5 pb-3.5">
-                <div className="h-full w-2xl bg-gray-100 rounded-4xl hover:bg-white cursor-pointer" onClick={():void => showFullChart(true)}></div>
-                <div className="h-full w-2xl bg-gray-100 rounded-4xl hover:bg-white cursor-pointer" onClick={():void => showFullChart(true)}></div>
+                <div className="h-full w-2xl bg-gray-100 rounded-4xl hover:bg-white duration-500 cursor-pointer" onClick={():void => showFullChart(true)}></div>
+                <div className="h-full w-2xl bg-gray-100 rounded-4xl hover:bg-white duration-500 cursor-pointer" onClick={():void => showFullChart(true)}></div>
             </div>
             <div className="flex justify-evenly items-center flex-row h-1/2 w-screen pt-3.5 pb-3.5">
-                <div className="h-full w-2xl bg-gray-100 rounded-4xl hover:bg-white cursor-pointer" onClick={():void => showFullChart(true)}></div>
-                <div className="h-full w-2xl bg-gray-100 rounded-4xl hover:bg-white cursor-pointer" onClick={():void => showFullChart(true)}></div>
+                <div className="h-full w-2xl bg-gray-100 rounded-4xl hover:bg-white duration-500 cursor-pointer" onClick={():void => showFullChart(true)}></div>
+                <div className="h-full w-2xl bg-gray-100 rounded-4xl hover:bg-white duration-500 cursor-pointer" onClick={():void => showFullChart(true)}></div>
             </div>
         </div>
         </>
