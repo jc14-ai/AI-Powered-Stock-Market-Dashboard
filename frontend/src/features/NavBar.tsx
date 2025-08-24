@@ -28,18 +28,22 @@ export default function Navbar(): React.ReactElement {
     }
 
     return (
-        <>
+        <>  {/* HOLDS NAVIGATION BAR */}
             <div className="flex flex-row justify-between items-center w-screen h-18 bg-blue-800 pl-10 pr-20 ">
                 <div className="">
+
+                    {/* TIMEFRAME INPUT */}
                     <input className={isTimeFrameShown ? "bg-white rounded-xl pl-2 h-8 w-20 outline-0" : "bg-white pl-2 h-8 w-20 outline-0 rounded-t-xl"}
                         value={value ? value : '1 Day'}
                         onMouseEnter={(): void => showTimeFrames()}
                         onMouseLeave={(): void => showTimeFrames()} />
 
+                    {/* THIS HOLDS TIMEFRAMES*/}
                     <div className={isTimeFrameShown ? "hidden absolute h-24 w-20 bg-white rounded-b-xl" : "flex absolute h-24 w-20 bg-white rounded-b-xl"}
                         onMouseEnter={(): void => setVisible(!true)}
                         onMouseLeave={(): void => setVisible(!false)}>
-
+                        
+                        {/* LIST OF TIMES */}
                         <ul className="flex flex-col justify-start items-start m-0 w-full">
                             <li className="hover:bg-blue-200 cursor-pointer w-full pl-2"
                                 onClick={() => changeValue("1 Day")}>1 Day</li>
@@ -54,6 +58,7 @@ export default function Navbar(): React.ReactElement {
                     </div>
                 </div>
 
+                {/* STOCK TICKER NAVIGATIONS */}
                 <div className="flex flex-row justify-evenly items-center w-1/4">
                     <Link to='/Amazon'>
                         <label className="cursor-pointer text-white hover:text-yellow-500 duration-300">AMZN</label>
@@ -61,6 +66,8 @@ export default function Navbar(): React.ReactElement {
                     <Link to='/Apple'>
                         <label className="cursor-pointer text-white hover:text-red-500 duration-300">AAPL</label>
                     </Link>
+
+                    {/* SHOWS 4 PANELS */}
                     <Link to='/'>
                         <img className="w-10 hover:scale-115 transition duration-300" src={logo} />
                     </Link>
@@ -72,6 +79,7 @@ export default function Navbar(): React.ReactElement {
                     </Link>
                 </div>
 
+                {/* DARK/LIGHT MODE TOGGLER */}
                 <img className="w-10 cursor-pointer" src={whatTheme ? lightMode : darkMode} onClick={(): void => changeTheme()} />
             </div>
         </>
