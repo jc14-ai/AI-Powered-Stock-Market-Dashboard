@@ -30,29 +30,30 @@ export default function Navbar(): React.ReactElement {
     return (
         <>  {/* HOLDS NAVIGATION BAR */}
             <div className="flex flex-row justify-between items-center w-screen h-28 bg-blue-950 pl-10 pr-20 ">
-                <div className="">
-
+                <div>
                     {/* TIMEFRAME INPUT */}
-                    <input className={isTimeFrameShown ? "bg-white rounded-xl pl-2 h-8 w-20 outline-0" : "bg-white pl-2 h-8 w-20 outline-0 rounded-t-xl"}
+                    <input className={isTimeFrameShown ? "bg-white pr-1 rounded-xl h-11 w-23 outline-0 text-center font-voces font-medium text-frame" : "bg-white pr-1 h-11 w-23 outline-0 rounded-t-xl text-center font-voces font-medium text-frame"}
                         value={value ? value : '1 Day'}
                         onMouseEnter={(): void => showTimeFrames()}
                         onMouseLeave={(): void => showTimeFrames()} />
 
                     {/* THIS HOLDS TIMEFRAMES*/}
-                    <div className={isTimeFrameShown ? "hidden absolute h-24 w-20 bg-white rounded-b-xl" : "flex absolute h-24 w-20 bg-white rounded-b-xl"}
+                    <div className={isTimeFrameShown ? "hidden absolute h-33 w-23 bg-white rounded-b-xl" : "flex absolute h-33 w-23 bg-white rounded-b-xl"}
                         onMouseEnter={(): void => setVisible(!true)}
                         onMouseLeave={(): void => setVisible(!false)}>
                         
                         {/* LIST OF TIMES */}
                         <ul className="flex flex-col justify-start items-start m-0 w-full">
-                            <li className="hover:bg-blue-200 cursor-pointer w-full pl-2"
-                                onClick={() => changeValue("1 Day")}>1 Day</li>
-                            <li className="hover:bg-blue-200 cursor-pointer w-full pl-2"
-                                onClick={() => changeValue("1 Week")}>1 Week</li>
-                            <li className="hover:bg-blue-200 cursor-pointer w-full pl-2"
-                                onClick={() => changeValue("1 Month")}>1 Month</li>
-                            <li className="hover:bg-blue-200 cursor-pointer w-full pl-2 rounded-b-xl"
-                                onClick={() => changeValue("1 Year")}>1 Year</li>
+                            <li className="flex justify-center items-center hover:bg-blue-200 cursor-pointer w-full font-voces font-medium text-frame"
+                                onClick={() => changeValue("1 Day")}>1 Week</li>
+                            <li className="flex justify-center items-center hover:bg-blue-200 cursor-pointer w-full font-voces font-medium text-frame"
+                                onClick={() => changeValue("1 Week")}>1 Month</li>
+                            <li className="flex justify-center items-center hover:bg-blue-200 cursor-pointer w-full font-voces font-medium text-frame"
+                                onClick={() => changeValue("1 Month")}>1 Year</li>
+                            <li className="flex justify-center items-center hover:bg-blue-200 cursor-pointer w-full font-voces font-medium text-frame"
+                                onClick={() => changeValue("5 Year")}>5 Year</li>
+                            <li className="flex justify-center items-center hover:bg-blue-200 cursor-pointer w-full rounded-b-xl font-voces font-medium text-frame"
+                                onClick={() => changeValue("All Time")}>All Time</li>
                         </ul>
 
                     </div>
@@ -60,10 +61,10 @@ export default function Navbar(): React.ReactElement {
 
                 {/* STOCK TICKER NAVIGATIONS */}
                 <div className="flex flex-row justify-evenly items-center w-2/3 h-1/1">
-                    <Link to='/Amazon' className="flex justify-center items-center bg-blue-900 h-2/3 w-1/5 rounded-4xl cursor-pointer text-white text-xl font-gantari font-medium hover:bg-white hover:text-blue-950  duration-600">
+                    <Link to='/Amazon' className="flex justify-center items-center bg-blue-900 h-2/3 w-1/5 rounded-4xl cursor-pointer text-white text-xl font-voces font-medium hover:bg-white hover:text-blue-950  duration-600">
                         <label>AMZN</label>
                     </Link>
-                    <Link to='/Apple' className="flex justify-center items-center bg-blue-900 h-2/3 w-1/5 rounded-4xl cursor-pointer text-white text-xl font-gantari font-medium hover:bg-white hover:text-blue-950 duration-600">
+                    <Link to='/Apple' className="flex justify-center items-center bg-blue-900 h-2/3 w-1/5 rounded-4xl cursor-pointer text-white text-xl font-voces font-medium hover:bg-white hover:text-blue-950 duration-600">
                         <label>AAPL</label>
                     </Link>
 
@@ -71,10 +72,10 @@ export default function Navbar(): React.ReactElement {
                     <Link to='/' className="flex justify-center items-center hover:bg-white hover:scale-115 duration-600 rounded-4xl w-15 h-15">
                         <img className="w-8 transition duration-300" src={logo} />
                     </Link>
-                    <Link to='/Microsoft' className="flex justify-center items-center bg-blue-900 h-2/3 w-1/5 rounded-4xl cursor-pointer text-white text-xl font-gantari font-medium hover:bg-white hover:text-blue-950 duration-600">
+                    <Link to='/Microsoft' className="flex justify-center items-center bg-blue-900 h-2/3 w-1/5 rounded-4xl cursor-pointer text-white text-xl font-voces font-medium hover:bg-white hover:text-blue-950 duration-600">
                         <label>MSFT</label>
                     </Link>
-                    <Link to='/Nvidia' className="flex justify-center items-center bg-blue-900 h-2/3 w-1/5 rounded-4xl cursor-pointer text-white text-xl font-gantari font-medium hover:bg-white hover:text-blue-950  duration-600">
+                    <Link to='/Nvidia' className="flex justify-center items-center bg-blue-900 h-2/3 w-1/5 rounded-4xl cursor-pointer text-white text-xl font-voces font-medium hover:bg-white hover:text-blue-950  duration-600">
                         <label>NVDA</label>
                     </Link>
                 </div>
