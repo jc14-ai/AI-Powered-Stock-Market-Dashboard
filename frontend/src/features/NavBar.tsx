@@ -29,7 +29,7 @@ export default function Navbar(): React.ReactElement {
 
     return (
         <>  {/* HOLDS NAVIGATION BAR */}
-            <div className="flex flex-row justify-between items-center w-screen h-18 bg-blue-800 pl-10 pr-20 ">
+            <div className="flex flex-row justify-between items-center w-screen h-28 bg-blue-950 pl-10 pr-20 ">
                 <div className="">
 
                     {/* TIMEFRAME INPUT */}
@@ -59,23 +59,23 @@ export default function Navbar(): React.ReactElement {
                 </div>
 
                 {/* STOCK TICKER NAVIGATIONS */}
-                <div className="flex flex-row justify-evenly items-center w-1/4">
-                    <Link to='/Amazon'>
-                        <label className="cursor-pointer text-white hover:text-yellow-500 duration-300">AMZN</label>
+                <div className="flex flex-row justify-evenly items-center w-2/3 h-1/1">
+                    <Link to='/Amazon' className="flex justify-center items-center bg-blue-900 h-2/3 w-1/5 rounded-4xl cursor-pointer text-white text-xl font-gantari font-medium hover:bg-white hover:text-blue-950  duration-600">
+                        <label>AMZN</label>
                     </Link>
-                    <Link to='/Apple'>
-                        <label className="cursor-pointer text-white hover:text-red-500 duration-300">AAPL</label>
+                    <Link to='/Apple' className="flex justify-center items-center bg-blue-900 h-2/3 w-1/5 rounded-4xl cursor-pointer text-white text-xl font-gantari font-medium hover:bg-white hover:text-blue-950 duration-600">
+                        <label>AAPL</label>
                     </Link>
 
                     {/* SHOWS 4 PANELS */}
-                    <Link to='/'>
-                        <img className="w-10 hover:scale-115 transition duration-300" src={logo} />
+                    <Link to='/' className="flex justify-center items-center hover:bg-white hover:scale-115 duration-600 rounded-4xl w-15 h-15">
+                        <img className="w-8 transition duration-300" src={logo} />
                     </Link>
-                    <Link to='/Microsoft'>
-                        <label className="cursor-pointer text-white hover:text-orange-500 duration-300">MSFT</label>
+                    <Link to='/Microsoft' className="flex justify-center items-center bg-blue-900 h-2/3 w-1/5 rounded-4xl cursor-pointer text-white text-xl font-gantari font-medium hover:bg-white hover:text-blue-950 duration-600">
+                        <label>MSFT</label>
                     </Link>
-                    <Link to='/Nvidia'>
-                        <label className="cursor-pointer text-white hover:text-green-500 duration-300">NVDA</label>
+                    <Link to='/Nvidia' className="flex justify-center items-center bg-blue-900 h-2/3 w-1/5 rounded-4xl cursor-pointer text-white text-xl font-gantari font-medium hover:bg-white hover:text-blue-950  duration-600">
+                        <label>NVDA</label>
                     </Link>
                 </div>
 
