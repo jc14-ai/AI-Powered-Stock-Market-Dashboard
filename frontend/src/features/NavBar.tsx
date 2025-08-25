@@ -4,12 +4,16 @@ import lightMode from "../assets/light_mode.png";
 import logo from "../assets/microsoft.png";
 import { Link } from 'react-router'
 
-export default function Navbar(): React.ReactElement {
+type NavbarProps = {
+    selectValue: (val:string) => void;
+    time: string;
+}
+
+export default function Navbar({selectValue, time}: NavbarProps): React.ReactElement {
     // TODO: Implement and fix theme toggle functionality
 
     const [whatTheme, setTheme] = useState<boolean>(true);
     const [isTimeFrameShown, setTimeFrameVisible] = useState<boolean>(true);
-    const [value, setValue] = useState<string>("");
 
     const changeTheme = (): void => {
         setTheme((prevTheme): boolean => !prevTheme)
@@ -24,7 +28,7 @@ export default function Navbar(): React.ReactElement {
     }
 
     const changeValue = (time: string): void => {
-        setValue(time)
+        selectValue(time)
     }
 
     return (
@@ -33,7 +37,7 @@ export default function Navbar(): React.ReactElement {
                 <div>
                     {/* TIMEFRAME INPUT */}
                     <input className={isTimeFrameShown ? "bg-gray-200 pr-1 rounded-xl h-11 w-23 outline-0 text-center font-voces font-medium text-frame" : "bg-gray-200 pr-1 h-11 w-23 outline-0 rounded-t-xl text-center font-voces font-medium text-frame"}
-                        value={value ? value : 'All Time'}
+                        value={time}
                         onMouseEnter={(): void => showTimeFrames()}
                         onMouseLeave={(): void => showTimeFrames()} />
 
