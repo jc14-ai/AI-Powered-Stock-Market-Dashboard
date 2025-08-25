@@ -1,4 +1,5 @@
 import {useState} from 'react'
+import Label from '../components/Label.tsx'
 export default function MainPanel(): React.ReactElement {    
     const [isFullChart, setFullChart] = useState<boolean>(false);
 
@@ -18,13 +19,13 @@ export default function MainPanel(): React.ReactElement {
             {/* UPPER MAIN SCREEN */}
             <div className="flex justify-evenly items-center flex-row h-1/2 w-screen pt-3.5 pb-3.5">
                 <div className='h-full flex flex-col items-start'>
-                    <h1 className='text-black bg-white p-3 rounded-t-3xl font-voces font-medium text-frame pl-5 pr-5'>Amazon.com, Inc.</h1>
+                    <Label text='Amazon.com, Inc.'/>
                     <div className="h-full w-2xl" onClick={():void => showFullChart(true)}>
                         <img className='h-full w-full object-cover bg-gray-100 rounded-b-3xl rounded-tr-3xl cursor-pointer' src='AMZN_AT.svg'/>
                     </div>
                 </div>
                 <div className='h-full flex flex-col justify-between items-start'>
-                    <h1 className='text-black bg-white p-3 rounded-t-3xl font-voces font-medium text-frame pl-5 pr-5'>Apple Inc.</h1>
+                    <Label text='Apple Inc.'/>
                     <div className="h-full w-2xl" onClick={():void => showFullChart(true)}>
                         <img className='h-full w-full object-cover bg-gray-100 rounded-b-3xl rounded-tr-3xl cursor-pointer' src='AAPL_AT.svg'/>
                     </div>
@@ -34,13 +35,13 @@ export default function MainPanel(): React.ReactElement {
             {/* LOWER MAIN SCREEN */}
             <div className="flex justify-evenly items-center flex-row h-1/2 w-screen pt-3.5 pb-3.5">
                 <div className='h-full flex flex-col justify-between items-start'>
-                    <h1 className='text-black bg-white p-3 rounded-t-3xl font-voces font-medium text-frame pl-5 pr-5'>Microsoft Corporation</h1>
+                    <Label text='Microsoft Corporation'/>
                     <div className="h-full w-2xl" onClick={():void => showFullChart(true)}>
                         <img className='h-full w-full object-cover bg-gray-100 rounded-b-3xl rounded-tr-3xl cursor-pointer' src='MSFT_AT.svg'/>
                     </div>
                 </div>
                 <div className='h-full flex flex-col justify-between items-start'>
-                    <h1 className='text-black bg-white p-3 rounded-t-3xl font-voces font-medium text-frame pl-5 pr-5'>NVIDIA Corporation</h1>
+                    <Label text='NVIDIA Corporation'/>
                     <div className="h-full w-2xl" onClick={():void => showFullChart(true)}>
                         <img className='h-full w-full object-cover bg-gray-100 rounded-b-3xl rounded-tr-3xl cursor-pointer' src='NVDA_AT.svg'/>
                     </div>
