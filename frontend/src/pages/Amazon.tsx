@@ -4,7 +4,7 @@ export default function Amazon():React.ReactElement{
         {/* <div className="flex flex-col h-screen w-screen bg-blue-100">
             
         </div> */}
-        <iframe className="flex flex-col h-screen w-screen bg-blue-100"/>
+        <iframe className="flex flex-col h-[888px] w-screen bg-blue-100"/>
         </>
     )
 }

@@ -29,11 +29,11 @@ export default function Navbar(): React.ReactElement {
 
     return (
         <>  {/* HOLDS NAVIGATION BAR */}
-            <div className="flex flex-row justify-between items-center w-screen h-28 bg-blue-950 pl-10 pr-20 ">
+            <div className="flex flex-row justify-between items-center w-screen h-28 bg-[#273166] pl-10 pr-20 ">
                 <div>
                     {/* TIMEFRAME INPUT */}
                     <input className={isTimeFrameShown ? "bg-gray-200 pr-1 rounded-xl h-11 w-23 outline-0 text-center font-voces font-medium text-frame" : "bg-gray-200 pr-1 h-11 w-23 outline-0 rounded-t-xl text-center font-voces font-medium text-frame"}
-                        value={value ? value : '1 Month'}
+                        value={value ? value : 'All Time'}
                         onMouseEnter={(): void => showTimeFrames()}
                         onMouseLeave={(): void => showTimeFrames()} />
 
@@ -58,22 +58,22 @@ export default function Navbar(): React.ReactElement {
                 </div>
 
                 {/* STOCK TICKER NAVIGATIONS */}
-                <div className="flex flex-row justify-evenly items-center w-2/3 h-1/1">
-                    <Link to='/Amazon' className="flex justify-center items-center bg-blue-900 h-2/3 w-1/5 rounded-4xl cursor-pointer text-white text-xl font-voces font-medium hover:bg-white hover:text-blue-950  duration-600">
+                <div className="flex flex-row justify-evenly items-center w-2/2 h-1/1">
+                    <Link to='/Amazon' className="flex justify-center items-center bg-[#262c50] h-2/3 w-1/5 rounded-4xl cursor-pointer text-white text-xl font-voces font-medium hover:bg-[#424b84]  duration-600">
                         <label>AMZN</label>
                     </Link>
-                    <Link to='/Apple' className="flex justify-center items-center bg-blue-900 h-2/3 w-1/5 rounded-4xl cursor-pointer text-white text-xl font-voces font-medium hover:bg-white hover:text-blue-950 duration-600">
+                    <Link to='/Apple' className="flex justify-center items-center bg-[#262c50] h-2/3 w-1/5 rounded-4xl cursor-pointer text-white text-xl font-voces font-medium hover:bg-[#424b84] duration-600">
                         <label>AAPL</label>
                     </Link>
 
                     {/* SHOWS 4 PANELS */}
-                    <Link to='/' className="flex justify-center items-center hover:bg-white hover:scale-115 duration-600 rounded-4xl w-15 h-15">
+                    <Link to='/' className="flex justify-center items-center hover:bg-[#424b84] hover:scale-115 duration-600 rounded-4xl w-15 h-15">
                         <img className="w-8 transition duration-300" src={logo} />
                     </Link>
-                    <Link to='/Microsoft' className="flex justify-center items-center bg-blue-900 h-2/3 w-1/5 rounded-4xl cursor-pointer text-white text-xl font-voces font-medium hover:bg-white hover:text-blue-950 duration-600">
+                    <Link to='/Microsoft' className="flex justify-center items-center bg-[#262c50] h-2/3 w-1/5 rounded-4xl cursor-pointer text-white text-xl font-voces font-medium hover:bg-[#424b84] duration-600">
                         <label>MSFT</label>
                     </Link>
-                    <Link to='/Nvidia' className="flex justify-center items-center bg-blue-900 h-2/3 w-1/5 rounded-4xl cursor-pointer text-white text-xl font-voces font-medium hover:bg-white hover:text-blue-950  duration-600">
+                    <Link to='/Nvidia' className="flex justify-center items-center bg-[#262c50] h-2/3 w-1/5 rounded-4xl cursor-pointer text-white text-xl font-voces font-medium hover:bg-[#424b84]  duration-600">
                         <label>NVDA</label>
                     </Link>
                 </div>
