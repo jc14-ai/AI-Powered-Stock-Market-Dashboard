@@ -32,27 +32,25 @@ export default function Navbar(): React.ReactElement {
             <div className="flex flex-row justify-between items-center w-screen h-28 bg-blue-950 pl-10 pr-20 ">
                 <div>
                     {/* TIMEFRAME INPUT */}
-                    <input className={isTimeFrameShown ? "bg-white pr-1 rounded-xl h-11 w-23 outline-0 text-center font-voces font-medium text-frame" : "bg-white pr-1 h-11 w-23 outline-0 rounded-t-xl text-center font-voces font-medium text-frame"}
-                        value={value ? value : '1 Day'}
+                    <input className={isTimeFrameShown ? "bg-gray-200 pr-1 rounded-xl h-11 w-23 outline-0 text-center font-voces font-medium text-frame" : "bg-gray-200 pr-1 h-11 w-23 outline-0 rounded-t-xl text-center font-voces font-medium text-frame"}
+                        value={value ? value : '1 Month'}
                         onMouseEnter={(): void => showTimeFrames()}
                         onMouseLeave={(): void => showTimeFrames()} />
 
                     {/* THIS HOLDS TIMEFRAMES*/}
-                    <div className={isTimeFrameShown ? "hidden absolute h-33 w-23 bg-white rounded-b-xl" : "flex absolute h-33 w-23 bg-white rounded-b-xl"}
+                    <div className={isTimeFrameShown ? "hidden absolute h-40 w-23 bg-gray-200 rounded-b-xl" : "flex absolute h-40 w-23 bg-gray-200 rounded-b-xl"}
                         onMouseEnter={(): void => setVisible(!true)}
                         onMouseLeave={(): void => setVisible(!false)}>
                         
                         {/* LIST OF TIMES */}
-                        <ul className="flex flex-col justify-start items-start m-0 w-full">
-                            <li className="flex justify-center items-center hover:bg-blue-200 cursor-pointer w-full font-voces font-medium text-frame"
-                                onClick={() => changeValue("1 Day")}>1 Week</li>
-                            <li className="flex justify-center items-center hover:bg-blue-200 cursor-pointer w-full font-voces font-medium text-frame"
-                                onClick={() => changeValue("1 Week")}>1 Month</li>
-                            <li className="flex justify-center items-center hover:bg-blue-200 cursor-pointer w-full font-voces font-medium text-frame"
-                                onClick={() => changeValue("1 Month")}>1 Year</li>
-                            <li className="flex justify-center items-center hover:bg-blue-200 cursor-pointer w-full font-voces font-medium text-frame"
-                                onClick={() => changeValue("5 Year")}>5 Year</li>
-                            <li className="flex justify-center items-center hover:bg-blue-200 cursor-pointer w-full rounded-b-xl font-voces font-medium text-frame"
+                        <ul className="flex flex-col h-full justify-start items-start m-0 w-full">
+                            <li className="flex h-10 justify-center items-center hover:bg-gray-100 duration-400 cursor-pointer w-full font-voces font-medium text-frame"
+                                onClick={() => changeValue("1 Week")}>1 Week</li>
+                            <li className="flex h-10 justify-center items-center hover:bg-gray-100 duration-400 cursor-pointer w-full font-voces font-medium text-frame"
+                                onClick={() => changeValue("1 Month")}>1 Month</li>
+                            <li className="flex h-10 justify-center items-center hover:bg-gray-100 duration-400 cursor-pointer w-full font-voces font-medium text-frame"
+                                onClick={() => changeValue("1 Year")}>1 Year</li>
+                            <li className="flex h-10 justify-center items-center hover:bg-gray-100 duration-400 cursor-pointer w-full rounded-b-xl font-voces font-medium text-frame"
                                 onClick={() => changeValue("All Time")}>All Time</li>
                         </ul>
 
