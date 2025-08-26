@@ -63,21 +63,21 @@ export default function Navbar({selectValue, time}: NavbarProps): React.ReactEle
 
                 {/* STOCK TICKER NAVIGATIONS */}
                 <div className="flex flex-row justify-evenly items-center w-2/2 h-1/1">
-                    <Link to='/Amazon' className="flex justify-center items-center bg-[#262c50] h-[50px] w-1/5 rounded-4xl cursor-pointer text-white text-xl font-voces font-medium hover:bg-[#424b84]  duration-600">
+                    <Link to='/Amazon' className="flex justify-center items-center bg-[#424b84] h-[50px] w-1/5 rounded-4xl cursor-pointer text-white text-xl font-voces font-medium hover:bg-[#5c65a3]  duration-600">
                         <label>AMZN</label>
                     </Link>
-                    <Link to='/Apple' className="flex justify-center items-center bg-[#262c50] h-[50px] w-1/5 rounded-4xl cursor-pointer text-white text-xl font-voces font-medium hover:bg-[#424b84] duration-600">
+                    <Link to='/Apple' className="flex justify-center items-center bg-[#424b84] h-[50px] w-1/5 rounded-4xl cursor-pointer text-white text-xl font-voces font-medium hover:bg-[#5c65a3] duration-600">
                         <label>AAPL</label>
                     </Link>
 
                     {/* SHOWS 4 PANELS */}
-                    <Link to='/' className="flex justify-center items-center bg-[#262c50] hover:bg-[#424b84] duration-600 rounded-[100px] w-15 h-15">
+                    <Link to='/' className="flex justify-center items-center bg-[#424b84] hover:bg-[#5c65a3] duration-600 rounded-[100px] w-15 h-15">
                         <img className="w-8 transition duration-300" src={logo} />
                     </Link>
-                    <Link to='/Microsoft' className="flex justify-center items-center bg-[#262c50] h-[50px] w-1/5 rounded-4xl cursor-pointer text-white text-xl font-voces font-medium hover:bg-[#424b84] duration-600">
+                    <Link to='/Microsoft' className="flex justify-center items-center bg-[#424b84] h-[50px] w-1/5 rounded-4xl cursor-pointer text-white text-xl font-voces font-medium hover:bg-[#5c65a3] duration-600">
                         <label>MSFT</label>
                     </Link>
-                    <Link to='/Nvidia' className="flex justify-center items-center bg-[#262c50] h-[50px] w-1/5 rounded-4xl cursor-pointer text-white text-xl font-voces font-medium hover:bg-[#424b84]  duration-600">
+                    <Link to='/Nvidia' className="flex justify-center items-center bg-[#424b84] h-[50px] w-1/5 rounded-4xl cursor-pointer text-white text-xl font-voces font-medium hover:bg-[#5c65a3] duration-600">
                         <label>NVDA</label>
                     </Link>
                 </div>

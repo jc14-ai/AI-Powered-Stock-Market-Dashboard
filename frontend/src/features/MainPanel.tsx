@@ -15,7 +15,7 @@ export default function MainPanel({time}:MainPanelProps): React.ReactElement {
     return (
         <>
         {/* MAIN SCREEN */}
-        <div className="flex justify-center items-center flex-col h-[888px] w-screen bg-[#262c50]">
+        <div className="flex justify-center items-center flex-col h-[888px] w-screen bg-blue-100">
 
             {/* FULL CHART TOGGLE */}
             <div className={isFullChart ? 'flex justify-center items-center h-150 w-250 bg-gray-800 z-1 absolute rounded-4xl' : 'hidden h-150 w-250 bg-gray-800 z-1 absolute rounded-4xl'}>
