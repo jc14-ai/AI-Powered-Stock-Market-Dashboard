@@ -18,54 +18,60 @@ export default function MainPanel({time}:MainPanelProps): React.ReactElement {
         <div className="flex justify-center items-center flex-col h-[888px] w-screen bg-blue-100">
 
             {/* FULL CHART TOGGLE */}
-            <div className={isFullChart ? 'flex justify-center items-center h-150 w-250 bg-gray-800 z-1 absolute rounded-4xl' : 'hidden h-150 w-250 bg-gray-800 z-1 absolute rounded-4xl'}>
+            <div className={isFullChart ? 
+                'flex justify-center items-center h-150 w-250 bg-gray-800 z-1 absolute rounded-4xl' : 
+                'hidden h-150 w-250 bg-gray-800 z-1 absolute rounded-4xl'}>
                 <button className='bg-amber-50 rounded-xl w-20 cursor-pointer' onClick={():void => showFullChart(false)}>Close</button>
             </div>
 
             {/* UPPER MAIN SCREEN */}
             <div className="flex justify-evenly items-center flex-row h-1/2 w-screen pt-3.5 pb-3.5">
-                <div className='h-full flex flex-col items-start'>
+                <div className='h-full flex flex-col items-start
+                                hover:scale-101 duration-300'>
                     <Label text='Amazon.com, Inc.'/>
                     <div className="h-full w-2xl" onClick={():void => showFullChart(true)}>
                         <img className='h-full w-full object-cover bg-gray-100 rounded-b-3xl rounded-tr-3xl cursor-pointer' 
                         src={time === "All Time" ? "AMZN_AT.svg": 
                         (time === "1 Year" ? "AMZN_1Y.svg" : 
                         (time === "1 Month" ? "AMZN_1M.svg" : 
-                        (time === "1 Week" ? "AMZN_1W.svg" : "AMZN_AT.svg")))}/>
+                        (time === "1 Week" ? "AMZN_1WW.svg" : "AMZN_AT.svg")))}/>
                     </div>
                 </div>
-                <div className='h-full flex flex-col justify-between items-start'>
+                <div className='h-full flex flex-col justify-between items-start 
+                                hover:scale-101 duration-300'>
                     <Label text='Apple Inc.'/>
                     <div className="h-full w-2xl" onClick={():void => showFullChart(true)}>
                         <img className='h-full w-full object-cover bg-gray-100 rounded-b-3xl rounded-tr-3xl cursor-pointer' 
                         src={time === "All Time" ? "AAPL_AT.svg": 
                         (time === "1 Year" ? "AAPL_1Y.svg" : 
                         (time === "1 Month" ? "AAPL_1M.svg" : 
-                        (time === "1 Week" ? "AAPL_1W.svg" : "AAPL_AT.svg")))}/>
+                        (time === "1 Week" ? "AAPL_1WW.svg" : "AAPL_AT.svg")))}/>
                     </div>
                 </div>
             </div>
 
             {/* LOWER MAIN SCREEN */}
             <div className="flex justify-evenly items-center flex-row h-1/2 w-screen pt-3.5 pb-3.5">
-                <div className='h-full flex flex-col justify-between items-start'>
+                <div className='h-full flex flex-col justify-between items-start 
+                                hover:scale-101 duration-300'>
                     <Label text='Microsoft Corporation'/>
                     <div className="h-full w-2xl" onClick={():void => showFullChart(true)}>
                         <img className='h-full w-full object-cover bg-gray-100 rounded-b-3xl rounded-tr-3xl cursor-pointer'
                         src={time === "All Time" ? "MSFT_AT.svg": 
                         (time === "1 Year" ? "MSFT_1Y.svg" : 
                         (time === "1 Month" ? "MSFT_1M.svg" : 
-                        (time === "1 Week" ? "MSFT_1W.svg" : "MSFT_AT.svg")))}/>
+                        (time === "1 Week" ? "MSFT_1WW.svg" : "MSFT_AT.svg")))}/>
                     </div>
                 </div>
-                <div className='h-full flex flex-col justify-between items-start'>
+                <div className='h-full flex flex-col justify-between items-start 
+                                hover:scale-101 duration-300'>
                     <Label text='NVIDIA Corporation'/>
                     <div className="h-full w-2xl" onClick={():void => showFullChart(true)}>
                         <img className='h-full w-full object-cover bg-gray-100 rounded-b-3xl rounded-tr-3xl cursor-pointer'
                         src={time === "All Time" ? "NVDA_AT.svg": 
                         (time === "1 Year" ? "NVDA_1Y.svg" : 
                         (time === "1 Month" ? "NVDA_1M.svg" : 
-                        (time === "1 Week" ? "NVDA_1W.svg" : "NVDA_AT.svg")))}/>
+                        (time === "1 Week" ? "NVDA_1WW.svg" : "NVDA_AT.svg")))}/>
                     </div>
                 </div>
             </div>
