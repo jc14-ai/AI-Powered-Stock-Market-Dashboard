@@ -32,9 +32,9 @@ export default function MainPanel({time}:MainPanelProps): React.ReactElement {
                     <div className="h-full w-2xl" onClick={():void => showFullChart(true)}>
                         <img className='h-full w-full object-cover bg-gray-100 rounded-b-3xl rounded-tr-3xl cursor-pointer' 
                         src={time === "All Time" ? "AMZN_AT.svg": 
-                        (time === "1 Year" ? "AMZN_1Y.svg" : 
-                        (time === "1 Month" ? "AMZN_1M.svg" : 
-                        (time === "1 Week" ? "AMZN_1WW.svg" : "AMZN_AT.svg")))}/>
+                        (time === "1 Year" ? "AMZN_Y.svg" : 
+                        (time === "1 Month" ? "AMZN_M.svg" : 
+                        (time === "1 Week" ? "AMZN_WW.svg" : "AMZN_AT.svg")))}/>
                     </div>
                 </div>
                 <div className='h-full flex flex-col justify-between items-start 
@@ -43,9 +43,9 @@ export default function MainPanel({time}:MainPanelProps): React.ReactElement {
                     <div className="h-full w-2xl" onClick={():void => showFullChart(true)}>
                         <img className='h-full w-full object-cover bg-gray-100 rounded-b-3xl rounded-tr-3xl cursor-pointer' 
                         src={time === "All Time" ? "AAPL_AT.svg": 
-                        (time === "1 Year" ? "AAPL_1Y.svg" : 
-                        (time === "1 Month" ? "AAPL_1M.svg" : 
-                        (time === "1 Week" ? "AAPL_1WW.svg" : "AAPL_AT.svg")))}/>
+                        (time === "1 Year" ? "AAPL_Y.svg" : 
+                        (time === "1 Month" ? "AAPL_M.svg" : 
+                        (time === "1 Week" ? "AAPL_WW.svg" : "AAPL_AT.svg")))}/>
                     </div>
                 </div>
             </div>
@@ -58,9 +58,9 @@ export default function MainPanel({time}:MainPanelProps): React.ReactElement {
                     <div className="h-full w-2xl" onClick={():void => showFullChart(true)}>
                         <img className='h-full w-full object-cover bg-gray-100 rounded-b-3xl rounded-tr-3xl cursor-pointer'
                         src={time === "All Time" ? "MSFT_AT.svg": 
-                        (time === "1 Year" ? "MSFT_1Y.svg" : 
-                        (time === "1 Month" ? "MSFT_1M.svg" : 
-                        (time === "1 Week" ? "MSFT_1WW.svg" : "MSFT_AT.svg")))}/>
+                        (time === "1 Year" ? "MSFT_Y.svg" : 
+                        (time === "1 Month" ? "MSFT_M.svg" : 
+                        (time === "1 Week" ? "MSFT_WW.svg" : "MSFT_AT.svg")))}/>
                     </div>
                 </div>
                 <div className='h-full flex flex-col justify-between items-start 
@@ -69,9 +69,9 @@ export default function MainPanel({time}:MainPanelProps): React.ReactElement {
                     <div className="h-full w-2xl" onClick={():void => showFullChart(true)}>
                         <img className='h-full w-full object-cover bg-gray-100 rounded-b-3xl rounded-tr-3xl cursor-pointer'
                         src={time === "All Time" ? "NVDA_AT.svg": 
-                        (time === "1 Year" ? "NVDA_1Y.svg" : 
-                        (time === "1 Month" ? "NVDA_1M.svg" : 
-                        (time === "1 Week" ? "NVDA_1WW.svg" : "NVDA_AT.svg")))}/>
+                        (time === "1 Year" ? "NVDA_Y.svg" : 
+                        (time === "1 Month" ? "NVDA_M.svg" : 
+                        (time === "1 Week" ? "NVDA_WW.svg" : "NVDA_AT.svg")))}/>
                     </div>
                 </div>
             </div>

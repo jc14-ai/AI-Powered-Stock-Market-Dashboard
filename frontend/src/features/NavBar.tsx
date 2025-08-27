@@ -33,7 +33,7 @@ export default function Navbar({selectValue, time}: NavbarProps): React.ReactEle
 
     return (
         <>  {/* HOLDS NAVIGATION BAR */}
-            <div className="flex flex-row justify-between items-center w-screen h-24 bg-[#273166] pl-10 pr-20">
+            <div className="flex flex-row justify-between items-center w-screen h-24 bg-[#273166] pl-10 pr-20 z-2">
                 <div>
                     {/* TIMEFRAME INPUT */}
                     <input className={isTimeFrameShown ? 
