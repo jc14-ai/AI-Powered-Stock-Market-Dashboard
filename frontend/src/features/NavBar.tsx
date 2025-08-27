@@ -9,11 +9,16 @@ type NavbarProps = {
     time: string;
 }
 
+type tickerButtonProps = {
+    ticker: string;
+}
+
 export default function Navbar({selectValue, time}: NavbarProps): React.ReactElement {
     // TODO: Implement and fix theme toggle functionality
 
     const [whatTheme, setTheme] = useState<boolean>(true);
     const [isTimeFrameShown, setTimeFrameVisible] = useState<boolean>(true);
+    const [tickerButton, setTickerColored] = useState<tickerButtonProps>({ticker: "ALL"});
 
     const changeTheme = (): void => {
         setTheme((prevTheme): boolean => !prevTheme)
@@ -29,6 +34,10 @@ export default function Navbar({selectValue, time}: NavbarProps): React.ReactEle
 
     const changeValue = (time: string): void => {
         selectValue(time)
+    }
+
+    const highlightTicker = (ticker:string):void  => {
+        setTickerColored({ticker:ticker});
     }
 
     return (
@@ -71,26 +80,44 @@ export default function Navbar({selectValue, time}: NavbarProps): React.ReactEle
 
                 {/* STOCK TICKER NAVIGATIONS */}
                 <div className="flex flex-row justify-evenly items-center w-2/2 h-1/1">
-                    <Link to='/Amazon' className="flex justify-center items-center bg-[#424b84] h-[50px] w-1/5 rounded-4xl 
-                                                    cursor-pointer text-white text-xl font-voces font-medium hover:bg-[#5c65a3]  duration-600">
+                    <Link to='/Amazon' className={tickerButton?.ticker === "AMZN" ? 
+                        "flex justify-center items-center bg-[#5c65a3] h-[50px] w-1/5 rounded-4xl cursor-pointer" + 
+                        " text-white text-xl font-voces font-medium hover:bg-[#5c65a3] duration-600": 
+                        "flex justify-center items-center bg-[#424b84] h-[50px] w-1/5 rounded-4xl cursor-pointer" + 
+                        " text-white text-xl font-voces font-medium hover:bg-[#5c65a3] duration-600"} 
+                        onClick={():void => highlightTicker("AMZN")}>
                         <label>AMZN</label>
                     </Link>
-                    <Link to='/Apple' className="flex justify-center items-center bg-[#424b84] h-[50px] w-1/5 rounded-4xl 
-                                                    cursor-pointer text-white text-xl font-voces font-medium hover:bg-[#5c65a3] duration-600">
+                    <Link to='/Apple' className={tickerButton?.ticker === "AAPL" ?  
+                        "flex justify-center items-center bg-[#5c65a3] h-[50px] w-1/5 rounded-4xl cursor-pointer" + 
+                        " text-white text-xl font-voces font-medium hover:bg-[#5c65a3] duration-600": 
+                        "flex justify-center items-center bg-[#424b84] h-[50px] w-1/5 rounded-4xl cursor-pointer" + 
+                        " text-white text-xl font-voces font-medium hover:bg-[#5c65a3] duration-600"} 
+                        onClick={():void => highlightTicker("AAPL")}>
                         <label>AAPL</label>
                     </Link>
 
                     {/* SHOWS 4 PANELS */}
-                    <Link to='/' className="flex justify-center items-center bg-[#424b84] 
-                                            hover:bg-[#5c65a3] duration-600 rounded-[100px] w-15 h-15">
+                    <Link to='/' className={tickerButton?.ticker === "ALL" ?
+                        "flex justify-center items-center bg-[#5c65a3] hover:bg-[#5c65a3] duration-600 rounded-[100px] w-15 h-15" :
+                        "flex justify-center items-center bg-[#424b84] hover:bg-[#5c65a3] duration-600 rounded-[100px] w-15 h-15"}
+                        onClick={():void => highlightTicker("ALL")}>
                         <img className="w-8 transition duration-300" src={logo} />
                     </Link>
-                    <Link to='/Microsoft' className="flex justify-center items-center bg-[#424b84] h-[50px] w-1/5 rounded-4xl 
-                                                        cursor-pointer text-white text-xl font-voces font-medium hover:bg-[#5c65a3] duration-600">
+                    <Link to='/Microsoft' className={tickerButton?.ticker === "MSFT" ?  
+                        "flex justify-center items-center bg-[#5c65a3] h-[50px] w-1/5 rounded-4xl cursor-pointer" + 
+                        " text-white text-xl font-voces font-medium hover:bg-[#5c65a3] duration-600": 
+                        "flex justify-center items-center bg-[#424b84] h-[50px] w-1/5 rounded-4xl cursor-pointer" + 
+                        " text-white text-xl font-voces font-medium hover:bg-[#5c65a3] duration-600"} 
+                        onClick={():void => highlightTicker("MSFT")}>
                         <label>MSFT</label>
                     </Link>
-                    <Link to='/Nvidia' className="flex justify-center items-center bg-[#424b84] h-[50px] w-1/5 rounded-4xl 
-                                                    cursor-pointer text-white text-xl font-voces font-medium hover:bg-[#5c65a3] duration-600">
+                    <Link to='/Nvidia' className={tickerButton?.ticker === "NVDA" ?  
+                        "flex justify-center items-center bg-[#5c65a3] h-[50px] w-1/5 rounded-4xl cursor-pointer" + 
+                        " text-white text-xl font-voces font-medium hover:bg-[#5c65a3] duration-600": 
+                        "flex justify-center items-center bg-[#424b84] h-[50px] w-1/5 rounded-4xl cursor-pointer" + 
+                        " text-white text-xl font-voces font-medium hover:bg-[#5c65a3] duration-600"} 
+                        onClick={():void => highlightTicker("NVDA")}>
                         <label>NVDA</label>
                     </Link>
                 </div>

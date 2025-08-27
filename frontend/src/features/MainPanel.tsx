@@ -21,6 +21,14 @@ export default function MainPanel({time}:MainPanelProps): React.ReactElement {
             <div className={isFullChart ? 
                 'flex justify-center items-center h-150 w-250 bg-gray-800 z-1 absolute rounded-4xl' : 
                 'hidden h-150 w-250 bg-gray-800 z-1 absolute rounded-4xl'}>
+                    {/* Stock Ticker - Company
+                        Timeframe selector
+                        Line Chart
+                        Volume Chart
+                        Latest Open Price
+                        Lates Closing Price
+                        Gain / Loss
+                        Full View Button */}
                 <button className='bg-amber-50 rounded-xl w-20 cursor-pointer' onClick={():void => showFullChart(false)}>Close</button>
             </div>
 
