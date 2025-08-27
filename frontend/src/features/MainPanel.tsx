@@ -31,10 +31,10 @@ export default function MainPanel({time}:MainPanelProps): React.ReactElement {
                     <Label text='Amazon.com, Inc.'/>
                     <div className="h-full w-2xl" onClick={():void => showFullChart(true)}>
                         <img className='h-full w-full object-cover bg-gray-100 rounded-b-3xl rounded-tr-3xl cursor-pointer' 
-                        src={time === "All Time" ? "AMZN_AT.svg": 
-                        (time === "1 Year" ? "AMZN_Y.svg" : 
-                        (time === "1 Month" ? "AMZN_M.svg" : 
-                        (time === "1 Week" ? "AMZN_WW.svg" : "AMZN_AT.svg")))}/>
+                        src={time === "All Time" ? "svg_visuals/AMZN_AT.svg": 
+                        (time === "1 Year" ? "svg_visuals/AMZN_Y.svg" : 
+                        (time === "1 Month" ? "svg_visuals/AMZN_M.svg" : 
+                        (time === "1 Week" ? "svg_visuals/AMZN_WW.svg" : "svg_visuals/AMZN_AT.svg")))}/>
                     </div>
                 </div>
                 <div className='h-full flex flex-col justify-between items-start 
@@ -42,10 +42,10 @@ export default function MainPanel({time}:MainPanelProps): React.ReactElement {
                     <Label text='Apple Inc.'/>
                     <div className="h-full w-2xl" onClick={():void => showFullChart(true)}>
                         <img className='h-full w-full object-cover bg-gray-100 rounded-b-3xl rounded-tr-3xl cursor-pointer' 
-                        src={time === "All Time" ? "AAPL_AT.svg": 
-                        (time === "1 Year" ? "AAPL_Y.svg" : 
-                        (time === "1 Month" ? "AAPL_M.svg" : 
-                        (time === "1 Week" ? "AAPL_WW.svg" : "AAPL_AT.svg")))}/>
+                        src={time === "All Time" ? "svg_visuals/AAPL_AT.svg": 
+                        (time === "1 Year" ? "svg_visuals/AAPL_Y.svg" : 
+                        (time === "1 Month" ? "svg_visuals/AAPL_M.svg" : 
+                        (time === "1 Week" ? "svg_visuals/AAPL_WW.svg" : "svg_visuals/AAPL_AT.svg")))}/>
                     </div>
                 </div>
             </div>
@@ -57,10 +57,10 @@ export default function MainPanel({time}:MainPanelProps): React.ReactElement {
                     <Label text='Microsoft Corporation'/>
                     <div className="h-full w-2xl" onClick={():void => showFullChart(true)}>
                         <img className='h-full w-full object-cover bg-gray-100 rounded-b-3xl rounded-tr-3xl cursor-pointer'
-                        src={time === "All Time" ? "MSFT_AT.svg": 
-                        (time === "1 Year" ? "MSFT_Y.svg" : 
-                        (time === "1 Month" ? "MSFT_M.svg" : 
-                        (time === "1 Week" ? "MSFT_WW.svg" : "MSFT_AT.svg")))}/>
+                        src={time === "All Time" ? "svg_visuals/MSFT_AT.svg": 
+                        (time === "1 Year" ? "svg_visuals/MSFT_Y.svg" : 
+                        (time === "1 Month" ? "svg_visuals/MSFT_M.svg" : 
+                        (time === "1 Week" ? "svg_visuals/MSFT_WW.svg" : "svg_visuals/MSFT_AT.svg")))}/>
                     </div>
                 </div>
                 <div className='h-full flex flex-col justify-between items-start 
@@ -68,10 +68,10 @@ export default function MainPanel({time}:MainPanelProps): React.ReactElement {
                     <Label text='NVIDIA Corporation'/>
                     <div className="h-full w-2xl" onClick={():void => showFullChart(true)}>
                         <img className='h-full w-full object-cover bg-gray-100 rounded-b-3xl rounded-tr-3xl cursor-pointer'
-                        src={time === "All Time" ? "NVDA_AT.svg": 
-                        (time === "1 Year" ? "NVDA_Y.svg" : 
-                        (time === "1 Month" ? "NVDA_M.svg" : 
-                        (time === "1 Week" ? "NVDA_WW.svg" : "NVDA_AT.svg")))}/>
+                        src={time === "All Time" ? "svg_visuals/NVDA_AT.svg": 
+                        (time === "1 Year" ? "svg_visuals/NVDA_Y.svg" : 
+                        (time === "1 Month" ? "svg_visuals/NVDA_M.svg" : 
+                        (time === "1 Week" ? "svg_visuals/NVDA_WW.svg" : "svg_visuals/NVDA_AT.svg")))}/>
                     </div>
                 </div>
             </div>
