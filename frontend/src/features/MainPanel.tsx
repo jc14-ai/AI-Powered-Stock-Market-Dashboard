@@ -31,9 +31,8 @@ export default function MainPanel({time}:MainPanelProps): React.ReactElement {
                                 stockView?.ticker === 'AAPL' || 
                                 stockView?.ticker === 'MSFT' || 
                                 stockView?.ticker === 'NVDA') ? 
-                                'flex justify-center items-center h-150 w-250 bg-gray-800 z-1 absolute rounded-4xl' : 
+                                'flex flex-col justify-center items-center h-150 w-250 bg-gray-800 z-1 absolute rounded-4xl' : 
                                 'hidden h-150 w-250 bg-gray-800 z-1 absolute rounded-4xl'}>
-                                    
                     {/* Stock Ticker - Company
                         Timeframe selector
                         Line Chart
@@ -44,11 +43,24 @@ export default function MainPanel({time}:MainPanelProps): React.ReactElement {
                         Full View Button */}
 
                 {/*Stock Ticker*/}
-                <label className=''>{stockView?.ticker === 'AMZN' ? 'Amazon' : (stockView?.ticker === 'AAPL' ? 'AAPL' : (stockView?.ticker === 'MSFT' ? 'MSFT' : (stockView?.ticker === '')))}</label>
+                <label className='text-white font-voces text-[4em]'>{stockView?.ticker === 'AMZN' ? 
+                'AMZN - Amazon.com, Inc.' : (stockView?.ticker === 'AAPL' ? 
+                'AAPL - Apple Inc.' : (stockView?.ticker === 'MSFT' ? 
+                'MSFT - Microsoft Corporation' : (stockView?.ticker === 'NVDA') ? 
+                'NVDA - NVIDIA Corporation': ''))}</label>
 
                 {/* Stock open/close price */}
-                <label className=''>{stockView?.openPrice}</label>
-                <label className=''>{stockView?.closingPrice}</label>
+                <label className='text-white font-voces text-[4em]'>{stockView?.ticker === 'AMZN' ? 
+                stockView?.openPrice : (stockView?.ticker === 'AAPL' ? 
+                stockView?.openPrice : (stockView?.ticker === 'MSFT' ? 
+                stockView?.openPrice : (stockView?.ticker === 'NVDA' ? 
+                stockView?.openPrice : 0.00)))}</label>
+
+                <label className='text-white font-voces text-[4em]'>{stockView?.ticker === 'AMZN' ? 
+                stockView?.closingPrice : (stockView?.ticker === 'AAPL' ? 
+                stockView?.closingPrice : (stockView?.ticker === 'MSFT' ? 
+                stockView?.closingPrice : (stockView?.ticker === 'NVDA' ? 
+                stockView?.closingPrice : 0.00)))}</label>
 
                 <button className='bg-amber-50 rounded-xl w-20 cursor-pointer' onClick={():void => showFullChart('','',0,0)}>Close</button>
             </div>
