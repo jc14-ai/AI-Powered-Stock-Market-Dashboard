@@ -18,7 +18,7 @@ export default function MainPanel({time}:MainPanelProps): React.ReactElement {
 
     const showFullChart = (ticker:string, time:string, openPrice:number, closingPrice:number) => {
         // TODO: Fix how to add this in the flow
-        setStockView({ticker:ticker,time:time, openPrice:openPrice, closingPrice:closingPrice})
+        setStockView({ticker:ticker, time:time, openPrice:openPrice, closingPrice:closingPrice})
     }
 
     return (
@@ -41,6 +41,25 @@ export default function MainPanel({time}:MainPanelProps): React.ReactElement {
                         Lates Closing Price
                         Gain / Loss
                         Full View Button */}
+
+                <img className='w-100' 
+                src={(stockView?.ticker === 'AMZN' && stockView?.time === 'All Time') ? 
+                'svg_visuals/AMZN_AT.svg' : ((stockView?.ticker === 'AAPL' && stockView?.time === 'All Time') ? 
+                'svg_visuals/AAPL_AT.svg' : ((stockView?.ticker === 'MSFT' && stockView?.time === 'All Time') ? 
+                'svg_visuals/MSFT_AT.svg' : ((stockView?.ticker === 'NVDA' && stockView?.time === 'All Time') ? 
+                'svg_visuals/NVDA_AT.svg' : ((stockView?.ticker === 'AMZN' && stockView?.time === '1 Year') ? 
+                'svg_visuals/AMZN_Y.svg' : ((stockView?.ticker === 'AAPL' && stockView?.time === '1 Year') ? 
+                'svg_visuals/AAPL_Y.svg' : ((stockView?.ticker === 'MSFT' && stockView?.time === '1 Year') ? 
+                'svg_visuals/MSFT_Y.svg' : ((stockView?.ticker === 'NVDA' && stockView?.time === '1 Year') ? 
+                'svg_visuals/NVDA_Y.svg' : ((stockView?.ticker === 'AMZN' && stockView?.time === '1 Month') ? 
+                'svg_visuals/AMZN_M.svg' : ((stockView?.ticker === 'AAPL' && stockView?.time === '1 Month') ? 
+                'svg_visuals/AAPL_M.svg' : ((stockView?.ticker === 'MSFT' && stockView?.time === '1 Month') ? 
+                'svg_visuals/MSFT_M.svg' : ((stockView?.ticker === 'NVDA' && stockView?.time === '1 Month') ? 
+                'svg_visuals/NVDA_M.svg' : ((stockView?.ticker === 'AMZN' && stockView?.time === '1 Week') ? 
+                'svg_visuals/AMZN_WW.svg' : ((stockView?.ticker === 'AAPL' && stockView?.time === '1 Week') ? 
+                'svg_visuals/AAPL_WW.svg' : ((stockView?.ticker === 'MSFT' && stockView?.time === '1 Week') ? 
+                'svg_visuals/MSFT_WW.svg' : ((stockView?.ticker === 'NVDA' && stockView?.time === '1 Week') ? 
+                'svg_visuals/NVDA_WW.svg' : '')))))))))))))))}/>
 
                 {/*Stock Ticker*/}
                 <label className='text-white font-voces text-[4em]'>{stockView?.ticker === 'AMZN' ? 
@@ -72,7 +91,7 @@ export default function MainPanel({time}:MainPanelProps): React.ReactElement {
                     <Label text='Amazon.com, Inc.'/>
                     <div className="h-full w-2xl" onClick={():void => showFullChart('AMZN',time,0,0)}>
                         <img className='h-full w-full object-cover bg-gray-100 rounded-b-3xl rounded-tr-3xl cursor-pointer' 
-                        src={time === "All Time" ? "svg_visuals/AMZN_AT.svg": 
+                        src={time === "All Time" ? "svg_visuals/AMZN_AT.svg" : 
                         (time === "1 Year" ? "svg_visuals/AMZN_Y.svg" : 
                         (time === "1 Month" ? "svg_visuals/AMZN_M.svg" : 
                         (time === "1 Week" ? "svg_visuals/AMZN_WW.svg" : "svg_visuals/AMZN_AT.svg")))}/>
