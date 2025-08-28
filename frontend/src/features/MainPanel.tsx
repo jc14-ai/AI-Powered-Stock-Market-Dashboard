@@ -5,8 +5,16 @@ type MainPanelProps = {
     time:string;
 }
 
+type stockViewProps = {
+    ticker: string;
+    time:string;
+    openPrice:number;
+    closingPrice:number;
+}
+
 export default function MainPanel({time}:MainPanelProps): React.ReactElement {    
     const [isFullChart, setFullChart] = useState<boolean>(false);
+    const [stockView, setStockView] = useState<stockViewProps>();
 
     const showFullChart = (isFull:boolean) => {
         setFullChart(isFull)
@@ -29,6 +37,14 @@ export default function MainPanel({time}:MainPanelProps): React.ReactElement {
                         Lates Closing Price
                         Gain / Loss
                         Full View Button */}
+
+                {/*Stock Ticker*/}
+                <label className=''>{stockView?.ticker}</label>
+
+                {/* Stock open/close price */}
+                <label>{stockView?.openPrice}</label>
+                <label>{stockView?.closingPrice}</label>
+
                 <button className='bg-amber-50 rounded-xl w-20 cursor-pointer' onClick={():void => showFullChart(false)}>Close</button>
             </div>
 
