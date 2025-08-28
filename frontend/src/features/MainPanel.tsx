@@ -13,11 +13,13 @@ type stockViewProps = {
 }
 
 export default function MainPanel({time}:MainPanelProps): React.ReactElement {    
-    const [isFullChart, setFullChart] = useState<boolean>(false);
+    // const [isFullChart, setFullChart] = useState<boolean>(false);
     const [stockView, setStockView] = useState<stockViewProps>();
 
-    const showFullChart = (isFull:boolean) => {
-        setFullChart(isFull)
+    const showFullChart = () => {
+        // TODO: Fix how to add this in the flow
+        setStockView({ticker:'',time:'', openPrice:0, closingPrice:0})
+        // setFullChart(isFull)
     }
 
     return (
@@ -26,9 +28,8 @@ export default function MainPanel({time}:MainPanelProps): React.ReactElement {
         <div className="flex justify-center items-center flex-col h-[888px] w-screen bg-blue-100">
 
             {/* FULL CHART TOGGLE */}
-            <div className={isFullChart ? 
-                'flex justify-center items-center h-150 w-250 bg-gray-800 z-1 absolute rounded-4xl' : 
-                'hidden h-150 w-250 bg-gray-800 z-1 absolute rounded-4xl'}>
+            <div className={(stockView?.ticker === 'AMZN' && stockView?.time === 'All Time') ? 'flex justify-center items-center h-150 w-250 bg-gray-800 z-1 absolute rounded-4xl' : (stockView?.ticker === 'AAPL' && stockView?.time === 'All Time' ? '' : '')}>
+                    {/* NOTE: 'hidden h-150 w-250 bg-gray-800 z-1 absolute rounded-4xl' */}
                     {/* Stock Ticker - Company
                         Timeframe selector
                         Line Chart
@@ -39,11 +40,11 @@ export default function MainPanel({time}:MainPanelProps): React.ReactElement {
                         Full View Button */}
 
                 {/*Stock Ticker*/}
-                <label className=''>{stockView?.ticker}</label>
+                <label className=''>{stockView?.ticker === 'AMZN' ? 'Amazon' : (stockView?.ticker === 'AAPL' ? 'AAPL' : (stockView?.ticker === 'MSFT' ? 'MSFT' : (stockView?.ticker === '')))}</label>
 
                 {/* Stock open/close price */}
-                <label>{stockView?.openPrice}</label>
-                <label>{stockView?.closingPrice}</label>
+                <label className=''>{stockView?.openPrice}</label>
+                <label className=''>{stockView?.closingPrice}</label>
 
                 <button className='bg-amber-50 rounded-xl w-20 cursor-pointer' onClick={():void => showFullChart(false)}>Close</button>
             </div>
