@@ -43,20 +43,22 @@ export default function MainPanel({time}:MainPanelProps): React.ReactElement {
                         Full View Button */}
 
                 {/*Stock Ticker*/}
-                <div className=''>
-                    <label className='text-white font-voces text-[2em]'>{stockView?.ticker === 'AMZN' ? 
-                    'AMZN - Amazon.com, Inc.' : (stockView?.ticker === 'AAPL' ? 
-                    'AAPL - Apple Inc.' : (stockView?.ticker === 'MSFT' ? 
-                    'MSFT - Microsoft Corporation' : (stockView?.ticker === 'NVDA') ? 
-                    'NVDA - NVIDIA Corporation': ''))}
-                    </label>
+                <div className='flex flex-row pl-5 pr-5 justify-between items-center w-full'>
+                    <div className='flex flex-row justify-start items-center'>
+                        <label className='text-white font-voces text-[2em]'>{stockView?.ticker === 'AMZN' ? 
+                        'AMZN - Amazon.com, Inc.' : (stockView?.ticker === 'AAPL' ?     
+                        'AAPL - Apple Inc.' : (stockView?.ticker === 'MSFT' ? 
+                        'MSFT - Microsoft Corporation' : (stockView?.ticker === 'NVDA') ? 
+                        'NVDA - NVIDIA Corporation': ''))}
+                        </label>
                     <label className='text-white font-voces text-[2em]'>+2.3%</label>
+                    </div>
                     <button className='bg-amber-50 rounded-xl w-20 cursor-pointer' onClick={():void => showFullChart('','',0,0)}>
                         Close
                     </button>
                 </div>
 
-                <div className='flex justify-start items-center h-1/2 w-full ml-5'>
+                <div className='flex justify-evenly items-center h-1/2 w-full'>
                     <img className='h-full w-[760px] object-cover bg-gray-100 rounded-3xl cursor-pointer'
                     src={(stockView?.ticker === 'AMZN' && stockView?.time === 'All Time') ? 
                     'svg_visuals/AMZN_AT_m.svg' : ((stockView?.ticker === 'AAPL' && stockView?.time === 'All Time') ? 
@@ -75,11 +77,10 @@ export default function MainPanel({time}:MainPanelProps): React.ReactElement {
                     'svg_visuals/AAPL_WW_m.svg' : ((stockView?.ticker === 'MSFT' && stockView?.time === '1 Week') ? 
                     'svg_visuals/MSFT_WW_m.svg' : ((stockView?.ticker === 'NVDA' && stockView?.time === '1 Week') ? 
                     'svg_visuals/NVDA_WW_m.svg' : '')))))))))))))))}/>
-                    
 
                     {/* Stock open/close price */}
-                    <div className='flex flex-col justify-center items-center'>
-                        <label className='text-white font-voces text-[4em]'>
+                    <div className='flex flex-col justify-evenly items-center h-1/2 w-1/5'>
+                        <label className='flex flex-row justify-center items-center text-white font-voces text-[3em] h-1/3 w-[150px] bg-green-300 rounded-2xl'>
                             {stockView?.ticker === 'AMZN' ? 
                             stockView?.openPrice : (stockView?.ticker === 'AAPL' ? 
                             stockView?.openPrice : (stockView?.ticker === 'MSFT' ? 
@@ -87,7 +88,7 @@ export default function MainPanel({time}:MainPanelProps): React.ReactElement {
                             stockView?.openPrice : 0.00)))}
                         </label>
 
-                        <label className='text-white font-voces text-[4em]'>
+                        <label className='flex flex-row justify-center items-center text-white font-voces text-[3em] bg-red-300 h-1/3 w-[150px] rounded-2xl'>
                             {stockView?.ticker === 'AMZN' ? 
                             stockView?.closingPrice : (stockView?.ticker === 'AAPL' ? 
                             stockView?.closingPrice : (stockView?.ticker === 'MSFT' ? 
@@ -96,7 +97,7 @@ export default function MainPanel({time}:MainPanelProps): React.ReactElement {
                         </label>
                     </div>
                 </div>
-                <div className='flex justify-start items-center h-1/3 w-full ml-5'>
+                <div className='flex justify-start items-center h-1/3 w-full pl-3 pr-3'>
                      <img className='h-full w-[760px] object-cover bg-gray-100 rounded-3xl cursor-pointer'
                     src={(stockView?.ticker === 'AMZN' && stockView?.time === 'All Time') ? 
                     'svg_visuals/AMZN_AT_m_RSI.svg' : ((stockView?.ticker === 'AAPL' && stockView?.time === 'All Time') ? 
