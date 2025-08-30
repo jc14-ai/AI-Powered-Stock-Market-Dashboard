@@ -31,7 +31,7 @@ export default function MainPanel({time}:MainPanelProps): React.ReactElement {
                                 stockView?.ticker === 'AAPL' || 
                                 stockView?.ticker === 'MSFT' || 
                                 stockView?.ticker === 'NVDA') ? 
-                                'flex flex-col justify-center items-center h-150 w-250 bg-gray-800 z-1 absolute rounded-4xl' : 
+                                'flex flex-col justify-evenly items-start h-150 w-250 bg-gray-800 z-1 absolute rounded-4xl' : 
                                 'hidden h-150 w-250 bg-gray-800 z-1 absolute rounded-4xl'}>
                     {/* Stock Ticker - Company
                         Timeframe selector
@@ -43,14 +43,21 @@ export default function MainPanel({time}:MainPanelProps): React.ReactElement {
                         Full View Button */}
 
                 {/*Stock Ticker*/}
-                <label className='text-white font-voces text-[4em]'>{stockView?.ticker === 'AMZN' ? 
-                'AMZN - Amazon.com, Inc.' : (stockView?.ticker === 'AAPL' ? 
-                'AAPL - Apple Inc.' : (stockView?.ticker === 'MSFT' ? 
-                'MSFT - Microsoft Corporation' : (stockView?.ticker === 'NVDA') ? 
-                'NVDA - NVIDIA Corporation': ''))}</label>
+                <div className=''>
+                    <label className='text-white font-voces text-[2em]'>{stockView?.ticker === 'AMZN' ? 
+                    'AMZN - Amazon.com, Inc.' : (stockView?.ticker === 'AAPL' ? 
+                    'AAPL - Apple Inc.' : (stockView?.ticker === 'MSFT' ? 
+                    'MSFT - Microsoft Corporation' : (stockView?.ticker === 'NVDA') ? 
+                    'NVDA - NVIDIA Corporation': ''))}
+                    </label>
+                    <label className='text-white font-voces text-[2em]'>+2.3%</label>
+                    <button className='bg-amber-50 rounded-xl w-20 cursor-pointer' onClick={():void => showFullChart('','',0,0)}>
+                        Close
+                    </button>
+                </div>
 
-                <div>
-                    <img className='w-150 rounded-2xl'
+                <div className='flex justify-start items-center h-1/2 w-full ml-5'>
+                    <img className='h-full w-[760px] object-cover bg-gray-100 rounded-3xl cursor-pointer'
                     src={(stockView?.ticker === 'AMZN' && stockView?.time === 'All Time') ? 
                     'svg_visuals/AMZN_AT_m.svg' : ((stockView?.ticker === 'AAPL' && stockView?.time === 'All Time') ? 
                     'svg_visuals/AAPL_AT_m.svg' : ((stockView?.ticker === 'MSFT' && stockView?.time === 'All Time') ? 
@@ -68,26 +75,47 @@ export default function MainPanel({time}:MainPanelProps): React.ReactElement {
                     'svg_visuals/AAPL_WW_m.svg' : ((stockView?.ticker === 'MSFT' && stockView?.time === '1 Week') ? 
                     'svg_visuals/MSFT_WW_m.svg' : ((stockView?.ticker === 'NVDA' && stockView?.time === '1 Week') ? 
                     'svg_visuals/NVDA_WW_m.svg' : '')))))))))))))))}/>
+                    
+
+                    {/* Stock open/close price */}
+                    <div className='flex flex-col justify-center items-center'>
+                        <label className='text-white font-voces text-[4em]'>
+                            {stockView?.ticker === 'AMZN' ? 
+                            stockView?.openPrice : (stockView?.ticker === 'AAPL' ? 
+                            stockView?.openPrice : (stockView?.ticker === 'MSFT' ? 
+                            stockView?.openPrice : (stockView?.ticker === 'NVDA' ? 
+                            stockView?.openPrice : 0.00)))}
+                        </label>
+
+                        <label className='text-white font-voces text-[4em]'>
+                            {stockView?.ticker === 'AMZN' ? 
+                            stockView?.closingPrice : (stockView?.ticker === 'AAPL' ? 
+                            stockView?.closingPrice : (stockView?.ticker === 'MSFT' ? 
+                            stockView?.closingPrice : (stockView?.ticker === 'NVDA' ? 
+                            stockView?.closingPrice : 0.00)))}  
+                        </label>
+                    </div>
                 </div>
-
-                <img className='' src=''/>
-
-                {/* Stock open/close price */}
-                <label className='text-white font-voces text-[4em]'>{stockView?.ticker === 'AMZN' ? 
-                stockView?.openPrice : (stockView?.ticker === 'AAPL' ? 
-                stockView?.openPrice : (stockView?.ticker === 'MSFT' ? 
-                stockView?.openPrice : (stockView?.ticker === 'NVDA' ? 
-                stockView?.openPrice : 0.00)))}</label>
-
-                <label className='text-white font-voces text-[4em]'>{stockView?.ticker === 'AMZN' ? 
-                stockView?.closingPrice : (stockView?.ticker === 'AAPL' ? 
-                stockView?.closingPrice : (stockView?.ticker === 'MSFT' ? 
-                stockView?.closingPrice : (stockView?.ticker === 'NVDA' ? 
-                stockView?.closingPrice : 0.00)))}</label>
-
-                <div className=''></div>
-
-                <button className='bg-amber-50 rounded-xl w-20 cursor-pointer' onClick={():void => showFullChart('','',0,0)}>Close</button>
+                <div className='flex justify-start items-center h-1/3 w-full ml-5'>
+                     <img className='h-full w-[760px] object-cover bg-gray-100 rounded-3xl cursor-pointer'
+                    src={(stockView?.ticker === 'AMZN' && stockView?.time === 'All Time') ? 
+                    'svg_visuals/AMZN_AT_m_RSI.svg' : ((stockView?.ticker === 'AAPL' && stockView?.time === 'All Time') ? 
+                    'svg_visuals/AAPL_AT_m_RSI.svg' : ((stockView?.ticker === 'MSFT' && stockView?.time === 'All Time') ? 
+                    'svg_visuals/MSFT_AT_m_RSI.svg' : ((stockView?.ticker === 'NVDA' && stockView?.time === 'All Time') ? 
+                    'svg_visuals/NVDA_AT_m_RSI.svg' : ((stockView?.ticker === 'AMZN' && stockView?.time === '1 Year') ? 
+                    'svg_visuals/AMZN_Y_m_RSI.svg' : ((stockView?.ticker === 'AAPL' && stockView?.time === '1 Year') ? 
+                    'svg_visuals/AAPL_Y_m_RSI.svg' : ((stockView?.ticker === 'MSFT' && stockView?.time === '1 Year') ? 
+                    'svg_visuals/MSFT_Y_m_RSI.svg' : ((stockView?.ticker === 'NVDA' && stockView?.time === '1 Year') ? 
+                    'svg_visuals/NVDA_Y_m_RSI.svg' : ((stockView?.ticker === 'AMZN' && stockView?.time === '1 Month') ? 
+                    'svg_visuals/AMZN_M_m_RSI.svg' : ((stockView?.ticker === 'AAPL' && stockView?.time === '1 Month') ? 
+                    'svg_visuals/AAPL_M_m_RSI.svg' : ((stockView?.ticker === 'MSFT' && stockView?.time === '1 Month') ? 
+                    'svg_visuals/MSFT_M_m_RSI.svg' : ((stockView?.ticker === 'NVDA' && stockView?.time === '1 Month') ? 
+                    'svg_visuals/NVDA_M_m_RSI.svg' : ((stockView?.ticker === 'AMZN' && stockView?.time === '1 Week') ? 
+                    'svg_visuals/AMZN_WW_m_RSI.svg' : ((stockView?.ticker === 'AAPL' && stockView?.time === '1 Week') ? 
+                    'svg_visuals/AAPL_WW_m_RSI.svg' : ((stockView?.ticker === 'MSFT' && stockView?.time === '1 Week') ? 
+                    'svg_visuals/MSFT_WW_m_RSI.svg' : ((stockView?.ticker === 'NVDA' && stockView?.time === '1 Week') ? 
+                    'svg_visuals/NVDA_WW_m_RSI.svg' : '')))))))))))))))}/>
+                </div>
             </div>
 
             {/* UPPER MAIN SCREEN */}
