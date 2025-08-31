@@ -100,24 +100,29 @@ def print_all_plots(datas, stock, labels):
         fig.update_layout(width=1920, height=1080)
         fig.write_html(f"../../frontend/public/chart_visuals/{stock}_{labels[i]}.html")
 
+"""
+TODO: 
+    gains/loss getter, 
+    open/close price getter,
+    high/low price getter,
+    main plot getter,
+    overview plot getter,
+    rsi plot getter
+"""
 @app.route('/analyze')
 def analyze():
     df_apple, df_microsoft, df_amazon, df_nvidia = load_dataset()
     
     df_apple['Date'] = df_apple['Price']
     df_apple = df_apple.drop(index=[0,1], columns='Price')
-
     df_microsoft['Date'] = df_microsoft['Price']
     df_microsoft = df_microsoft.drop(index=[0,1], columns='Price')
-
     df_amazon['Date'] = df_amazon['Price']
     df_amazon = df_amazon.drop(index=[0,1], columns='Price')
-
     df_nvidia['Date'] = df_nvidia['Price']
     df_nvidia = df_nvidia.drop(index=[0,1], columns='Price')
     
     dfs = [df_apple, df_amazon, df_microsoft, df_nvidia]
-    
     window = 14
     short_period = 12
     long_period = 26
