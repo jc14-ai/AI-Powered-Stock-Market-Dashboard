@@ -1,5 +1,7 @@
 import {useState} from 'react'
 import Label from '../components/Label.tsx'
+import closeButton from '../assets/close-unhovered.png'
+import closeButtonHovered from '../assets/close-hovered.png'
 
 type MainPanelProps = {
     time:string;
@@ -10,15 +12,22 @@ type stockViewProps = {
     time:string;
     openPrice:number;
     closingPrice:number;
+    highPrice:number;
+    lowPrice:number;
 }
 
 export default function MainPanel({time}:MainPanelProps): React.ReactElement {    
     // const [isFullChart, setFullChart] = useState<boolean>(false);
     const [stockView, setStockView] = useState<stockViewProps>();
+    const [isCloseHovered, setCloseHovered]  = useState<boolean>(false);
 
-    const showFullChart = (ticker:string, time:string, openPrice:number, closingPrice:number) => {
+    const changeHovered = (isHovered: boolean):void => {
+        setCloseHovered(isHovered);
+    }
+
+    const showFullChart = (ticker:string, time:string, openPrice:number, closingPrice:number, highPrice:number, lowPrice:number) => {
         // TODO: Fix how to add this in the flow
-        setStockView({ticker:ticker, time:time, openPrice:openPrice, closingPrice:closingPrice})
+        setStockView({ticker:ticker, time:time, openPrice:openPrice, closingPrice:closingPrice, highPrice:highPrice, lowPrice:lowPrice})
     }
 
     return (
@@ -44,18 +53,21 @@ export default function MainPanel({time}:MainPanelProps): React.ReactElement {
 
                 {/*Stock Ticker*/}
                 <div className='flex flex-row pl-5 pr-5 justify-between items-center w-full'>
-                    <div className='flex flex-row justify-start items-center'>
-                        <label className='text-white font-voces text-[2em]'>{stockView?.ticker === 'AMZN' ? 
+                    <div className='flex flex-row justify-between items-center w-fit'>
+                        <label className='text-white font-voces text-[2em] mr-3'>{stockView?.ticker === 'AMZN' ? 
                         'AMZN - Amazon.com, Inc.' : (stockView?.ticker === 'AAPL' ?     
                         'AAPL - Apple Inc.' : (stockView?.ticker === 'MSFT' ? 
                         'MSFT - Microsoft Corporation' : (stockView?.ticker === 'NVDA') ? 
                         'NVDA - NVIDIA Corporation': ''))}
                         </label>
-                    <label className='text-white font-voces text-[2em]'>+2.3%</label>
+                        <label className='flex justify-center items-center text-black font-voces text-[1.5em] bg-green-300 rounded-4xl w-[110px]'>
+                            +2.3%
+                        </label>
                     </div>
-                    <button className='bg-amber-50 rounded-xl w-20 cursor-pointer' onClick={():void => showFullChart('','',0,0)}>
-                        Close
-                    </button>
+                    <img className='w-10 cursor-pointer' src={isCloseHovered? closeButtonHovered: closeButton} 
+                    onClick={():void => showFullChart('','',0,0,0,0)} 
+                    onMouseEnter={():void => {changeHovered(true)}} 
+                    onMouseLeave={():void => {changeHovered(false)}}/>
                 </div>
 
                 <div className='flex justify-evenly items-center h-1/2 w-full'>
@@ -79,22 +91,50 @@ export default function MainPanel({time}:MainPanelProps): React.ReactElement {
                     'svg_visuals/NVDA_WW_m.svg' : '')))))))))))))))}/>
 
                     {/* Stock open/close price */}
-                    <div className='flex flex-col justify-evenly items-center h-1/2 w-1/5'>
-                        <label className='flex flex-row justify-center items-center text-white font-voces text-[3em] h-1/3 w-[150px] bg-green-300 rounded-2xl'>
-                            {stockView?.ticker === 'AMZN' ? 
-                            stockView?.openPrice : (stockView?.ticker === 'AAPL' ? 
-                            stockView?.openPrice : (stockView?.ticker === 'MSFT' ? 
-                            stockView?.openPrice : (stockView?.ticker === 'NVDA' ? 
-                            stockView?.openPrice : 0.00)))}
-                        </label>
+                    <div className='flex flex-col justify-evenly items-center h-2/3 w-1/5'>
+                        <div className='flex flex-row justify-start items-center h-1/5 w-[150px] rounded-2xl'>
+                            <label className='flex justify-center items-center bg-gray-400 font-voces text-[2em] rounded-bl-2xl rounded-tl-2xl h-full w-[50px]'>O</label>
+                            <label className='flex flex-row justify-center items-center text-black font-voces text-[2em] h-full w-[100px] bg-white rounded-tr-2xl rounded-br-2xl'>
+                                {stockView?.ticker === 'AMZN' ? 
+                                stockView?.openPrice : (stockView?.ticker === 'AAPL' ? 
+                                stockView?.openPrice : (stockView?.ticker === 'MSFT' ? 
+                                stockView?.openPrice : (stockView?.ticker === 'NVDA' ? 
+                                stockView?.openPrice : 0.00)))}
+                            </label>
+                        </div>
 
-                        <label className='flex flex-row justify-center items-center text-white font-voces text-[3em] bg-red-300 h-1/3 w-[150px] rounded-2xl'>
-                            {stockView?.ticker === 'AMZN' ? 
-                            stockView?.closingPrice : (stockView?.ticker === 'AAPL' ? 
-                            stockView?.closingPrice : (stockView?.ticker === 'MSFT' ? 
-                            stockView?.closingPrice : (stockView?.ticker === 'NVDA' ? 
-                            stockView?.closingPrice : 0.00)))}  
-                        </label>
+                        <div className='flex flex-row justify-start items-center h-1/5 w-[150px] rounded-2xl'>
+                            <label className='flex justify-center items-center bg-gray-400 font-voces text-[2em] rounded-bl-2xl rounded-tl-2xl h-full w-[50px]'>C</label>
+                            <label className='flex flex-row justify-center items-center text-black font-voces text-[2em] h-full w-[100px] bg-white rounded-tr-2xl rounded-br-2xl'>
+                                {stockView?.ticker === 'AMZN' ? 
+                                stockView?.closingPrice : (stockView?.ticker === 'AAPL' ? 
+                                stockView?.closingPrice : (stockView?.ticker === 'MSFT' ? 
+                                stockView?.closingPrice : (stockView?.ticker === 'NVDA' ? 
+                                stockView?.closingPrice : 0.00)))}
+                            </label>
+                        </div>
+
+                        <div className='flex flex-row justify-start items-center h-1/5 w-[150px] rounded-2xl'>
+                            <label className='flex justify-center items-center bg-gray-400 font-voces text-[2em] rounded-bl-2xl rounded-tl-2xl h-full w-[50px]'>H</label>
+                            <label className='flex flex-row justify-center items-center text-black font-voces text-[2em] h-full w-[100px] bg-white rounded-tr-2xl rounded-br-2xl'>
+                                {stockView?.ticker === 'AMZN' ? 
+                                stockView?.highPrice : (stockView?.ticker === 'AAPL' ? 
+                                stockView?.highPrice : (stockView?.ticker === 'MSFT' ? 
+                                stockView?.highPrice : (stockView?.ticker === 'NVDA' ? 
+                                stockView?.highPrice : 0.00)))}
+                            </label>
+                        </div>
+
+                        <div className='flex flex-row justify-start items-center h-1/5 w-[150px] rounded-2xl'>
+                            <label className='flex justify-center items-center bg-gray-400 font-voces text-[2em] rounded-bl-2xl rounded-tl-2xl h-full w-[50px]'>L</label>
+                            <label className='flex flex-row justify-center items-center text-black font-voces text-[2em] h-full w-[100px] bg-white rounded-tr-2xl rounded-br-2xl'>
+                                {stockView?.ticker === 'AMZN' ? 
+                                stockView?.lowPrice : (stockView?.ticker === 'AAPL' ? 
+                                stockView?.lowPrice : (stockView?.ticker === 'MSFT' ? 
+                                stockView?.lowPrice : (stockView?.ticker === 'NVDA' ? 
+                                stockView?.lowPrice : 0.00)))}
+                            </label>
+                        </div>
                     </div>
                 </div>
                 <div className='flex justify-start items-center h-1/3 w-full pl-3 pr-3'>
@@ -124,7 +164,7 @@ export default function MainPanel({time}:MainPanelProps): React.ReactElement {
                 <div className='h-full flex flex-col items-start
                                 hover:scale-101 duration-300'>
                     <Label text='Amazon.com, Inc.'/>
-                    <div className="h-full w-2xl" onClick={():void => showFullChart('AMZN',time,0,0)}>
+                    <div className="h-full w-2xl" onClick={():void => showFullChart('AMZN',time,0,0,0,0)}>
                         <img className='h-full w-full object-cover bg-gray-100 rounded-b-3xl rounded-tr-3xl cursor-pointer' 
                         src={time === "All Time" ? "svg_visuals/AMZN_AT.svg" : 
                         (time === "1 Year" ? "svg_visuals/AMZN_Y.svg" : 
@@ -135,7 +175,7 @@ export default function MainPanel({time}:MainPanelProps): React.ReactElement {
                 <div className='h-full flex flex-col justify-between items-start 
                                 hover:scale-101 duration-300'>
                     <Label text='Apple Inc.'/>
-                    <div className="h-full w-2xl" onClick={():void => showFullChart('AAPL',time,0,0)}>
+                    <div className="h-full w-2xl" onClick={():void => showFullChart('AAPL',time,0,0,0,0)}>
                         <img className='h-full w-full object-cover bg-gray-100 rounded-b-3xl rounded-tr-3xl cursor-pointer' 
                         src={time === "All Time" ? "svg_visuals/AAPL_AT.svg": 
                         (time === "1 Year" ? "svg_visuals/AAPL_Y.svg" : 
@@ -150,7 +190,7 @@ export default function MainPanel({time}:MainPanelProps): React.ReactElement {
                 <div className='h-full flex flex-col justify-between items-start 
                                 hover:scale-101 duration-300'>
                     <Label text='Microsoft Corporation'/>
-                    <div className="h-full w-2xl" onClick={():void => showFullChart('MSFT',time,0,0)}>
+                    <div className="h-full w-2xl" onClick={():void => showFullChart('MSFT',time,0,0,0,0)}>
                         <img className='h-full w-full object-cover bg-gray-100 rounded-b-3xl rounded-tr-3xl cursor-pointer'
                         src={time === "All Time" ? "svg_visuals/MSFT_AT.svg": 
                         (time === "1 Year" ? "svg_visuals/MSFT_Y.svg" : 
@@ -161,7 +201,7 @@ export default function MainPanel({time}:MainPanelProps): React.ReactElement {
                 <div className='h-full flex flex-col justify-between items-start 
                                 hover:scale-101 duration-300'>
                     <Label text='NVIDIA Corporation'/>
-                    <div className="h-full w-2xl" onClick={():void => showFullChart('NVDA',time,0,0)}>
+                    <div className="h-full w-2xl" onClick={():void => showFullChart('NVDA',time,0,0,0,0)}>
                         <img className='h-full w-full object-cover bg-gray-100 rounded-b-3xl rounded-tr-3xl cursor-pointer'
                         src={time === "All Time" ? "svg_visuals/NVDA_AT.svg": 
                         (time === "1 Year" ? "svg_visuals/NVDA_Y.svg" : 
