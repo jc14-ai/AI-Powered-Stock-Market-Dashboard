@@ -1,4 +1,4 @@
-import {useState} from 'react'
+import {useState, useEffect} from 'react'
 import Label from '../components/Label.tsx'
 import closeButton from '../assets/close-unhovered.png'
 import closeButtonHovered from '../assets/close-hovered.png'
@@ -25,9 +25,20 @@ export default function MainPanel({time}:MainPanelProps): React.ReactElement {
         setCloseHovered(isHovered);
     }
 
+    // useEffect(() =>{
+    //     fetch('http://localhost:3000/hello')
+    //     .then(res => res.json())
+    //     .then(data => data'])
+    //     }, []);
+
     const showFullChart = (ticker:string, time:string, openPrice:number, closingPrice:number, highPrice:number, lowPrice:number) => {
         // TODO: Fix how to add this in the flow
-        setStockView({ticker:ticker, time:time, openPrice:openPrice, closingPrice:closingPrice, highPrice:highPrice, lowPrice:lowPrice})
+        setStockView({ticker:ticker, 
+                        time:time, 
+                        openPrice:openPrice, 
+                        closingPrice:closingPrice, 
+                        highPrice:highPrice, 
+                        lowPrice:lowPrice});
     }
 
     return (
@@ -61,7 +72,8 @@ export default function MainPanel({time}:MainPanelProps): React.ReactElement {
                         'NVDA - NVIDIA Corporation': ''))}
                         </label>
                         <label className='flex justify-center items-center text-black font-voces text-[1.5em] bg-green-300 rounded-4xl w-[110px]'>
-                            +2.3%
+                            {/* GET FROM THE BACKEND  */}
+                            +2.3% 
                         </label>
                     </div>
                     <img className='w-10 cursor-pointer' src={isCloseHovered? closeButtonHovered: closeButton} 
