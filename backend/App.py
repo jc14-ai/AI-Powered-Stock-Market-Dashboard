@@ -1,4 +1,4 @@
-from flask import Flask
+from flask import Flask, jsonify
 import joblib
 
 import yfinance as yf
@@ -110,12 +110,7 @@ TODO:
     rsi plot getter
 """
 
-@app.route('/gain_loss')
-def gain_loss():
-    
-    pass
-
-@app.route('/analyze')
+@app.route('/analyze', method=['GET'])
 def analyze():
     df_apple, df_microsoft, df_amazon, df_nvidia = load_dataset()
     
@@ -155,6 +150,65 @@ def predict():
     amazon = joblib.load('/models/AMZN.pkl')
     microsoft = joblib.load('/models/MSFT.pkl')
     nvidia = joblib.load('/models/NVDA.pkl')
+
+"""
+FUNCTIONS:
+func:load_datasets()
+func:apple_load_dataset()
+func:amazon_load_dataset()
+func:microsoft_load_dataset()
+func:nvidia_load_dataset()
+
+route:analyze()
+route:apple_analyze()
+route:amazon_analyze()
+route:microsoft_analyze()
+route:nvidia_analyze()
+
+route:apple_predict()
+route:amazon_predict()
+route:microsoft_predict()
+route:nvidia_predict()
+"""
+
+def set_date_now():
+    return str(date.today() - timedelta(days=2))
+
+def apple_load_datasets():
+    date_now = set_date_now()
+    df_apple_to_csv = yf.download("AAPL", start="2020-01-01", end=date_now)
+    apple_path = 'training/datasets/apple.csv'
+    df_apple_to_csv.to_csv(apple_path)
+    df_apple = pd.read_csv(apple_path)
+    
+    return df_apple
+
+def amazon_load_datasets():
+    date_now = set_date_now()
+    df_amazon_to_csv = yf.download("AMZN", start="2020-01-01", end=date_now)
+    amazon_path = 'training/datasets/amazon.csv'
+    df_amazon_to_csv.to_csv(amazon_path)
+    df_amazon = pd.read_csv(amazon_path)
+    
+    return df_amazon
+
+def microsoft_load_datasets():
+    date_now = set_date_now()
+    df_microsoft_to_csv = yf.download("MSFT", start="2020-01-01", end=date_now)
+    microsoft_path = 'training/datasets/microsoft.csv'
+    df_microsoft_to_csv.to_csv(microsoft_path)
+    df_microsoft = pd.read_csv(microsoft_path)
+    
+    return df_microsoft
+
+def nvidia_load_datasets():
+    date_now = set_date_now()
+    df_nvidia_to_csv = yf.download("NVDA", start="2020-01-01", end=date_now)
+    nvidia_path = 'training/datasets/microsoft.csv'
+    df_nvidia_to_csv.to_csv(nvidia_path)
+    df_nvidia = pd.read_csv(nvidia_path)
+    
+    return df_nvidia
 
 if __name__ == '__main__':
     app.run(debug=True)
