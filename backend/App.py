@@ -109,6 +109,12 @@ TODO:
     overview plot getter,
     rsi plot getter
 """
+
+@app.route('/gain_loss')
+def gain_loss():
+    
+    pass
+
 @app.route('/analyze')
 def analyze():
     df_apple, df_microsoft, df_amazon, df_nvidia = load_dataset()
@@ -142,8 +148,6 @@ def analyze():
         datas = [week, month, year, all_time]
         
         print_all_plots(datas=datas, stock=stocks[i], labels=labels)
-        
-        print(f"{stocks[i]} is good to go!")
 
 @app.route('/predict')
 def predict():
