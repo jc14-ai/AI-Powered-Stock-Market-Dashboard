@@ -10,17 +10,28 @@ from  datetime import date, timedelta
 
 app = Flask(__name__)
 
-def load_dataset():
-    date_now = str(date.today() - timedelta(days=2))
+def set_periodic_variables():
+    window = 14
+    short_period = 12
+    long_period = 26
+    signal_line_period = 9
+    
+    return window, short_period, long_period, signal_line_period
+
+def date_now():
+    return str(date.today() - timedelta(days=2))
+
+def load_overall_dataset():
+    date_now = date_now()
     df_apple_to_csv = yf.download("AAPL", start="2020-01-01", end=date_now)
     df_microsoft_to_csv = yf.download("MSFT", start="2020-01-01", end=date_now)
     df_amazon_to_csv = yf.download("AMZN", start="2020-01-01", end=date_now)
     df_nvidia_to_csv = yf.download("NVDA", start="2020-01-01", end=date_now)
 
-    apple_path = 'training/datasets/apple.csv'
-    microsoft_path = 'training/datasets/microsoft.csv'
-    amazon_path = 'training/datasets/amazon.csv'
-    nvidia_path = 'training/datasets/nvidia.csv'
+    apple_path = 'datasets/apple.csv'
+    microsoft_path = 'datasets/microsoft.csv'
+    amazon_path = 'datasets/amazon.csv'
+    nvidia_path = 'datasets/nvidia.csv'
 
     df_apple_to_csv.to_csv(apple_path)
     df_microsoft_to_csv.to_csv(microsoft_path)
@@ -31,8 +42,15 @@ def load_dataset():
     df_microsoft = pd.read_csv(microsoft_path)
     df_amazon = pd.read_csv(amazon_path)
     df_nvidia = pd.read_csv(nvidia_path)
+
+def load_dataset(ticker="", company=""):
+    date_now = date_now()
+    df_to_csv = yf.download(ticker, start="2020-01-01", end=date_now)
+    path = f'training/datasets/{company}.csv'
+    df_to_csv.to_csv(path)
+    df = pd.read_csv(path)
     
-    return df_apple, df_microsoft, df_amazon, df_nvidia
+    return df
 
 def convert_type(df):
     df['Close'] = df['Close'].astype(float)
@@ -76,7 +94,7 @@ def print_all_plots(datas, stock, labels):
         sns.despine()
         plt.xlabel(xlabel="")
         plt.ylabel(ylabel="")
-        plt.savefig(f"../../frontend/public/svg_visuals/{stock}_{labels[i]}.svg")
+        plt.savefig(f"../frontend/public/svg_visuals/{stock}_{labels[i]}.svg")
         plt.close()
         
         #Sub chart
@@ -85,7 +103,7 @@ def print_all_plots(datas, stock, labels):
         sns.despine()
         plt.xlabel(xlabel="")
         plt.ylabel(ylabel="")
-        plt.savefig(f"../../frontend/public/svg_visuals/{stock}_{labels[i]}_m.svg")
+        plt.savefig(f"../frontend/public/svg_visuals/{stock}_{labels[i]}_m.svg")
         plt.close()
         
         plt.figure(figsize=(16.2,3.5))
@@ -93,12 +111,12 @@ def print_all_plots(datas, stock, labels):
         sns.despine()
         plt.xlabel(xlabel="")
         plt.ylabel(ylabel="")
-        plt.savefig(f"../../frontend/public/svg_visuals/{stock}_{labels[i]}_m_RSI.svg")
+        plt.savefig(f"../frontend/public/svg_visuals/{stock}_{labels[i]}_m_RSI.svg")
         plt.close()
         
         fig = px.line(data_frame=datas[i], x='Date', y='Close')
         fig.update_layout(width=1920, height=1080)
-        fig.write_html(f"../../frontend/public/chart_visuals/{stock}_{labels[i]}.html")
+        fig.write_html(f"../frontend/public/chart_visuals/{stock}_{labels[i]}.html")
 
 """
 TODO: 
@@ -112,7 +130,7 @@ TODO:
 
 @app.route('/analyze', method=['GET'])
 def analyze():
-    df_apple, df_microsoft, df_amazon, df_nvidia = load_dataset()
+    df_apple, df_microsoft, df_amazon, df_nvidia = load_overall_dataset()
     
     df_apple['Date'] = df_apple['Price']
     df_apple = df_apple.drop(index=[0,1], columns='Price')
@@ -124,10 +142,7 @@ def analyze():
     df_nvidia = df_nvidia.drop(index=[0,1], columns='Price')
     
     dfs = [df_apple, df_amazon, df_microsoft, df_nvidia]
-    window = 14
-    short_period = 12
-    long_period = 26
-    signal_line_period = 9
+    window, short_period, long_period, signal_line_period = set_periodic_variables()
     stocks = ['AAPL', 'AMZN', 'MSFT', 'NVDA']
     labels = ['WW', 'M', 'Y', 'AT']
     
@@ -143,6 +158,39 @@ def analyze():
         datas = [week, month, year, all_time]
         
         print_all_plots(datas=datas, stock=stocks[i], labels=labels)
+        
+@app.route('/apple')
+def apple_analyze():
+    df_apple = load_dataset(ticker='AAPL',company='apple')
+    df_apple['Date'] = df_apple['Price']
+    df_apple = df_apple.drop(index=[0,1], columns='Price')
+    
+    window, short_period, long_period, signal_line_period = set_periodic_variables()
+    convert_type(df_apple)
+    df_apple = engineer_features(df_apple, window, short_period, long_period, signal_line_period)
+    df_apple = drop_features_and_na(df_apple)
+    
+    week_start_date = date.now() - timedelta(days=7)
+    month_start_date = date.now() - timedelta(days=31)
+    year_start_date = date.now() - timedelta(days=365)
+    all_start_date = date.now() - timedelta(days=len(df_apple))
+    end_date = date.now()
+    
+    week = df_apple.loc[(df_apple['Date'] <= pd.to_datetime(end_date)) & (df_apple['Date'] > pd.to_datetime(week_start_date))]
+    month = df_apple.loc[(df_apple['Date'] <= pd.to_datetime(end_date)) & (df_apple['Date'] > pd.to_datetime(month_start_date))]
+    year = df_apple.loc[(df_apple['Date'] <= pd.to_datetime(end_date)) & (df_apple['Date'] > pd.to_datetime(year_start_date))]
+    all_time = df_apple.loc[(df_apple['Date'] <= pd.to_datetime(end_date)) & (df_apple['Date'] > pd.to_datetime(all_start_date))]
+    datas = [week, month, year, all_time]
+    labels = ['WW', 'M', 'Y', 'AT']
+    
+    print_all_plots(datas=datas, stock='AAPL', labels=labels)
+    
+    week_price_change = week.loc[:,'Price Change'].sum()
+    month_price_change = month.loc[:,'Price Change'].sum()
+    year_price_change = year.loc[:,'Price Change'].sum()
+    all_price_change = all_time.loc[:,'Price Change'].sum()
+    
+    return jsonify({})
 
 @app.route('/predict')
 def predict():
@@ -153,11 +201,11 @@ def predict():
 
 """
 FUNCTIONS:
-func:load_datasets()
-func:apple_load_dataset()
-func:amazon_load_dataset()
-func:microsoft_load_dataset()
-func:nvidia_load_dataset()
+func:load_dataset()
+func:convert_type()
+func:engineer_features()
+func:drop_features_and_na()
+func:print_all_plots()
 
 route:analyze()
 route:apple_analyze()
@@ -170,45 +218,6 @@ route:amazon_predict()
 route:microsoft_predict()
 route:nvidia_predict()
 """
-
-def set_date_now():
-    return str(date.today() - timedelta(days=2))
-
-def apple_load_datasets():
-    date_now = set_date_now()
-    df_apple_to_csv = yf.download("AAPL", start="2020-01-01", end=date_now)
-    apple_path = 'training/datasets/apple.csv'
-    df_apple_to_csv.to_csv(apple_path)
-    df_apple = pd.read_csv(apple_path)
-    
-    return df_apple
-
-def amazon_load_datasets():
-    date_now = set_date_now()
-    df_amazon_to_csv = yf.download("AMZN", start="2020-01-01", end=date_now)
-    amazon_path = 'training/datasets/amazon.csv'
-    df_amazon_to_csv.to_csv(amazon_path)
-    df_amazon = pd.read_csv(amazon_path)
-    
-    return df_amazon
-
-def microsoft_load_datasets():
-    date_now = set_date_now()
-    df_microsoft_to_csv = yf.download("MSFT", start="2020-01-01", end=date_now)
-    microsoft_path = 'training/datasets/microsoft.csv'
-    df_microsoft_to_csv.to_csv(microsoft_path)
-    df_microsoft = pd.read_csv(microsoft_path)
-    
-    return df_microsoft
-
-def nvidia_load_datasets():
-    date_now = set_date_now()
-    df_nvidia_to_csv = yf.download("NVDA", start="2020-01-01", end=date_now)
-    nvidia_path = 'training/datasets/microsoft.csv'
-    df_nvidia_to_csv.to_csv(nvidia_path)
-    df_nvidia = pd.read_csv(nvidia_path)
-    
-    return df_nvidia
 
 if __name__ == '__main__':
     app.run(debug=True)
