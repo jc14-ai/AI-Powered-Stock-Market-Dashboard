@@ -4,7 +4,7 @@ import joblib
 import yfinance as yf
 import pandas as pd
 import matplotlib.pyplot as plt
-# import seaborn as sns
+import seaborn as sns
 import plotly.express as px
 from  datetime import date, timedelta
 
@@ -128,7 +128,7 @@ TODO:
     rsi plot getter
 """
 
-@app.route('/analyze', method=['GET'])
+@app.route('/analyze')
 def analyze():
     df_apple, df_microsoft, df_amazon, df_nvidia = load_overall_dataset()
     

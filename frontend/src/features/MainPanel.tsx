@@ -76,7 +76,7 @@ export default function MainPanel({time}:MainPanelProps): React.ReactElement {
                             {/* GET FROM THE BACKEND  */}
                             +2.3%
                             {/* BACKEND TEST ROUTING  */}
-                            message 
+                            {message} 
                         </label>
                     </div>
                     <img className='w-10 cursor-pointer' src={isCloseHovered? closeButtonHovered: closeButton} 

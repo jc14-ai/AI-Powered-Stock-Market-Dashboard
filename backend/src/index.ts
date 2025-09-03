@@ -12,10 +12,12 @@ app.use(cors());
 //     res.json({'message':'Youre getting this from express!'})
 // })
 
-app.get('/predict', async (req:Request, res:Response) => {
+app.get('/predict', (req:Request, res:Response) => {
     try {
-        const response = await axios.get('http://localhost:5000/predict');
-        res.json(response.data);
+        fetch('http://localhost:5000/predict')
+        .then(res => res.json())
+        .then(data => res.json(data.message))
+
     } catch (error) {
         res.status(500).json({error: 'Flask server error'});
     }
@@ -24,8 +26,8 @@ app.get('/predict', async (req:Request, res:Response) => {
 
 app.get('/hello', async (req:Request, res:Response) => {
     try {
-        const response = await axios.get('http://localhost:5000/hello');
-        res.json(response.data);
+        const response = await axios.get('http://127.0.0.1:5000/hello')
+        res.json(response.data)
     } catch (error) {
         res.status(500).json({error: 'Flask server error'});
     }
