@@ -4,7 +4,7 @@ import joblib
 import yfinance as yf
 import pandas as pd
 import matplotlib.pyplot as plt
-import seaborn as sns
+# import seaborn as sns
 import plotly.express as px
 from  datetime import date, timedelta
 
@@ -218,6 +218,10 @@ route:amazon_predict()
 route:microsoft_predict()
 route:nvidia_predict()
 """
+
+@app.route('/hello')
+def hello():
+    return jsonify({'message': 'This messag came from flask router!'})
 
 if __name__ == '__main__':
     app.run(debug=True)

@@ -20,16 +20,17 @@ export default function MainPanel({time}:MainPanelProps): React.ReactElement {
     // const [isFullChart, setFullChart] = useState<boolean>(false);
     const [stockView, setStockView] = useState<stockViewProps>();
     const [isCloseHovered, setCloseHovered]  = useState<boolean>(false);
+    const [message, setMessage] = useState<string>('');
 
     const changeHovered = (isHovered: boolean):void => {
         setCloseHovered(isHovered);
     }
 
-    // useEffect(() =>{
-    //     fetch('http://localhost:3000/hello')
-    //     .then(res => res.json())
-    //     .then(data => data'])
-    //     }, []);
+    useEffect(() =>{
+        fetch('http://localhost:3000/hello')
+        .then(res => res.json())
+        .then(data => setMessage(data.message))
+        }, [message]);
 
     const showFullChart = (ticker:string, time:string, openPrice:number, closingPrice:number, highPrice:number, lowPrice:number) => {
         // TODO: Fix how to add this in the flow
@@ -73,7 +74,9 @@ export default function MainPanel({time}:MainPanelProps): React.ReactElement {
                         </label>
                         <label className='flex justify-center items-center text-black font-voces text-[1.5em] bg-green-300 rounded-4xl w-[110px]'>
                             {/* GET FROM THE BACKEND  */}
-                            +2.3% 
+                            +2.3%
+                            {/* BACKEND TEST ROUTING  */}
+                            message 
                         </label>
                     </div>
                     <img className='w-10 cursor-pointer' src={isCloseHovered? closeButtonHovered: closeButton} 
