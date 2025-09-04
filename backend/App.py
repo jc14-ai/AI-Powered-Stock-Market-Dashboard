@@ -211,7 +211,7 @@ def apple_analyze():
                     'yearly high': round(year_price_high, 2),
                     'all high': round(all_price_high, 2),
                     'weekly low': round(week_price_low, 2),
-                    'month low': round(month_price_low, 2),
+                    'monthly low': round(month_price_low, 2),
                     'yearly low': round(year_price_low, 2),
                     'all low': round(all_price_low, 2)})
 

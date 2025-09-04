@@ -8,7 +8,7 @@ type MainPanelProps = {
 }
 
 type stockViewProps = {
-    ticker: string;
+    ticker?: string;
     // time:string;
     weekHighPrice?:number;
     monthHighPrice?:number;
@@ -140,6 +140,24 @@ export default function MainPanel({time}:MainPanelProps): React.ReactElement {
         }
     }
 
+    // const highPriceDict = {'AAPL':{'All Time': stockView?.allHighPrice, 
+    //                                 '1 Year': stockView?.yearHighPrice, 
+    //                                 '1 Month': stockView?.monthHighPrice,
+    //                                 '1 Week': stockView?.weekHighPrice},
+    //                         'AMZN':{'All Time': stockView?.allHighPrice, 
+    //                                 '1 Year': stockView?.yearHighPrice, 
+    //                                 '1 Month': stockView?.monthHighPrice,
+    //                                 '1 Week': stockView?.weekHighPrice},
+    //                         'MSFT':{'All Time': stockView?.allHighPrice, 
+    //                                 '1 Year': stockView?.yearHighPrice, 
+    //                                 '1 Month': stockView?.monthHighPrice,
+    //                                 '1 Week': stockView?.weekHighPrice},
+    //                         'NVDA':{'All Time': stockView?.allHighPrice, 
+    //                                 '1 Year': stockView?.yearHighPrice, 
+    //                                 '1 Month': stockView?.monthHighPrice,
+    //                                 '1 Week': stockView?.weekHighPrice},
+    //                         }
+
     return (
         <>
         {/* MAIN SCREEN */}
@@ -231,14 +249,22 @@ export default function MainPanel({time}:MainPanelProps): React.ReactElement {
                         <div className='flex flex-row justify-start items-center h-1/5 w-[150px] rounded-2xl'>
                             <label className='flex justify-center items-center bg-gray-400 font-voces text-[2em] rounded-bl-2xl rounded-tl-2xl h-full w-[50px]'>H</label>
                             <label className='flex flex-row justify-center items-center text-black font-voces text-[2em] h-full w-[100px] bg-white rounded-tr-2xl rounded-br-2xl'>
-                                
+                                {((stockView?.ticker === 'AMZN' || stockView?.ticker === 'MSFT' || stockView?.ticker === 'AAPL' || stockView?.ticker === 'NVDA') && time === 'All Time') ? 
+                                stockView?.allHighPrice : (((stockView?.ticker === 'AMZN' || stockView?.ticker === 'MSFT' || stockView?.ticker === 'AAPL' || stockView?.ticker === 'NVDA') && time === '1 Year') ? 
+                                stockView?.yearHighPrice : (((stockView?.ticker === 'AMZN' || stockView?.ticker === 'MSFT' || stockView?.ticker === 'AAPL' || stockView?.ticker === 'NVDA') && time === '1 Month') ? 
+                                stockView?.monthHighPrice : (((stockView?.ticker === 'AMZN' || stockView?.ticker === 'MSFT' || stockView?.ticker === 'AAPL' || stockView?.ticker === 'NVDA') && time === '1 Week') ? 
+                                stockView?.weekHighPrice : 0.00)))}
                             </label>
                         </div>
 
                         <div className='flex flex-row justify-start items-center h-1/5 w-[150px] rounded-2xl'>
                             <label className='flex justify-center items-center bg-gray-400 font-voces text-[2em] rounded-bl-2xl rounded-tl-2xl h-full w-[50px]'>L</label>
                             <label className='flex flex-row justify-center items-center text-black font-voces text-[2em] h-full w-[100px] bg-white rounded-tr-2xl rounded-br-2xl'>
-                                
+                                {((stockView?.ticker === 'AMZN' || stockView?.ticker === 'MSFT' || stockView?.ticker === 'AAPL' || stockView?.ticker === 'NVDA') && time === 'All Time') ? 
+                                stockView?.allLowPrice : (((stockView?.ticker === 'AMZN' || stockView?.ticker === 'MSFT' || stockView?.ticker === 'AAPL' || stockView?.ticker === 'NVDA') && time === '1 Year') ? 
+                                stockView?.yearLowPrice : (((stockView?.ticker === 'AMZN' || stockView?.ticker === 'MSFT' || stockView?.ticker === 'AAPL' || stockView?.ticker === 'NVDA') && time === '1 Month') ? 
+                                stockView?.monthLowPrice : (((stockView?.ticker === 'AMZN' || stockView?.ticker === 'MSFT' || stockView?.ticker === 'AAPL' || stockView?.ticker === 'NVDA') && time === '1 Week') ? 
+                                stockView?.weekLowPrice : 0.00)))}
                             </label>
                         </div>
                     </div>
