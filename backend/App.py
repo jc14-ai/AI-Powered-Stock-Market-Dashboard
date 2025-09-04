@@ -6,7 +6,7 @@ import pandas as pd
 import matplotlib.pyplot as plt
 import seaborn as sns
 import plotly.express as px
-from  datetime import date, timedelta
+from datetime import date, timedelta
 
 app = Flask(__name__)
 
@@ -19,7 +19,8 @@ def set_periodic_variables():
     return window, short_period, long_period, signal_line_period
 
 def date_now():
-    return str(date.today() - timedelta(days=2))
+    today = str(date.today() - timedelta(days=2))
+    return today
 
 def load_overall_dataset():
     date_now = date_now()
@@ -28,10 +29,10 @@ def load_overall_dataset():
     df_amazon_to_csv = yf.download("AMZN", start="2020-01-01", end=date_now)
     df_nvidia_to_csv = yf.download("NVDA", start="2020-01-01", end=date_now)
 
-    apple_path = 'datasets/apple.csv'
-    microsoft_path = 'datasets/microsoft.csv'
-    amazon_path = 'datasets/amazon.csv'
-    nvidia_path = 'datasets/nvidia.csv'
+    apple_path = 'training/datasets/apple.csv'
+    microsoft_path = 'training/datasets/microsoft.csv'
+    amazon_path = 'training/datasets/amazon.csv'
+    nvidia_path = 'training/datasets/nvidia.csv'
 
     df_apple_to_csv.to_csv(apple_path)
     df_microsoft_to_csv.to_csv(microsoft_path)
@@ -44,8 +45,8 @@ def load_overall_dataset():
     df_nvidia = pd.read_csv(nvidia_path)
 
 def load_dataset(ticker="", company=""):
-    date_now = date_now()
-    df_to_csv = yf.download(ticker, start="2020-01-01", end=date_now)
+    date_today = date_now()
+    df_to_csv = yf.download(ticker, start="2020-01-01", end=date_today)
     path = f'training/datasets/{company}.csv'
     df_to_csv.to_csv(path)
     df = pd.read_csv(path)
@@ -170,11 +171,11 @@ def apple_analyze():
     df_apple = engineer_features(df_apple, window, short_period, long_period, signal_line_period)
     df_apple = drop_features_and_na(df_apple)
     
-    week_start_date = date.now() - timedelta(days=7)
-    month_start_date = date.now() - timedelta(days=31)
-    year_start_date = date.now() - timedelta(days=365)
-    all_start_date = date.now() - timedelta(days=len(df_apple))
-    end_date = date.now()
+    week_start_date = date.today() - timedelta(days=7)
+    month_start_date = date.today() - timedelta(days=31)
+    year_start_date = date.today() - timedelta(days=365)
+    all_start_date = date.today() - timedelta(days=len(df_apple))
+    end_date = date.today()
     
     week = df_apple.loc[(df_apple['Date'] <= pd.to_datetime(end_date)) & (df_apple['Date'] > pd.to_datetime(week_start_date))]
     month = df_apple.loc[(df_apple['Date'] <= pd.to_datetime(end_date)) & (df_apple['Date'] > pd.to_datetime(month_start_date))]
@@ -183,23 +184,36 @@ def apple_analyze():
     datas = [week, month, year, all_time]
     labels = ['WW', 'M', 'Y', 'AT']
     
-    print_all_plots(datas=datas, stock='AAPL', labels=labels)
+    # print_all_plots(datas=datas, stock='AAPL', labels=labels)
     
     week_price_change = week.loc[:,'Price Change'].sum()
     month_price_change = month.loc[:,'Price Change'].sum()
     year_price_change = year.loc[:,'Price Change'].sum()
     all_price_change = all_time.loc[:,'Price Change'].sum()
     
+    week_price_high = week.loc[:,'High'].max()
+    month_price_high = month.loc[:,'High'].max()
+    year_price_high = year.loc[:,'High'].max()
+    all_price_high = all_time.loc[:,'High'].max()
+    
+    week_price_low = week.loc[:,'Low'].min()
+    month_price_low = month.loc[:,'Low'].min()
+    year_price_low = year.loc[:,'Low'].min()
+    all_price_low = all_time.loc[:,'Low'].min()
     
     return jsonify({'ticker':'AAPL',
-                    'weekly change': week_price_change, 
-                    'monthly change': month_price_change,
-                    'yearly change': year_price_change,
-                    'all change': all_price_change,
-                    'open':'',
-                    'close':'',
-                    'high':'',
-                    'low':''})
+                    'weekly change': round(week_price_change, 2), 
+                    'monthly change': round(month_price_change, 2),
+                    'yearly change': round(year_price_change, 2),
+                    'all change': round(all_price_change, 2),
+                    'weekly high': round(week_price_high, 2),
+                    'monthly high': round(month_price_high, 2),
+                    'yearly high': round(year_price_high, 2),
+                    'all high': round(all_price_high, 2),
+                    'weekly low': round(week_price_low, 2),
+                    'month low': round(month_price_low, 2),
+                    'yearly low': round(year_price_low, 2),
+                    'all low': round(all_price_low, 2)})
 
 @app.route('/predict')
 def predict():

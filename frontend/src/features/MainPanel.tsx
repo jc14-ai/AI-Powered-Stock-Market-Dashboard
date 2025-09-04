@@ -10,10 +10,14 @@ type MainPanelProps = {
 type stockViewProps = {
     ticker: string;
     // time:string;
-    openPrice?:number;
-    closingPrice?:number;
-    highPrice?:number;
-    lowPrice?:number;
+    weekHighPrice?:number;
+    monthHighPrice?:number;
+    yearHighPrice?:number;
+    allHighPrice?:number;
+    weekLowPrice?:number;
+    monthLowPrice?:number;
+    yearLowPrice?:number;
+    allLowPrice?:number;
     weekChange?:number,
     monthChange?:number,
     yearChange?:number,
@@ -46,10 +50,14 @@ export default function MainPanel({time}:MainPanelProps): React.ReactElement {
                 .then(data => {
                 setStockView({
                     ticker: data['ticker'],
-                    openPrice: data['open'],
-                    closingPrice: data['close'],
-                    highPrice: data['high'],
-                    lowPrice: data['low'],
+                    weekHighPrice: data['weekly high'],
+                    monthHighPrice: data['monthly high'],
+                    yearHighPrice: data['yearly high'],
+                    allHighPrice: data['all high'],
+                    weekLowPrice: data['weekly low'],
+                    monthLowPrice: data['monthly low'],
+                    yearLowPrice: data['yearly low'],
+                    allLowPrice: data['all low'],
                     allChange: data['all change'],
                     weekChange:data['weekly change'],
                     monthChange: data['monthly change'],
@@ -65,10 +73,14 @@ export default function MainPanel({time}:MainPanelProps): React.ReactElement {
                 .then(data => {
                 setStockView({
                     ticker: data['ticker'],
-                    openPrice: data['open'],
-                    closingPrice: data['close'],
-                    highPrice: data['high'],
-                    lowPrice: data['low'],
+                    weekHighPrice: data['weekly high'],
+                    monthHighPrice: data['monthly high'],
+                    yearHighPrice: data['yearly high'],
+                    allHighPrice: data['all high'],
+                    weekLowPrice: data['weekly low'],
+                    monthLowPrice: data['monthly low'],
+                    yearLowPrice: data['yearly low'],
+                    allLowPrice: data['all low'],
                     allChange: data['all change'],
                     weekChange:data['weekly change'],
                     monthChange: data['monthly change'],
@@ -84,10 +96,14 @@ export default function MainPanel({time}:MainPanelProps): React.ReactElement {
                 .then(data => {
                 setStockView({
                     ticker: data['ticker'],
-                    openPrice: data['open'],
-                    closingPrice: data['close'],
-                    highPrice: data['high'],
-                    lowPrice: data['low'],
+                    weekHighPrice: data['weekly high'],
+                    monthHighPrice: data['monthly high'],
+                    yearHighPrice: data['yearly high'],
+                    allHighPrice: data['all high'],
+                    weekLowPrice: data['weekly low'],
+                    monthLowPrice: data['monthly low'],
+                    yearLowPrice: data['yearly low'],
+                    allLowPrice: data['all low'],
                     allChange: data['all change'],
                     weekChange:data['weekly change'],
                     monthChange: data['monthly change'],
@@ -103,10 +119,14 @@ export default function MainPanel({time}:MainPanelProps): React.ReactElement {
                 .then(data => {
                 setStockView({
                     ticker: data['ticker'],
-                    openPrice: data['open'],
-                    closingPrice: data['close'],
-                    highPrice: data['high'],
-                    lowPrice: data['low'],
+                    weekHighPrice: data['weekly high'],
+                    monthHighPrice: data['monthly high'],
+                    yearHighPrice: data['yearly high'],
+                    allHighPrice: data['all high'],
+                    weekLowPrice: data['weekly low'],
+                    monthLowPrice: data['monthly low'],
+                    yearLowPrice: data['yearly low'],
+                    allLowPrice: data['all low'],
                     allChange: data['all change'],
                     weekChange:data['weekly change'],
                     monthChange: data['monthly change'],
@@ -185,9 +205,8 @@ export default function MainPanel({time}:MainPanelProps): React.ReactElement {
                     'svg_visuals/MSFT_WW_m.svg' : ((stockView?.ticker === 'NVDA' && time === '1 Week') ? 
                     'svg_visuals/NVDA_WW_m.svg' : '')))))))))))))))}/>
 
-                    {/* Stock open/close price */}
                     <div className='flex flex-col justify-evenly items-center h-2/3 w-1/5'>
-                        <div className='flex flex-row justify-start items-center h-1/5 w-[150px] rounded-2xl'>
+                        {/* <div className='flex flex-row justify-start items-center h-1/5 w-[150px] rounded-2xl'>
                             <label className='flex justify-center items-center bg-gray-400 font-voces text-[2em] rounded-bl-2xl rounded-tl-2xl h-full w-[50px]'>O</label>
                             <label className='flex flex-row justify-center items-center text-black font-voces text-[2em] h-full w-[100px] bg-white rounded-tr-2xl rounded-br-2xl'>
                                 {stockView?.ticker === 'AMZN' ? 
@@ -207,27 +226,19 @@ export default function MainPanel({time}:MainPanelProps): React.ReactElement {
                                 stockView?.closingPrice : (stockView?.ticker === 'NVDA' ? 
                                 stockView?.closingPrice : 0.00)))}
                             </label>
-                        </div>
-
+                        </div> */}
+                        {/* Stock high/low price */}
                         <div className='flex flex-row justify-start items-center h-1/5 w-[150px] rounded-2xl'>
                             <label className='flex justify-center items-center bg-gray-400 font-voces text-[2em] rounded-bl-2xl rounded-tl-2xl h-full w-[50px]'>H</label>
                             <label className='flex flex-row justify-center items-center text-black font-voces text-[2em] h-full w-[100px] bg-white rounded-tr-2xl rounded-br-2xl'>
-                                {stockView?.ticker === 'AMZN' ? 
-                                stockView?.highPrice : (stockView?.ticker === 'AAPL' ? 
-                                stockView?.highPrice : (stockView?.ticker === 'MSFT' ? 
-                                stockView?.highPrice : (stockView?.ticker === 'NVDA' ? 
-                                stockView?.highPrice : 0.00)))}
+                                
                             </label>
                         </div>
 
                         <div className='flex flex-row justify-start items-center h-1/5 w-[150px] rounded-2xl'>
                             <label className='flex justify-center items-center bg-gray-400 font-voces text-[2em] rounded-bl-2xl rounded-tl-2xl h-full w-[50px]'>L</label>
                             <label className='flex flex-row justify-center items-center text-black font-voces text-[2em] h-full w-[100px] bg-white rounded-tr-2xl rounded-br-2xl'>
-                                {stockView?.ticker === 'AMZN' ? 
-                                stockView?.lowPrice : (stockView?.ticker === 'AAPL' ? 
-                                stockView?.lowPrice : (stockView?.ticker === 'MSFT' ? 
-                                stockView?.lowPrice : (stockView?.ticker === 'NVDA' ? 
-                                stockView?.lowPrice : 0.00)))}
+                                
                             </label>
                         </div>
                     </div>
