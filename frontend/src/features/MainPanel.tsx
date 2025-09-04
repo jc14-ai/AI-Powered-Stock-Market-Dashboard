@@ -89,8 +89,12 @@ export default function MainPanel({time}:MainPanelProps): React.ReactElement {
                         'NVDA - NVIDIA Corporation': ''))}
                         </label>
                         <label className='flex justify-center items-center text-black font-voces text-[1.5em] bg-green-300 rounded-4xl w-[110px]'>
-                            {/* GET FROM THE BACKEND  */}
-                            +2.3%
+                            {/* finish the rest of stocks */}
+                            {(stockView?.ticker === 'AAPL' && time === 'All Time') ? 
+                            stockView?.allChange : ((stockView?.ticker === 'AAPL' && time === '1 Year') ? 
+                            stockView?.yearChange :(stockView?.ticker === 'AAPL' && time === '1 Month') ?
+                            stockView?.monthChange :(stockView?.ticker === 'AAPL' && time === '1 Week') ? 
+                            stockView?.weekChange : '')}
                         </label>
                     </div>
                     <img className='w-10 cursor-pointer' src={isCloseHovered ? closeButtonHovered : closeButton} 
