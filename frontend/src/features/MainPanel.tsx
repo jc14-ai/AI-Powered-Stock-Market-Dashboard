@@ -39,19 +39,81 @@ export default function MainPanel({time}:MainPanelProps): React.ReactElement {
 
     const showFullChart = (ticker:string, time:string) => {
         // TODO: Fix how to add this in the flow
-        if (time === 'All Time' && ticker === 'AAPL'){
-            fetch('http://localhost:3000/stocks/apple')
-            .then(res => res.json())
-            .then(data => {
+        if (ticker === 'AAPL'){
+            if(time === 'All Time' || time === '1 Year' || time === '1 Month' || time === '1 Week'){
+                fetch('http://localhost:3000/stocks/apple')
+                .then(res => res.json())
+                .then(data => {
                 setStockView({
                     ticker: data['ticker'],
                     openPrice: data['open'],
                     closingPrice: data['close'],
                     highPrice: data['high'],
                     lowPrice: data['low'],
-                    allChange: data['all change']
+                    allChange: data['all change'],
+                    weekChange:data['weekly change'],
+                    monthChange: data['monthly change'],
+                    yearChange: data['yearly change']
+                    })
                 })
-            })
+            }
+        }
+        else if(ticker === 'AMZN'){
+            if(time === 'All Time' || time === '1 Year' || time === '1 Month' || time === '1 Week'){
+                fetch('http://localhost:3000/stocks/amazon')
+                .then(res => res.json())
+                .then(data => {
+                setStockView({
+                    ticker: data['ticker'],
+                    openPrice: data['open'],
+                    closingPrice: data['close'],
+                    highPrice: data['high'],
+                    lowPrice: data['low'],
+                    allChange: data['all change'],
+                    weekChange:data['weekly change'],
+                    monthChange: data['monthly change'],
+                    yearChange: data['yearly change']
+                    })
+                })
+            }
+        }
+        else if(ticker === 'MSFT'){
+            if(time === 'All Time' || time === '1 Year' || time === '1 Month' || time === '1 Week'){
+                fetch('http://localhost:3000/stocks/microsoft')
+                .then(res => res.json())
+                .then(data => {
+                setStockView({
+                    ticker: data['ticker'],
+                    openPrice: data['open'],
+                    closingPrice: data['close'],
+                    highPrice: data['high'],
+                    lowPrice: data['low'],
+                    allChange: data['all change'],
+                    weekChange:data['weekly change'],
+                    monthChange: data['monthly change'],
+                    yearChange: data['yearly change']
+                    })
+                })
+            }
+        }
+        else if(ticker === 'NVDA'){
+            if(time === 'All Time' || time === '1 Year' || time === '1 Month' || time === '1 Week'){
+                fetch('http://localhost:3000/stocks/nvidia')
+                .then(res => res.json())
+                .then(data => {
+                setStockView({
+                    ticker: data['ticker'],
+                    openPrice: data['open'],
+                    closingPrice: data['close'],
+                    highPrice: data['high'],
+                    lowPrice: data['low'],
+                    allChange: data['all change'],
+                    weekChange:data['weekly change'],
+                    monthChange: data['monthly change'],
+                    yearChange: data['yearly change']
+                    })
+                })
+            }
         }
         else{
              setStockView({ticker: ''})
