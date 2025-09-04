@@ -161,44 +161,45 @@ def analyze():
         
 @app.route('/stocks/apple')
 def apple_analyze():
-    df_apple = load_dataset(ticker='AAPL',company='apple')
-    df_apple['Date'] = df_apple['Price']
-    df_apple = df_apple.drop(index=[0,1], columns='Price')
+    # df_apple = load_dataset(ticker='AAPL',company='apple')
+    # df_apple['Date'] = df_apple['Price']
+    # df_apple = df_apple.drop(index=[0,1], columns='Price')
     
-    window, short_period, long_period, signal_line_period = set_periodic_variables()
-    convert_type(df_apple)
-    df_apple = engineer_features(df_apple, window, short_period, long_period, signal_line_period)
-    df_apple = drop_features_and_na(df_apple)
+    # window, short_period, long_period, signal_line_period = set_periodic_variables()
+    # convert_type(df_apple)
+    # df_apple = engineer_features(df_apple, window, short_period, long_period, signal_line_period)
+    # df_apple = drop_features_and_na(df_apple)
     
-    week_start_date = date.now() - timedelta(days=7)
-    month_start_date = date.now() - timedelta(days=31)
-    year_start_date = date.now() - timedelta(days=365)
-    all_start_date = date.now() - timedelta(days=len(df_apple))
-    end_date = date.now()
+    # week_start_date = date.now() - timedelta(days=7)
+    # month_start_date = date.now() - timedelta(days=31)
+    # year_start_date = date.now() - timedelta(days=365)
+    # all_start_date = date.now() - timedelta(days=len(df_apple))
+    # end_date = date.now()
     
-    week = df_apple.loc[(df_apple['Date'] <= pd.to_datetime(end_date)) & (df_apple['Date'] > pd.to_datetime(week_start_date))]
-    month = df_apple.loc[(df_apple['Date'] <= pd.to_datetime(end_date)) & (df_apple['Date'] > pd.to_datetime(month_start_date))]
-    year = df_apple.loc[(df_apple['Date'] <= pd.to_datetime(end_date)) & (df_apple['Date'] > pd.to_datetime(year_start_date))]
-    all_time = df_apple.loc[(df_apple['Date'] <= pd.to_datetime(end_date)) & (df_apple['Date'] > pd.to_datetime(all_start_date))]
-    datas = [week, month, year, all_time]
-    labels = ['WW', 'M', 'Y', 'AT']
+    # week = df_apple.loc[(df_apple['Date'] <= pd.to_datetime(end_date)) & (df_apple['Date'] > pd.to_datetime(week_start_date))]
+    # month = df_apple.loc[(df_apple['Date'] <= pd.to_datetime(end_date)) & (df_apple['Date'] > pd.to_datetime(month_start_date))]
+    # year = df_apple.loc[(df_apple['Date'] <= pd.to_datetime(end_date)) & (df_apple['Date'] > pd.to_datetime(year_start_date))]
+    # all_time = df_apple.loc[(df_apple['Date'] <= pd.to_datetime(end_date)) & (df_apple['Date'] > pd.to_datetime(all_start_date))]
+    # datas = [week, month, year, all_time]
+    # labels = ['WW', 'M', 'Y', 'AT']
     
-    print_all_plots(datas=datas, stock='AAPL', labels=labels)
+    # print_all_plots(datas=datas, stock='AAPL', labels=labels)
     
-    week_price_change = week.loc[:,'Price Change'].sum()
-    month_price_change = month.loc[:,'Price Change'].sum()
-    year_price_change = year.loc[:,'Price Change'].sum()
-    all_price_change = all_time.loc[:,'Price Change'].sum()
+    # week_price_change = week.loc[:,'Price Change'].sum()
+    # month_price_change = month.loc[:,'Price Change'].sum()
+    # year_price_change = year.loc[:,'Price Change'].sum()
+    # all_price_change = all_time.loc[:,'Price Change'].sum()
     
     
-    return jsonify({'weekly change':week_price_change, 
-                    'monthly change': month_price_change,
-                    'yearly change': year_price_change,
-                    'all change': all_price_change,
-                    'Open':'',
-                    'Close':'',
-                    'High':'',
-                    'Low':''})
+    return jsonify({'ticker':'AAPL',
+                    'weekly change':20, 
+                    'monthly change': 30,
+                    'yearly change': 40,
+                    'all change': 50,
+                    'open':'',
+                    'close':'',
+                    'high':'',
+                    'low':''})
 
 @app.route('/predict')
 def predict():
@@ -226,10 +227,6 @@ route:amazon_predict()
 route:microsoft_predict()
 route:nvidia_predict()
 """
-
-@app.route('/hello')
-def hello():
-    return jsonify({'message': 'This messag came from flask router!'})
 
 if __name__ == '__main__':
     app.run(debug=True)
