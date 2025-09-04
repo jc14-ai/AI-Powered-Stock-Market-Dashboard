@@ -159,7 +159,7 @@ def analyze():
         
         print_all_plots(datas=datas, stock=stocks[i], labels=labels)
         
-@app.route('/apple')
+@app.route('/stocks/apple')
 def apple_analyze():
     df_apple = load_dataset(ticker='AAPL',company='apple')
     df_apple['Date'] = df_apple['Price']
@@ -190,7 +190,15 @@ def apple_analyze():
     year_price_change = year.loc[:,'Price Change'].sum()
     all_price_change = all_time.loc[:,'Price Change'].sum()
     
-    return jsonify({})
+    
+    return jsonify({'weekly change':week_price_change, 
+                    'monthly change': month_price_change,
+                    'yearly change': year_price_change,
+                    'all change': all_price_change,
+                    'Open':'',
+                    'Close':'',
+                    'High':'',
+                    'Low':''})
 
 @app.route('/predict')
 def predict():
