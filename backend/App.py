@@ -216,6 +216,159 @@ def apple_analyze():
                     'monthly low': round(month_price_low, 2),
                     'yearly low': round(year_price_low, 2),
                     'all low': round(all_price_low, 2)})
+    
+@app.route('/stocks/amazon')
+def amazon_analyze():
+    df_amazon = load_dataset(ticker='AMZN',company='amazon')
+    df_amazon['Date'] = df_amazon['Price']
+    df_amazon = df_amazon.drop(index=[0,1], columns='Price')
+    
+    window, short_period, long_period, signal_line_period = set_periodic_variables()
+    convert_type(df_amazon)
+    df_amazon = engineer_features(df_amazon, window, short_period, long_period, signal_line_period)
+    df_amazon = drop_features_and_na(df_amazon)
+    
+    week_start_date = date.today() - timedelta(days=7)
+    month_start_date = date.today() - timedelta(days=31)
+    year_start_date = date.today() - timedelta(days=365)
+    all_start_date = date.today() - timedelta(days=len(df_amazon))
+    end_date = date.today()
+    
+    week = df_amazon.loc[(df_amazon['Date'] <= pd.to_datetime(end_date)) & (df_amazon['Date'] > pd.to_datetime(week_start_date))]
+    month = df_amazon.loc[(df_amazon['Date'] <= pd.to_datetime(end_date)) & (df_amazon['Date'] > pd.to_datetime(month_start_date))]
+    year = df_amazon.loc[(df_amazon['Date'] <= pd.to_datetime(end_date)) & (df_amazon['Date'] > pd.to_datetime(year_start_date))]
+    all_time = df_amazon.loc[(df_amazon['Date'] <= pd.to_datetime(end_date)) & (df_amazon['Date'] > pd.to_datetime(all_start_date))]
+    
+    week_price_change = week.loc[:,'Price Change'].sum()
+    month_price_change = month.loc[:,'Price Change'].sum()
+    year_price_change = year.loc[:,'Price Change'].sum()
+    all_price_change = all_time.loc[:,'Price Change'].sum()
+    
+    week_price_high = week.loc[:,'High'].max()
+    month_price_high = month.loc[:,'High'].max()
+    year_price_high = year.loc[:,'High'].max()
+    all_price_high = all_time.loc[:,'High'].max()
+    
+    week_price_low = week.loc[:,'Low'].min()
+    month_price_low = month.loc[:,'Low'].min()
+    year_price_low = year.loc[:,'Low'].min()
+    all_price_low = all_time.loc[:,'Low'].min()
+    
+    return jsonify({'ticker':'AMZN',
+                    'weekly change': round(week_price_change, 2), 
+                    'monthly change': round(month_price_change, 2),
+                    'yearly change': round(year_price_change, 2),
+                    'all change': round(all_price_change, 2),
+                    'weekly high': round(week_price_high, 2),
+                    'monthly high': round(month_price_high, 2),
+                    'yearly high': round(year_price_high, 2),
+                    'all high': round(all_price_high, 2),
+                    'weekly low': round(week_price_low, 2),
+                    'monthly low': round(month_price_low, 2),
+                    'yearly low': round(year_price_low, 2),
+                    'all low': round(all_price_low, 2)})
+    
+@app.route('/stocks/microsoft')
+def microsoft_analyze():
+    df_microsoft = load_dataset(ticker='MSFT',company='microsoft')
+    df_microsoft['Date'] = df_microsoft['Price']
+    df_microsoft = df_microsoft.drop(index=[0,1], columns='Price')
+    
+    window, short_period, long_period, signal_line_period = set_periodic_variables()
+    convert_type(df_microsoft)
+    df_microsoft = engineer_features(df_microsoft, window, short_period, long_period, signal_line_period)
+    df_microsoft = drop_features_and_na(df_microsoft)
+    
+    week_start_date = date.today() - timedelta(days=7)
+    month_start_date = date.today() - timedelta(days=31)
+    year_start_date = date.today() - timedelta(days=365)
+    all_start_date = date.today() - timedelta(days=len(df_microsoft))
+    end_date = date.today()
+    
+    week = df_microsoft.loc[(df_microsoft['Date'] <= pd.to_datetime(end_date)) & (df_microsoft['Date'] > pd.to_datetime(week_start_date))]
+    month = df_microsoft.loc[(df_microsoft['Date'] <= pd.to_datetime(end_date)) & (df_microsoft['Date'] > pd.to_datetime(month_start_date))]
+    year = df_microsoft.loc[(df_microsoft['Date'] <= pd.to_datetime(end_date)) & (df_microsoft['Date'] > pd.to_datetime(year_start_date))]
+    all_time = df_microsoft.loc[(df_microsoft['Date'] <= pd.to_datetime(end_date)) & (df_microsoft['Date'] > pd.to_datetime(all_start_date))]
+    
+    week_price_change = week.loc[:,'Price Change'].sum()
+    month_price_change = month.loc[:,'Price Change'].sum()
+    year_price_change = year.loc[:,'Price Change'].sum()
+    all_price_change = all_time.loc[:,'Price Change'].sum()
+    
+    week_price_high = week.loc[:,'High'].max()
+    month_price_high = month.loc[:,'High'].max()
+    year_price_high = year.loc[:,'High'].max()
+    all_price_high = all_time.loc[:,'High'].max()
+    
+    week_price_low = week.loc[:,'Low'].min()
+    month_price_low = month.loc[:,'Low'].min()
+    year_price_low = year.loc[:,'Low'].min()
+    all_price_low = all_time.loc[:,'Low'].min()
+    
+    return jsonify({'ticker':'MSFT',
+                    'weekly change': round(week_price_change, 2), 
+                    'monthly change': round(month_price_change, 2),
+                    'yearly change': round(year_price_change, 2),
+                    'all change': round(all_price_change, 2),
+                    'weekly high': round(week_price_high, 2),
+                    'monthly high': round(month_price_high, 2),
+                    'yearly high': round(year_price_high, 2),
+                    'all high': round(all_price_high, 2),
+                    'weekly low': round(week_price_low, 2),
+                    'monthly low': round(month_price_low, 2),
+                    'yearly low': round(year_price_low, 2),
+                    'all low': round(all_price_low, 2)})
+
+@app.route('/stocks/nvidia')
+def nvidia_analyze():
+    df_nvidia = load_dataset(ticker='NVDA',company='nvidia')
+    df_nvidia['Date'] = df_nvidia['Price']
+    df_nvidia = df_nvidia.drop(index=[0,1], columns='Price')
+    
+    window, short_period, long_period, signal_line_period = set_periodic_variables()
+    convert_type(df_nvidia)
+    df_nvidia = engineer_features(df_nvidia, window, short_period, long_period, signal_line_period)
+    df_nvidia = drop_features_and_na(df_nvidia)
+    
+    week_start_date = date.today() - timedelta(days=7)
+    month_start_date = date.today() - timedelta(days=31)
+    year_start_date = date.today() - timedelta(days=365)
+    all_start_date = date.today() - timedelta(days=len(df_nvidia))
+    end_date = date.today()
+    
+    week = df_nvidia.loc[(df_nvidia['Date'] <= pd.to_datetime(end_date)) & (df_nvidia['Date'] > pd.to_datetime(week_start_date))]
+    month = df_nvidia.loc[(df_nvidia['Date'] <= pd.to_datetime(end_date)) & (df_nvidia['Date'] > pd.to_datetime(month_start_date))]
+    year = df_nvidia.loc[(df_nvidia['Date'] <= pd.to_datetime(end_date)) & (df_nvidia['Date'] > pd.to_datetime(year_start_date))]
+    all_time = df_nvidia.loc[(df_nvidia['Date'] <= pd.to_datetime(end_date)) & (df_nvidia['Date'] > pd.to_datetime(all_start_date))]
+    
+    week_price_change = week.loc[:,'Price Change'].sum()
+    month_price_change = month.loc[:,'Price Change'].sum()
+    year_price_change = year.loc[:,'Price Change'].sum()
+    all_price_change = all_time.loc[:,'Price Change'].sum()
+    
+    week_price_high = week.loc[:,'High'].max()
+    month_price_high = month.loc[:,'High'].max()
+    year_price_high = year.loc[:,'High'].max()
+    all_price_high = all_time.loc[:,'High'].max()
+    
+    week_price_low = week.loc[:,'Low'].min()
+    month_price_low = month.loc[:,'Low'].min()
+    year_price_low = year.loc[:,'Low'].min()
+    all_price_low = all_time.loc[:,'Low'].min()
+    
+    return jsonify({'ticker':'NVDA',
+                    'weekly change': round(week_price_change, 2), 
+                    'monthly change': round(month_price_change, 2),
+                    'yearly change': round(year_price_change, 2),
+                    'all change': round(all_price_change, 2),
+                    'weekly high': round(week_price_high, 2),
+                    'monthly high': round(month_price_high, 2),
+                    'yearly high': round(year_price_high, 2),
+                    'all high': round(all_price_high, 2),
+                    'weekly low': round(week_price_low, 2),
+                    'monthly low': round(month_price_low, 2),
+                    'yearly low': round(year_price_low, 2),
+                    'all low': round(all_price_low, 2)})
 
 @app.route('/predict')
 def predict():

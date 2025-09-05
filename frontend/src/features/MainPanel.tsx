@@ -136,24 +136,6 @@ export default function MainPanel({time}:MainPanelProps): React.ReactElement {
         }
     }
 
-    // const highPriceDict = {'AAPL':{'All Time': stockView?.allHighPrice, 
-    //                                 '1 Year': stockView?.yearHighPrice, 
-    //                                 '1 Month': stockView?.monthHighPrice,
-    //                                 '1 Week': stockView?.weekHighPrice},
-    //                         'AMZN':{'All Time': stockView?.allHighPrice, 
-    //                                 '1 Year': stockView?.yearHighPrice, 
-    //                                 '1 Month': stockView?.monthHighPrice,
-    //                                 '1 Week': stockView?.weekHighPrice},
-    //                         'MSFT':{'All Time': stockView?.allHighPrice, 
-    //                                 '1 Year': stockView?.yearHighPrice, 
-    //                                 '1 Month': stockView?.monthHighPrice,
-    //                                 '1 Week': stockView?.weekHighPrice},
-    //                         'NVDA':{'All Time': stockView?.allHighPrice, 
-    //                                 '1 Year': stockView?.yearHighPrice, 
-    //                                 '1 Month': stockView?.monthHighPrice,
-    //                                 '1 Week': stockView?.weekHighPrice},
-    //                         }
-
     return (
         <>
         {/* MAIN SCREEN */}
