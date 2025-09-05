@@ -3,6 +3,8 @@ import Label from '../components/Label.tsx'
 import closeButton from '../assets/close-unhovered.png'
 import closeButtonHovered from '../assets/close-hovered.png'
 
+import { Link } from 'react-router'
+
 type MainPanelProps = {
     time:string;
 }
@@ -173,7 +175,7 @@ export default function MainPanel({time}:MainPanelProps): React.ReactElement {
                             'flex justify-center items-center text-black font-voces text-[1.5em] bg-red-300 rounded-4xl w-[110px]'): (time === '1 Week' ? (((stockView?.weekChange ?? 0) > 0) ? 
                             'flex justify-center items-center text-black font-voces text-[1.5em] bg-green-300 rounded-4xl w-[110px]' : 
                             'flex justify-center items-center text-black font-voces text-[1.5em] bg-red-300 rounded-4xl w-[110px]'): '')))}>
-                                
+
                             {time === 'All Time' ? stockView?.allChange : 
                             (time === '1 Year' ? stockView?.yearChange : 
                             (time === '1 Month' ? stockView?.monthChange : 
@@ -208,9 +210,9 @@ export default function MainPanel({time}:MainPanelProps): React.ReactElement {
 
                     <div className='flex flex-col justify-evenly items-center h-2/3 w-1/5'>
                         {/* Stock high/low price */}
-                        <div className='flex flex-row justify-start items-center h-1/3 w-[150px] rounded-2xl'>
-                            <label className='flex justify-center items-center bg-gray-400 font-voces text-[2em] rounded-bl-2xl rounded-tl-2xl h-full w-[50px]'>H</label>
-                            <label className='flex flex-row justify-center items-center text-black font-voces text-[1.5em] h-full w-[100px] bg-white rounded-tr-2xl rounded-br-2xl'>
+                        <div className='flex flex-row justify-start items-center h-1/5 w-[150px] rounded-4xl'>
+                            <label className='flex justify-center items-center bg-gray-400 font-voces text-[2em] rounded-bl-4xl rounded-tl-4xl h-full w-[50px]'>H</label>
+                            <label className='flex flex-row justify-center items-center text-black font-voces text-[1.5em] h-full w-[100px] bg-white rounded-tr-4xl rounded-br-4xl'>
                                 {time === 'All Time' ? 
                                 stockView?.allHighPrice : ((time === '1 Year') ? 
                                 stockView?.yearHighPrice : ((time === '1 Month') ? 
@@ -219,9 +221,9 @@ export default function MainPanel({time}:MainPanelProps): React.ReactElement {
                             </label>
                         </div>
 
-                        <div className='flex flex-row justify-start items-center h-1/3 w-[150px] rounded-2xl'>
-                            <label className='flex justify-center items-center bg-gray-400 font-voces text-[2em] rounded-bl-2xl rounded-tl-2xl h-full w-[50px]'>L</label>
-                            <label className='flex flex-row justify-center items-center text-black font-voces text-[1.5em] h-full w-[100px] bg-white rounded-tr-2xl rounded-br-2xl'>
+                        <div className='flex flex-row justify-start items-center h-1/5 w-[150px] rounded-4xl'>
+                            <label className='flex justify-center items-center bg-gray-400 font-voces text-[2em] rounded-bl-4xl rounded-tl-4xl h-full w-[50px]'>L</label>
+                            <label className='flex flex-row justify-center items-center text-black font-voces text-[1.5em] h-full w-[100px] bg-white rounded-tr-4xl rounded-br-4xl'>
                                {time === 'All Time' ? 
                                 stockView?.allLowPrice : ((time === '1 Year') ? 
                                 stockView?.yearLowPrice : ((time === '1 Month') ? 
@@ -229,6 +231,11 @@ export default function MainPanel({time}:MainPanelProps): React.ReactElement {
                                 stockView?.weekLowPrice : 0.00)))}
                             </label>
                         </div>
+
+                        <Link className='bg-gray-200 pl-5 pr-5 pt-3 pb-3 rounded-4xl hover:cursor-pointer hover:bg-white duration-300' 
+                               to={stockView?.ticker === 'AAPL' ? '/Apple' : stockView?.ticker === 'AMZN' ? '/Amazon': stockView?.ticker === 'MSFT' ? '/Microsoft' : stockView?.ticker === 'NVDA' ? '/Nvidia' : ''} 
+                               onClick={():void => {}}>View Full Chart
+                        </Link>
                     </div>
                 </div>
                 <div className='flex justify-start items-center h-1/3 w-full pl-3 pr-3'>
