@@ -32,9 +32,9 @@ export default function MainPanel({time}:MainPanelProps): React.ReactElement {
         setCloseHovered(isHovered);
     }
 
-    useEffect(() =>{
-        fetch('http://localhost:3000/analyze')
-        }, []);
+    // useEffect(() =>{
+    //     fetch('http://localhost:3000/analyze')
+    //     }, []);
 
     const showFullChart = (ticker:string, time:string) => {
         // TODO: Fix how to add this in the flow
@@ -149,7 +149,6 @@ export default function MainPanel({time}:MainPanelProps): React.ReactElement {
                                 'hidden h-150 w-250 bg-gray-800 z-1 absolute rounded-4xl'}>
                     
                     {/* Stock Ticker - Company - done
-                        Timeframe selector - not yet
                         Line Chart - done
                         Volume Chart - not yet
                         High/Low Price - done
@@ -165,8 +164,16 @@ export default function MainPanel({time}:MainPanelProps): React.ReactElement {
                         'MSFT - Microsoft Corporation' : (stockView?.ticker === 'NVDA') ? 
                         'NVDA - NVIDIA Corporation': ''))}
                         </label>
-                        <label className='flex justify-center items-center text-black font-voces text-[1.5em] bg-green-300 rounded-4xl w-[110px]'>
-                            {/* finish the rest of stocks */}
+                        <label className={time === 'All Time' ? (((stockView?.allChange ?? 0) > 0) ? 
+                            'flex justify-center items-center text-black font-voces text-[1.5em] bg-green-300 rounded-4xl w-[110px]' : 
+                            'flex justify-center items-center text-black font-voces text-[1.5em] bg-red-300 rounded-4xl w-[110px]') : (time === '1 Year' ? (((stockView?.yearChange ?? 0) > 0) ? 
+                            'flex justify-center items-center text-black font-voces text-[1.5em] bg-green-300 rounded-4xl w-[110px]' : 
+                            'flex justify-center items-center text-black font-voces text-[1.5em] bg-red-300 rounded-4xl w-[110px]') : (time === '1 Month' ? (((stockView?.monthChange ?? 0) > 0) ? 
+                            'flex justify-center items-center text-black font-voces text-[1.5em] bg-green-300 rounded-4xl w-[110px]' : 
+                            'flex justify-center items-center text-black font-voces text-[1.5em] bg-red-300 rounded-4xl w-[110px]'): (time === '1 Week' ? (((stockView?.weekChange ?? 0) > 0) ? 
+                            'flex justify-center items-center text-black font-voces text-[1.5em] bg-green-300 rounded-4xl w-[110px]' : 
+                            'flex justify-center items-center text-black font-voces text-[1.5em] bg-red-300 rounded-4xl w-[110px]'): '')))}>
+                                
                             {time === 'All Time' ? stockView?.allChange : 
                             (time === '1 Year' ? stockView?.yearChange : 
                             (time === '1 Month' ? stockView?.monthChange : 
@@ -201,9 +208,9 @@ export default function MainPanel({time}:MainPanelProps): React.ReactElement {
 
                     <div className='flex flex-col justify-evenly items-center h-2/3 w-1/5'>
                         {/* Stock high/low price */}
-                        <div className='flex flex-row justify-start items-center h-1/5 w-[150px] rounded-2xl'>
+                        <div className='flex flex-row justify-start items-center h-1/3 w-[150px] rounded-2xl'>
                             <label className='flex justify-center items-center bg-gray-400 font-voces text-[2em] rounded-bl-2xl rounded-tl-2xl h-full w-[50px]'>H</label>
-                            <label className='flex flex-row justify-center items-center text-black font-voces text-[2em] h-full w-[100px] bg-white rounded-tr-2xl rounded-br-2xl'>
+                            <label className='flex flex-row justify-center items-center text-black font-voces text-[1.5em] h-full w-[100px] bg-white rounded-tr-2xl rounded-br-2xl'>
                                 {time === 'All Time' ? 
                                 stockView?.allHighPrice : ((time === '1 Year') ? 
                                 stockView?.yearHighPrice : ((time === '1 Month') ? 
@@ -212,9 +219,9 @@ export default function MainPanel({time}:MainPanelProps): React.ReactElement {
                             </label>
                         </div>
 
-                        <div className='flex flex-row justify-start items-center h-1/5 w-[150px] rounded-2xl'>
+                        <div className='flex flex-row justify-start items-center h-1/3 w-[150px] rounded-2xl'>
                             <label className='flex justify-center items-center bg-gray-400 font-voces text-[2em] rounded-bl-2xl rounded-tl-2xl h-full w-[50px]'>L</label>
-                            <label className='flex flex-row justify-center items-center text-black font-voces text-[2em] h-full w-[100px] bg-white rounded-tr-2xl rounded-br-2xl'>
+                            <label className='flex flex-row justify-center items-center text-black font-voces text-[1.5em] h-full w-[100px] bg-white rounded-tr-2xl rounded-br-2xl'>
                                {time === 'All Time' ? 
                                 stockView?.allLowPrice : ((time === '1 Year') ? 
                                 stockView?.yearLowPrice : ((time === '1 Month') ? 
