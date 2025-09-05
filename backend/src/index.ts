@@ -64,6 +64,10 @@ app.get('/stocks/nvidia', (req:Request, res:Response) => {
     }
 })
 
+app.get('/analyze', (req:Request, res:Response) =>{
+    fetch('http://127.0.0.1:5000/analyze')
+})
+
 app.listen(PORT, ():void => {
     console.log(`Listening on PORT ${PORT}`)
 });

@@ -33,13 +33,9 @@ export default function MainPanel({time}:MainPanelProps): React.ReactElement {
         setCloseHovered(isHovered);
     }
 
-    // useEffect(() =>{
-    //     fetch('http://localhost:3000/stocks/apple')
-    //     .then(res => res.json())
-    //     .then(data => {
-
-    //     })
-    //     }, []);
+    useEffect(() =>{
+        fetch('http://localhost:3000/analyze')
+        }, []);
 
     const showFullChart = (ticker:string, time:string) => {
         // TODO: Fix how to add this in the flow
@@ -194,7 +190,7 @@ export default function MainPanel({time}:MainPanelProps): React.ReactElement {
                             stockView?.allChange : ((stockView?.ticker === 'AAPL' && time === '1 Year') ? 
                             stockView?.yearChange :(stockView?.ticker === 'AAPL' && time === '1 Month') ?
                             stockView?.monthChange :(stockView?.ticker === 'AAPL' && time === '1 Week') ? 
-                            stockView?.weekChange : '')}
+                            stockView?.weekChange : 0.00)}%
                         </label>
                     </div>
                     <img className='w-10 cursor-pointer' src={isCloseHovered ? closeButtonHovered : closeButton} 

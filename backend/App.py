@@ -1,8 +1,12 @@
-from flask import Flask, jsonify
+from flask import Flask, jsonify, send_file
 import joblib
 
 import yfinance as yf
 import pandas as pd
+
+import matplotlib
+matplotlib.use('Agg')
+
 import matplotlib.pyplot as plt
 import seaborn as sns
 import plotly.express as px
@@ -23,11 +27,11 @@ def date_now():
     return today
 
 def load_overall_dataset():
-    date_now = date_now()
-    df_apple_to_csv = yf.download("AAPL", start="2020-01-01", end=date_now)
-    df_microsoft_to_csv = yf.download("MSFT", start="2020-01-01", end=date_now)
-    df_amazon_to_csv = yf.download("AMZN", start="2020-01-01", end=date_now)
-    df_nvidia_to_csv = yf.download("NVDA", start="2020-01-01", end=date_now)
+    today = date_now()
+    df_apple_to_csv = yf.download("AAPL", start="2020-01-01", end=today)
+    df_microsoft_to_csv = yf.download("MSFT", start="2020-01-01", end=today)
+    df_amazon_to_csv = yf.download("AMZN", start="2020-01-01", end=today)
+    df_nvidia_to_csv = yf.download("NVDA", start="2020-01-01", end=today)
 
     apple_path = 'training/datasets/apple.csv'
     microsoft_path = 'training/datasets/microsoft.csv'
@@ -43,6 +47,8 @@ def load_overall_dataset():
     df_microsoft = pd.read_csv(microsoft_path)
     df_amazon = pd.read_csv(amazon_path)
     df_nvidia = pd.read_csv(nvidia_path)
+    
+    return df_apple, df_microsoft, df_amazon, df_nvidia
 
 def load_dataset(ticker="", company=""):
     date_today = date_now()
@@ -181,10 +187,6 @@ def apple_analyze():
     month = df_apple.loc[(df_apple['Date'] <= pd.to_datetime(end_date)) & (df_apple['Date'] > pd.to_datetime(month_start_date))]
     year = df_apple.loc[(df_apple['Date'] <= pd.to_datetime(end_date)) & (df_apple['Date'] > pd.to_datetime(year_start_date))]
     all_time = df_apple.loc[(df_apple['Date'] <= pd.to_datetime(end_date)) & (df_apple['Date'] > pd.to_datetime(all_start_date))]
-    datas = [week, month, year, all_time]
-    labels = ['WW', 'M', 'Y', 'AT']
-    
-    # print_all_plots(datas=datas, stock='AAPL', labels=labels)
     
     week_price_change = week.loc[:,'Price Change'].sum()
     month_price_change = month.loc[:,'Price Change'].sum()
