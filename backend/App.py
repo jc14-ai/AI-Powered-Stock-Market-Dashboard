@@ -1,4 +1,4 @@
-from flask import Flask, jsonify, send_file
+from flask import Flask, jsonify, request
 import joblib
 
 import yfinance as yf
@@ -13,6 +13,11 @@ import plotly.express as px
 from datetime import date, timedelta
 
 app = Flask(__name__)
+
+apple = joblib.load('/models/AAPL.pkl')
+amazon = joblib.load('/models/AMZN.pkl')
+microsoft = joblib.load('/models/MSFT.pkl')
+nvidia = joblib.load('/models/NVDA.pkl')
 
 def set_periodic_variables():
     window = 14
@@ -374,12 +379,13 @@ def nvidia_analyze():
                     'yearly low': round(year_price_low, 2),
                     'all low': round(all_price_low, 2)})
 
-@app.route('/predict')
-def predict():
-    apple = joblib.load('/models/AAPL.pkl')
-    amazon = joblib.load('/models/AMZN.pkl')
-    microsoft = joblib.load('/models/MSFT.pkl')
-    nvidia = joblib.load('/models/NVDA.pkl')
+@app.route('/predict/apple', method=['POST'])
+def apple_predict():
+    data = request.json()
+    apple_input = data.get('predict','')
+    prediction = apple.predict([apple_input])
+    
+    return jsonify({'Prediction': str(prediction[0])})
 
 """
 FUNCTIONS:

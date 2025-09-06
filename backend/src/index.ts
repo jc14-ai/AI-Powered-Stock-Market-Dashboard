@@ -24,7 +24,7 @@ app.use(cors());
 // })
 
 
-app.get('/stocks/apple', (req:Request, res:Response) => {
+app.get('/stocks/apple', (req:Request, res:Response):void => {
     try {
         fetch('http://127.0.0.1:5000/stocks/apple')
         .then(res => res.json())
@@ -34,7 +34,7 @@ app.get('/stocks/apple', (req:Request, res:Response) => {
     }
 })
 
-app.get('/stocks/amazon', (req:Request, res:Response) => {
+app.get('/stocks/amazon', (req:Request, res:Response):void => {
     try {
         fetch('http://127.0.0.1:5000/stocks/amazon')
         .then(res => res.json())
@@ -44,7 +44,7 @@ app.get('/stocks/amazon', (req:Request, res:Response) => {
     }
 })
 
-app.get('/stocks/microsoft', (req:Request, res:Response) => {
+app.get('/stocks/microsoft', (req:Request, res:Response):void => {
     try {
         fetch('http://127.0.0.1:5000/stocks/microsoft')
         .then(res => res.json())
@@ -54,7 +54,7 @@ app.get('/stocks/microsoft', (req:Request, res:Response) => {
     }
 })
 
-app.get('/stocks/nvidia', (req:Request, res:Response) => {
+app.get('/stocks/nvidia', (req:Request, res:Response):void => {
     try {
         fetch('http://127.0.0.1:5000/stocks/nvidia')
         .then(res => res.json())
@@ -64,8 +64,16 @@ app.get('/stocks/nvidia', (req:Request, res:Response) => {
     }
 })
 
-app.get('/analyze', (req:Request, res:Response) =>{
+app.get('/analyze', (req:Request, res:Response):void =>{
     fetch('http://127.0.0.1:5000/analyze')
+})
+
+app.post('/predict/apple', (req:Request, res:Response):void => {
+
+})
+
+app.get('/predict/apple', (req:Request, res:Response):void =>{
+    
 })
 
 app.listen(PORT, ():void => {
