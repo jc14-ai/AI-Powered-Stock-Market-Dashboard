@@ -8,6 +8,8 @@ import { Link } from 'react-router'
 
 type MainPanelProps = {
     time:string;
+    setTicker: (val:string) => void;
+    tickerB:string;
 }
 
 type stockViewProps = {
@@ -26,7 +28,7 @@ type stockViewProps = {
     allChange?:number
 }
 
-export default function MainPanel({time}:MainPanelProps): React.ReactElement {    
+export default function MainPanel({time, setTicker, tickerB}:MainPanelProps): React.ReactElement {    
     // const [isFullChart, setFullChart] = useState<boolean>(false);
     const [stockView, setStockView] = useState<stockViewProps>();
     const [isCloseHovered, setCloseHovered]  = useState<boolean>(false);
@@ -35,6 +37,10 @@ export default function MainPanel({time}:MainPanelProps): React.ReactElement {
         setCloseHovered(isHovered);
     }
 
+    const highlightTicker = (ticker:string):void  => {
+        setTicker(ticker);
+    }
+    
     useEffect(() =>{
         fetch('http://localhost:3000/analyze')
         }, []);
@@ -235,7 +241,7 @@ export default function MainPanel({time}:MainPanelProps): React.ReactElement {
 
                         <Link className='flex flex-row justify-evenly items-center bg-gray-200 pl-3 pr-3 pt-3 pb-3 w-37 rounded-4xl hover:cursor-pointer hover:bg-white duration-300' 
                                to={stockView?.ticker === 'AAPL' ? '/Apple' : stockView?.ticker === 'AMZN' ? '/Amazon': stockView?.ticker === 'MSFT' ? '/Microsoft' : stockView?.ticker === 'NVDA' ? '/Nvidia' : ''} 
-                               onClick={():void => {}}>
+                               onClick={():void => {highlightTicker(stockView?.ticker ?? '')}}>
                                 <label className='text-[0.8em]'>View Full Chart</label>
                                <img className='w-8' src={fullScreen}/>
                         </Link>
