@@ -10,15 +10,16 @@ import { useState } from "react"
 
 export default function App() {
   const [value, setValue] = useState<string>("All Time");
+  
   return (
     <>
       <Navbar selectValue={setValue} time={value}/>
       <Routes>
         <Route path="/" element={<MainPanel time={value}/>}/>
-        <Route path="/Amazon" element={<Amazon/>}/>
-        <Route path="/Apple" element={<Apple/>}/>
-        <Route path="/Nvidia" element={<Nvidia/>}/>
-        <Route path="/Microsoft" element={<Microsoft/>}/>
+        <Route path="/Amazon" element={<Amazon time={value}/>}/>
+        <Route path="/Apple" element={<Apple time={value}/>}/>
+        <Route path="/Nvidia" element={<Nvidia time={value}/>}/>
+        <Route path="/Microsoft" element={<Microsoft time={value}/>}/>
       </Routes>
     </>
   )
