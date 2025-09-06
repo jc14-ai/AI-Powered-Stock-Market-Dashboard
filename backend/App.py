@@ -387,6 +387,30 @@ def apple_predict():
     
     return jsonify({'Prediction': str(prediction[0])})
 
+@app.route('/predict/amazon', method=['POST'])
+def amazon_predict():
+    data = request.json()
+    amazon_input = data.get('predict','')
+    prediction = amazon.predict([amazon_input])
+    
+    return jsonify({'Prediction': str(prediction[0])})
+    
+@app.route('/predict/microsoft', method=['POST'])
+def microsoft_predict():
+    data = request.json()
+    microsoft_input = data.get('predict','')
+    prediction = microsoft.predict([microsoft_input])
+    
+    return jsonify({'Prediction': str(prediction[0])})
+    
+@app.route('/predict/nvidia', method=['POST'])
+def nvidia_predict():
+    data = request.json()
+    nvidia_input = data.get('predict','')
+    prediction = nvidia.predict([nvidia_input])
+    
+    return jsonify({'Prediction': str(prediction[0])})
+
 """
 FUNCTIONS:
 func:load_dataset()
