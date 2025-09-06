@@ -12,11 +12,8 @@ type NavbarProps = {
 }
 
 export default function Navbar({selectValue, time, setTicker, tickerB}: NavbarProps): React.ReactElement {
-    // TODO: Implement and fix theme toggle functionality
-
     const [whatTheme, setTheme] = useState<boolean>(true);
     const [isTimeFrameShown, setTimeFrameVisible] = useState<boolean>(true);
-    // const [tickerButton, setTickerColored] = useState<tickerButtonProps>({ticker: "ALL"});
 
     const changeTheme = (): void => {
         setTheme((prevTheme): boolean => !prevTheme)

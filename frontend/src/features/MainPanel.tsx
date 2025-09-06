@@ -236,7 +236,7 @@ export default function MainPanel({time, setTicker}:MainPanelProps): React.React
                         </div>
 
                         <div className='flex flex-row justify-start items-center h-1/5 w-[150px] rounded-4xl'>
-                            <label className='flex justify-center items-center bg-gray-300 font-voces text-[2em] rounded-bl-4xl rounded-tl-4xl h-full w-[50px]'>P</label>
+                            <label className='flex justify-center items-center bg-gray-300 font-voces text-[2em] rounded-bl-4xl rounded-tl-4xl h-full w-[50px]'>N</label>
                             <label className='flex flex-row justify-center items-center text-black font-voces text-[1.5em] h-full w-[100px] bg-gray-200 rounded-tr-4xl rounded-br-4xl'>
                                {stockView?.predictedPrice}
                             </label>

@@ -403,58 +403,6 @@ def nvidia_analyze():
                     'all low': round(all_price_low, 2),
                     'predicted price': round(prediction[0], 2)})
 
-# @app.route('/predict/apple', methods=['POST'])
-# def apple_predict():
-#     data = request.json()
-#     apple_input = data.get('predict','')
-#     prediction = apple.predict([apple_input])
-    
-#     return jsonify({'Prediction': str(prediction[0])})
-
-# @app.route('/predict/amazon', methods=['POST'])
-# def amazon_predict():
-#     data = request.json()
-#     amazon_input = data.get('predict','')
-#     prediction = amazon.predict([amazon_input])
-    
-#     return jsonify({'Prediction': str(prediction[0])})
-    
-# @app.route('/predict/microsoft', methods=['POST'])
-# def microsoft_predict():
-#     data = request.json()
-#     microsoft_input = data.get('predict','')
-#     prediction = microsoft.predict([microsoft_input])
-    
-#     return jsonify({'Prediction': str(prediction[0])})
-    
-# @app.route('/predict/nvidia', methods=['POST'])
-# def nvidia_predict():
-#     data = request.json()
-#     nvidia_input = data.get('predict','')
-#     prediction = nvidia.predict([nvidia_input])
-    
-#     return jsonify({'Prediction': str(prediction[0])})
-
-"""
-FUNCTIONS:
-func:load_dataset()
-func:convert_type()
-func:engineer_features()
-func:drop_features_and_na()
-func:print_all_plots()
-
-route:analyze()
-route:apple_analyze()
-route:amazon_analyze()
-route:microsoft_analyze()
-route:nvidia_analyze()
-
-route:apple_predict()
-route:amazon_predict()
-route:microsoft_predict()
-route:nvidia_predict()
-"""
-
 if __name__ == '__main__':
     app.run(debug=True)
 
