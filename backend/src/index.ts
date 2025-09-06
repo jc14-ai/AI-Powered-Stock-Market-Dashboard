@@ -8,22 +8,6 @@ const PORT = 3000;
 
 app.use(cors());
 
-// app.get('/hello', (req:Request, res:Response):void => {
-//     res.json({'message':'Youre getting this from express!'})
-// })
-
-// app.get('/predict', (req:Request, res:Response) => {
-//     try {
-//         fetch('http://localhost:5000/predict')
-//         .then(res => res.json())
-//         .then(data => res.json(data.message))
-
-//     } catch (error) {
-//         res.status(500).json({error: 'Flask server error'});
-//     }
-// })
-
-
 app.get('/stocks/apple', (req:Request, res:Response):void => {
     try {
         fetch('http://127.0.0.1:5000/stocks/apple')
@@ -67,14 +51,6 @@ app.get('/stocks/nvidia', (req:Request, res:Response):void => {
 app.get('/analyze', (req:Request, res:Response):void =>{
     fetch('http://127.0.0.1:5000/analyze')
 })
-
-// app.post('/predict/apple', (req:Request, res:Response):void => {
-    
-// })
-
-// app.get('/predict/apple', (req:Request, res:Response):void =>{
-    
-// })
 
 app.listen(PORT, ():void => {
     console.log(`Listening on PORT ${PORT}`)
