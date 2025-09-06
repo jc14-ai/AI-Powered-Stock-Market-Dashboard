@@ -14,10 +14,10 @@ from datetime import date, timedelta
 
 app = Flask(__name__)
 
-apple = joblib.load('/models/AAPL.pkl')
-amazon = joblib.load('/models/AMZN.pkl')
-microsoft = joblib.load('/models/MSFT.pkl')
-nvidia = joblib.load('/models/NVDA.pkl')
+apple = joblib.load('training/models/AAPL.pkl')
+amazon = joblib.load('training/models/AMZN.pkl')
+microsoft = joblib.load('training/models/MSFT.pkl')
+nvidia = joblib.load('training/models/NVDA.pkl')
 
 def set_periodic_variables():
     window = 14
@@ -179,7 +179,7 @@ def analyze():
 def apple_analyze():
     df_apple = load_dataset(ticker='AAPL',company='apple')
     df_apple['Date'] = df_apple['Price']
-    df_apple = df_apple.drop(index=[0,1], columns='Price')
+    df_apple = df_apple.drop(index=[0,1], columns=['Price'])
     
     window, short_period, long_period, signal_line_period = set_periodic_variables()
     convert_type(df_apple)
@@ -211,6 +211,11 @@ def apple_analyze():
     month_price_low = month.loc[:,'Low'].min()
     year_price_low = year.loc[:,'Low'].min()
     all_price_low = all_time.loc[:,'Low'].min()
+
+    latest_feature = all_time.drop(columns=['Close','Date']).iloc[-1]
+    latest_features = latest_feature.values.reshape(1, -1)
+    
+    prediction = apple.predict(latest_features)
     
     return jsonify({'ticker':'AAPL',
                     'weekly change': round(week_price_change, 2), 
@@ -224,7 +229,8 @@ def apple_analyze():
                     'weekly low': round(week_price_low, 2),
                     'monthly low': round(month_price_low, 2),
                     'yearly low': round(year_price_low, 2),
-                    'all low': round(all_price_low, 2)})
+                    'all low': round(all_price_low, 2),
+                    'predicted price': round(prediction[0], 2)})
     
 @app.route('/stocks/amazon')
 def amazon_analyze():
@@ -263,6 +269,11 @@ def amazon_analyze():
     year_price_low = year.loc[:,'Low'].min()
     all_price_low = all_time.loc[:,'Low'].min()
     
+    latest_feature = all_time.drop(columns=['Close','Date']).iloc[-1]
+    latest_features = latest_feature.values.reshape(1, -1)
+    
+    prediction = apple.predict(latest_features)
+    
     return jsonify({'ticker':'AMZN',
                     'weekly change': round(week_price_change, 2), 
                     'monthly change': round(month_price_change, 2),
@@ -275,7 +286,8 @@ def amazon_analyze():
                     'weekly low': round(week_price_low, 2),
                     'monthly low': round(month_price_low, 2),
                     'yearly low': round(year_price_low, 2),
-                    'all low': round(all_price_low, 2)})
+                    'all low': round(all_price_low, 2),
+                    'predicted price': round(prediction[0], 2)})
     
 @app.route('/stocks/microsoft')
 def microsoft_analyze():
@@ -314,6 +326,11 @@ def microsoft_analyze():
     year_price_low = year.loc[:,'Low'].min()
     all_price_low = all_time.loc[:,'Low'].min()
     
+    latest_feature = all_time.drop(columns=['Close','Date']).iloc[-1]
+    latest_features = latest_feature.values.reshape(1, -1)
+    
+    prediction = apple.predict(latest_features)
+    
     return jsonify({'ticker':'MSFT',
                     'weekly change': round(week_price_change, 2), 
                     'monthly change': round(month_price_change, 2),
@@ -326,7 +343,8 @@ def microsoft_analyze():
                     'weekly low': round(week_price_low, 2),
                     'monthly low': round(month_price_low, 2),
                     'yearly low': round(year_price_low, 2),
-                    'all low': round(all_price_low, 2)})
+                    'all low': round(all_price_low, 2),
+                    'predicted price': round(prediction[0], 2)})
 
 @app.route('/stocks/nvidia')
 def nvidia_analyze():
@@ -365,6 +383,11 @@ def nvidia_analyze():
     year_price_low = year.loc[:,'Low'].min()
     all_price_low = all_time.loc[:,'Low'].min()
     
+    latest_feature = all_time.drop(columns=['Close','Date']).iloc[-1]
+    latest_features = latest_feature.values.reshape(1, -1)
+    
+    prediction = apple.predict(latest_features)
+    
     return jsonify({'ticker':'NVDA',
                     'weekly change': round(week_price_change, 2), 
                     'monthly change': round(month_price_change, 2),
@@ -377,39 +400,40 @@ def nvidia_analyze():
                     'weekly low': round(week_price_low, 2),
                     'monthly low': round(month_price_low, 2),
                     'yearly low': round(year_price_low, 2),
-                    'all low': round(all_price_low, 2)})
+                    'all low': round(all_price_low, 2),
+                    'predicted price': round(prediction[0], 2)})
 
-@app.route('/predict/apple', method=['POST'])
-def apple_predict():
-    data = request.json()
-    apple_input = data.get('predict','')
-    prediction = apple.predict([apple_input])
+# @app.route('/predict/apple', methods=['POST'])
+# def apple_predict():
+#     data = request.json()
+#     apple_input = data.get('predict','')
+#     prediction = apple.predict([apple_input])
     
-    return jsonify({'Prediction': str(prediction[0])})
+#     return jsonify({'Prediction': str(prediction[0])})
 
-@app.route('/predict/amazon', method=['POST'])
-def amazon_predict():
-    data = request.json()
-    amazon_input = data.get('predict','')
-    prediction = amazon.predict([amazon_input])
+# @app.route('/predict/amazon', methods=['POST'])
+# def amazon_predict():
+#     data = request.json()
+#     amazon_input = data.get('predict','')
+#     prediction = amazon.predict([amazon_input])
     
-    return jsonify({'Prediction': str(prediction[0])})
+#     return jsonify({'Prediction': str(prediction[0])})
     
-@app.route('/predict/microsoft', method=['POST'])
-def microsoft_predict():
-    data = request.json()
-    microsoft_input = data.get('predict','')
-    prediction = microsoft.predict([microsoft_input])
+# @app.route('/predict/microsoft', methods=['POST'])
+# def microsoft_predict():
+#     data = request.json()
+#     microsoft_input = data.get('predict','')
+#     prediction = microsoft.predict([microsoft_input])
     
-    return jsonify({'Prediction': str(prediction[0])})
+#     return jsonify({'Prediction': str(prediction[0])})
     
-@app.route('/predict/nvidia', method=['POST'])
-def nvidia_predict():
-    data = request.json()
-    nvidia_input = data.get('predict','')
-    prediction = nvidia.predict([nvidia_input])
+# @app.route('/predict/nvidia', methods=['POST'])
+# def nvidia_predict():
+#     data = request.json()
+#     nvidia_input = data.get('predict','')
+#     prediction = nvidia.predict([nvidia_input])
     
-    return jsonify({'Prediction': str(prediction[0])})
+#     return jsonify({'Prediction': str(prediction[0])})
 
 """
 FUNCTIONS:

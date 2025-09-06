@@ -15,7 +15,7 @@ export default function App() {
     <>
       <Navbar selectValue={setValue} time={value} setTicker={setTickerColored} tickerB={tickerButton}/>
       <Routes>
-        <Route path="/" element={<MainPanel time={value} setTicker={setTickerColored} tickerB={tickerButton}/>} />
+        <Route path="/" element={<MainPanel time={value} setTicker={setTickerColored}/>} />
         <Route path="/Amazon" element={<Amazon time={value}/>}/>
         <Route path="/Apple" element={<Apple time={value}/>}/>
         <Route path="/Nvidia" element={<Nvidia time={value}/>}/>

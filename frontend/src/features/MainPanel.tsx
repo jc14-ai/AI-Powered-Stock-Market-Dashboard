@@ -9,7 +9,6 @@ import { Link } from 'react-router'
 type MainPanelProps = {
     time:string;
     setTicker: (val:string) => void;
-    tickerB:string;
 }
 
 type stockViewProps = {
@@ -25,13 +24,15 @@ type stockViewProps = {
     weekChange?:number,
     monthChange?:number,
     yearChange?:number,
-    allChange?:number
+    allChange?:number,
+    predictedPrice?:number
 }
 
-export default function MainPanel({time, setTicker, tickerB}:MainPanelProps): React.ReactElement {    
+export default function MainPanel({time, setTicker}:MainPanelProps): React.ReactElement {    
     // const [isFullChart, setFullChart] = useState<boolean>(false);
     const [stockView, setStockView] = useState<stockViewProps>();
     const [isCloseHovered, setCloseHovered]  = useState<boolean>(false);
+    // const [predictedPrice, setPredictedPrice] = useState<string>('');
 
     const changeHovered = (isHovered: boolean):void => {
         setCloseHovered(isHovered);
@@ -40,8 +41,16 @@ export default function MainPanel({time, setTicker, tickerB}:MainPanelProps): Re
     const highlightTicker = (ticker:string):void  => {
         setTicker(ticker);
     }
+
+    // useEffect(():void =>{
+    //     fetch('http://localhost:3000/predict/apple',{
+    //         method:'POST',
+    //         headers: {'Content-Type':'application/json'},
+    //         body: JSON.stringify({Price : ''})
+    //     })
+    // },[predictedPrice]);
     
-    useEffect(() =>{
+    useEffect(():void =>{
         fetch('http://localhost:3000/analyze')
         }, []);
 
@@ -65,7 +74,8 @@ export default function MainPanel({time, setTicker, tickerB}:MainPanelProps): Re
                     allChange: data['all change'],
                     weekChange:data['weekly change'],
                     monthChange: data['monthly change'],
-                    yearChange: data['yearly change']
+                    yearChange: data['yearly change'],
+                    predictedPrice: data['predicted price']
                     })
                 })
             }
@@ -88,7 +98,8 @@ export default function MainPanel({time, setTicker, tickerB}:MainPanelProps): Re
                     allChange: data['all change'],
                     weekChange:data['weekly change'],
                     monthChange: data['monthly change'],
-                    yearChange: data['yearly change']
+                    yearChange: data['yearly change'],
+                    predictedPrice: data['predicted price']
                     })
                 })
             }
@@ -111,7 +122,8 @@ export default function MainPanel({time, setTicker, tickerB}:MainPanelProps): Re
                     allChange: data['all change'],
                     weekChange:data['weekly change'],
                     monthChange: data['monthly change'],
-                    yearChange: data['yearly change']
+                    yearChange: data['yearly change'],
+                    predictedPrice: data['predicted price']
                     })
                 })
             }
@@ -134,7 +146,8 @@ export default function MainPanel({time, setTicker, tickerB}:MainPanelProps): Re
                     allChange: data['all change'],
                     weekChange:data['weekly change'],
                     monthChange: data['monthly change'],
-                    yearChange: data['yearly change']
+                    yearChange: data['yearly change'],
+                    predictedPrice: data['predicted price']
                     })
                 })
             }
@@ -159,10 +172,10 @@ export default function MainPanel({time, setTicker, tickerB}:MainPanelProps): Re
                     
                     {/* Stock Ticker - Company - done
                         Line Chart - done
-                        Volume Chart - not yet
+                        prediction - not yet
                         High/Low Price - done
                         Gain / Loss - done
-                        Full View Button  - not yet*/}
+                        Full View Button  - done*/}
 
                 {/*Stock Ticker*/}
                 <div className='flex flex-row pl-5 pr-5 justify-between items-center w-full'>
@@ -238,6 +251,8 @@ export default function MainPanel({time, setTicker, tickerB}:MainPanelProps): Re
                                 stockView?.weekLowPrice : 0.00)))}
                             </label>
                         </div>
+
+                        <label className='text-white'>Predicted Price: {stockView?.predictedPrice}</label>
 
                         <Link className='flex flex-row justify-evenly items-center bg-gray-200 pl-3 pr-3 pt-3 pb-3 w-37 rounded-4xl hover:cursor-pointer hover:bg-white duration-300' 
                                to={stockView?.ticker === 'AAPL' ? '/Apple' : stockView?.ticker === 'AMZN' ? '/Amazon': stockView?.ticker === 'MSFT' ? '/Microsoft' : stockView?.ticker === 'NVDA' ? '/Nvidia' : ''} 
