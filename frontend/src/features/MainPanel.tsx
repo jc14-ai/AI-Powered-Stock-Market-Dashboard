@@ -2,6 +2,7 @@ import {useState, useEffect} from 'react'
 import Label from '../components/Label.tsx'
 import closeButton from '../assets/close-unhovered.png'
 import closeButtonHovered from '../assets/close-hovered.png'
+import fullScreen from '../assets/full-screen.png'
 
 import { Link } from 'react-router'
 
@@ -34,9 +35,9 @@ export default function MainPanel({time}:MainPanelProps): React.ReactElement {
         setCloseHovered(isHovered);
     }
 
-    // useEffect(() =>{
-    //     fetch('http://localhost:3000/analyze')
-    //     }, []);
+    useEffect(() =>{
+        fetch('http://localhost:3000/analyze')
+        }, []);
 
     const showFullChart = (ticker:string, time:string) => {
         // TODO: Fix how to add this in the flow
@@ -232,9 +233,11 @@ export default function MainPanel({time}:MainPanelProps): React.ReactElement {
                             </label>
                         </div>
 
-                        <Link className='bg-gray-200 pl-5 pr-5 pt-3 pb-3 rounded-4xl hover:cursor-pointer hover:bg-white duration-300' 
+                        <Link className='flex flex-row justify-evenly items-center bg-gray-200 pl-3 pr-3 pt-3 pb-3 w-37 rounded-4xl hover:cursor-pointer hover:bg-white duration-300' 
                                to={stockView?.ticker === 'AAPL' ? '/Apple' : stockView?.ticker === 'AMZN' ? '/Amazon': stockView?.ticker === 'MSFT' ? '/Microsoft' : stockView?.ticker === 'NVDA' ? '/Nvidia' : ''} 
-                               onClick={():void => {}}>View Full Chart
+                               onClick={():void => {}}>
+                                <label className='text-[0.8em]'>View Full Chart</label>
+                               <img className='w-8' src={fullScreen}/>
                         </Link>
                     </div>
                 </div>

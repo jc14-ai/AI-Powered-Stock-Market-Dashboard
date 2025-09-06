@@ -122,7 +122,11 @@ def print_all_plots(datas, stock, labels):
         plt.close()
         
         fig = px.line(data_frame=datas[i], x='Date', y='Close')
-        fig.update_layout(width=1920, height=1080)
+        fig.update_layout(width=1520, 
+                          height=660,
+                          xaxis_title='', 
+                          yaxis_title='',
+                          margin=dict(l=0,r=0,t=0,b=0))
         fig.write_html(f"../frontend/public/chart_visuals/{stock}_{labels[i]}.html")
 
 """
