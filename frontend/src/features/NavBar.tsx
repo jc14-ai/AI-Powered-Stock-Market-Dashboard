@@ -1,6 +1,4 @@
 import { useState } from "react";
-import darkMode from "../assets/dark_mode.png";
-import lightMode from "../assets/light_mode.png";
 import logo from "../assets/microsoft.png";
 import { Link } from 'react-router'
 
@@ -12,12 +10,7 @@ type NavbarProps = {
 }
 
 export default function Navbar({selectValue, time, setTicker, tickerB}: NavbarProps): React.ReactElement {
-    const [whatTheme, setTheme] = useState<boolean>(true);
     const [isTimeFrameShown, setTimeFrameVisible] = useState<boolean>(true);
-
-    const changeTheme = (): void => {
-        setTheme((prevTheme): boolean => !prevTheme)
-    }
 
     const showTimeFrames = (): void => {
         setTimeFrameVisible((prevBox): boolean => !prevBox)
@@ -116,9 +109,6 @@ export default function Navbar({selectValue, time, setTicker, tickerB}: NavbarPr
                         <label>NVDA</label>
                     </Link>
                 </div>
-
-                {/* DARK/LIGHT MODE TOGGLER */}
-                <img className="w-10 cursor-pointer" src={whatTheme ? lightMode : darkMode} onClick={(): void => changeTheme()} />
             </div>
         </>
     )

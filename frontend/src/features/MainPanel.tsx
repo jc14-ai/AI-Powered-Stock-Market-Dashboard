@@ -153,7 +153,7 @@ export default function MainPanel({time, setTicker}:MainPanelProps): React.React
         <div className="flex justify-center items-center flex-col h-[888px] w-screen bg-blue-100">
 
             {/* FULL CHART TOGGLE */}
-            <div className={(stockView?.ticker !== '') ? 
+            <div className={(stockView?.ticker === 'AAPL' || stockView?.ticker === 'AMZN' || stockView?.ticker === 'MSFT' || stockView?.ticker === 'NVDA') ? 
                                 'flex flex-col justify-evenly items-start h-150 w-250 bg-gray-800 z-1 absolute rounded-4xl' : 
                                 'hidden h-150 w-250 bg-gray-800 z-1 absolute rounded-4xl'}>
 
