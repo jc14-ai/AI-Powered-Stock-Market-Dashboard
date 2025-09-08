@@ -1,4 +1,5 @@
-from flask import Flask, jsonify, request
+from flask import Flask, jsonify
+from flask_cors import CORS
 import joblib
 
 import yfinance as yf
@@ -12,12 +13,28 @@ import seaborn as sns
 import plotly.express as px
 from datetime import date, timedelta
 
+import os
+
 app = Flask(__name__)
 
-apple = joblib.load('training/models/AAPL.pkl')
-amazon = joblib.load('training/models/AMZN.pkl')
-microsoft = joblib.load('training/models/MSFT.pkl')
-nvidia = joblib.load('training/models/NVDA.pkl')
+BASE_DIR = os.path.dirname(__file__)
+
+APPLE_MODEL_PATH = os.path.join(os.path.dirname(__file__), 'training','models','AAPL.pkl')
+AMAZON_MODEL_PATH = os.path.join(os.path.dirname(__file__), 'training','models','AMZN.pkl')
+MICROSOFT_MODEL_PATH = os.path.join(os.path.dirname(__file__), 'training','models','MSFT.pkl')
+NVIDIA_MODEL_PATH = os.path.join(os.path.dirname(__file__), 'training','models','NVDA.pkl')
+
+with open(APPLE_MODEL_PATH,'rb') as f:
+    apple = joblib.load(f)
+    
+with open(AMAZON_MODEL_PATH,'rb') as f:
+    amazon = joblib.load(f)
+
+with open(MICROSOFT_MODEL_PATH,'rb') as f:
+    microsoft = joblib.load(f)
+
+with open(NVIDIA_MODEL_PATH,'rb') as f:
+    nvidia = joblib.load(f)
 
 def set_periodic_variables():
     window = 14
@@ -37,11 +54,11 @@ def load_overall_dataset():
     df_microsoft_to_csv = yf.download("MSFT", start="2020-01-01", end=today)
     df_amazon_to_csv = yf.download("AMZN", start="2020-01-01", end=today)
     df_nvidia_to_csv = yf.download("NVDA", start="2020-01-01", end=today)
-
-    apple_path = 'training/datasets/apple.csv'
-    microsoft_path = 'training/datasets/microsoft.csv'
-    amazon_path = 'training/datasets/amazon.csv'
-    nvidia_path = 'training/datasets/nvidia.csv'
+    
+    apple_path = os.path.join(BASE_DIR, "training", "datasets", "apple.csv")
+    microsoft_path = os.path.join(BASE_DIR, "training", "datasets", "microsoft.csv")
+    amazon_path = os.path.join(BASE_DIR, "training", "datasets", "amazon.csv")
+    nvidia_path = os.path.join(BASE_DIR, "training", "datasets", "nvidia.csv")
 
     df_apple_to_csv.to_csv(apple_path)
     df_microsoft_to_csv.to_csv(microsoft_path)
@@ -58,7 +75,7 @@ def load_overall_dataset():
 def load_dataset(ticker="", company=""):
     date_today = date_now()
     df_to_csv = yf.download(ticker, start="2020-01-01", end=date_today)
-    path = f'training/datasets/{company}.csv'
+    path = os.path.join(BASE_DIR, "training", "datasets", f"{company}.csv")
     df_to_csv.to_csv(path)
     df = pd.read_csv(path)
     
@@ -99,6 +116,7 @@ def drop_features_and_na(df):
     df = df.dropna()
     return df
 
+#NEEDS SOME CHANGES ON FILE PATH BEFORE DEPLOYING ESPECIALLY ON savefig() function
 def print_all_plots(datas, stock, labels):
     for i in range(len(datas)):
         plt.figure(figsize=(10.5,3.5))
@@ -404,6 +422,7 @@ def nvidia_analyze():
                     'predicted price': round(prediction[0], 2)})
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    port = int(os.environ.get("Port", 5000))
+    app.run(host="0.0.0.0",port=port)
 
 

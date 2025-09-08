@@ -41,14 +41,14 @@ export default function MainPanel({time, setTicker}:MainPanelProps): React.React
     }
     
     useEffect(():void =>{
-        fetch('http://localhost:3000/analyze')
+        fetch('/analyze')
         }, []);
 
     const showFullChart = (ticker:string, time:string) => {
         // TODO: Fix how to add this in the flow
         if (ticker === 'AAPL'){
             if(time === 'All Time' || time === '1 Year' || time === '1 Month' || time === '1 Week'){
-                fetch('http://localhost:3000/stocks/apple')
+                fetch('/stocks/apple')
                 .then(res => res.json())
                 .then(data => {
                 setStockView({
@@ -72,7 +72,7 @@ export default function MainPanel({time, setTicker}:MainPanelProps): React.React
         }
         else if(ticker === 'AMZN'){
             if(time === 'All Time' || time === '1 Year' || time === '1 Month' || time === '1 Week'){
-                fetch('http://localhost:3000/stocks/amazon')
+                fetch('/stocks/amazon')
                 .then(res => res.json())
                 .then(data => {
                 setStockView({
@@ -96,7 +96,7 @@ export default function MainPanel({time, setTicker}:MainPanelProps): React.React
         }
         else if(ticker === 'MSFT'){
             if(time === 'All Time' || time === '1 Year' || time === '1 Month' || time === '1 Week'){
-                fetch('http://localhost:3000/stocks/microsoft')
+                fetch('/stocks/microsoft')
                 .then(res => res.json())
                 .then(data => {
                 setStockView({
@@ -120,7 +120,7 @@ export default function MainPanel({time, setTicker}:MainPanelProps): React.React
         }
         else if(ticker === 'NVDA'){
             if(time === 'All Time' || time === '1 Year' || time === '1 Month' || time === '1 Week'){
-                fetch('http://localhost:3000/stocks/nvidia')
+                fetch('/stocks/nvidia')
                 .then(res => res.json())
                 .then(data => {
                 setStockView({

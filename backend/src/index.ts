@@ -1,16 +1,17 @@
 import express, { Request, Response } from "express";
 import cors from 'cors';
-import axios from 'axios';
 
 const app = express();
 
-const PORT = 3000;
+const PORT = process.env.PORT || 3000;
+
+const FLASK_URL = process.env.FLASK_URL || 'http://127.0.0.1:5000'
 
 app.use(cors());
 
 app.get('/stocks/apple', (req:Request, res:Response):void => {
     try {
-        fetch('http://127.0.0.1:5000/stocks/apple')
+        fetch(`${FLASK_URL}/stocks/apple`)
         .then(res => res.json()) 
         .then(data => res.json(data));
     } catch (error) {
@@ -20,7 +21,7 @@ app.get('/stocks/apple', (req:Request, res:Response):void => {
 
 app.get('/stocks/amazon', (req:Request, res:Response):void => {
     try {
-        fetch('http://127.0.0.1:5000/stocks/amazon')
+        fetch(`${FLASK_URL}/stocks/amazon`)
         .then(res => res.json())
         .then(data => res.json(data));
     } catch (error) {
@@ -30,7 +31,7 @@ app.get('/stocks/amazon', (req:Request, res:Response):void => {
 
 app.get('/stocks/microsoft', (req:Request, res:Response):void => {
     try {
-        fetch('http://127.0.0.1:5000/stocks/microsoft')
+        fetch(`${FLASK_URL}/stocks/microsoft`)
         .then(res => res.json())
         .then(data => res.json(data));
     } catch (error) {
@@ -40,7 +41,7 @@ app.get('/stocks/microsoft', (req:Request, res:Response):void => {
 
 app.get('/stocks/nvidia', (req:Request, res:Response):void => {
     try {
-        fetch('http://127.0.0.1:5000/stocks/nvidia')
+        fetch(`${FLASK_URL}/stocks/nvidia`)
         .then(res => res.json())
         .then(data => res.json(data));
     } catch (error) {
@@ -49,7 +50,7 @@ app.get('/stocks/nvidia', (req:Request, res:Response):void => {
 })
 
 app.get('/analyze', (req:Request, res:Response):void =>{
-    fetch('http://127.0.0.1:5000/analyze')
+    fetch(`${FLASK_URL}/analyze`)
 })
 
 app.listen(PORT, ():void => {
