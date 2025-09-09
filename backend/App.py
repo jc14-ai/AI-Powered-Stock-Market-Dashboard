@@ -1,5 +1,4 @@
 from flask import Flask, jsonify
-from flask_cors import CORS
 import joblib
 
 import yfinance as yf
@@ -124,7 +123,7 @@ def print_all_plots(datas, stock, labels):
         sns.despine()
         plt.xlabel(xlabel="")
         plt.ylabel(ylabel="")
-        plt.savefig(f"../frontend/public/svg_visuals/{stock}_{labels[i]}.svg")
+        # plt.savefig(f"../frontend/public/svg_visuals/{stock}_{labels[i]}.svg")
         plt.close()
         
         #Sub chart
@@ -133,7 +132,7 @@ def print_all_plots(datas, stock, labels):
         sns.despine()
         plt.xlabel(xlabel="")
         plt.ylabel(ylabel="")
-        plt.savefig(f"../frontend/public/svg_visuals/{stock}_{labels[i]}_m.svg")
+        # plt.savefig(f"../frontend/public/svg_visuals/{stock}_{labels[i]}_m.svg")
         plt.close()
         
         plt.figure(figsize=(16.2,3.5))
@@ -141,7 +140,7 @@ def print_all_plots(datas, stock, labels):
         sns.despine()
         plt.xlabel(xlabel="")
         plt.ylabel(ylabel="")
-        plt.savefig(f"../frontend/public/svg_visuals/{stock}_{labels[i]}_m_RSI.svg")
+        # plt.savefig(f"../frontend/public/svg_visuals/{stock}_{labels[i]}_m_RSI.svg")
         plt.close()
         
         fig = px.line(data_frame=datas[i], x='Date', y='Close')
@@ -150,7 +149,18 @@ def print_all_plots(datas, stock, labels):
                           xaxis_title='', 
                           yaxis_title='',
                           margin=dict(l=0,r=0,t=0,b=0))
-        fig.write_html(f"../frontend/public/chart_visuals/{stock}_{labels[i]}.html")
+        # fig.write_html(f"../frontend/public/chart_visuals/{stock}_{labels[i]}.html")
+
+app.route('/plot/window/<stock>/<time>')
+def plot_window():
+    # plt.figure(figsize=(10.5,3.5))
+    #     sns.lineplot(data=datas[i], x='Date', y='Close', errorbar=None)
+    #     sns.despine()
+    #     plt.xlabel(xlabel="")
+    #     plt.ylabel(ylabel="")
+    #     # plt.savefig(f"../frontend/public/svg_visuals/{stock}_{labels[i]}.svg")
+    #     plt.close()
+    ...
 
 """
 TODO: 
@@ -191,7 +201,7 @@ def analyze():
         all_time = df
         datas = [week, month, year, all_time]
         
-        print_all_plots(datas=datas, stock=stocks[i], labels=labels)
+        # print_all_plots(datas=datas, stock=stocks[i], labels=labels)
         
 @app.route('/stocks/apple')
 def apple_analyze():

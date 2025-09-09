@@ -279,10 +279,10 @@ export default function MainPanel({time, setTicker}:MainPanelProps): React.React
                     <Label text='Amazon.com, Inc.'/>
                     <div className="h-full w-2xl" onClick={():void => showFullChart('AMZN',time)}>
                         <img className='h-full w-full object-cover bg-gray-100 rounded-b-3xl rounded-tr-3xl cursor-pointer' 
-                        src={time === "All Time" ? "svg_visuals/AMZN_AT.svg" : 
-                        (time === "1 Year" ? "svg_visuals/AMZN_Y.svg" : 
-                        (time === "1 Month" ? "svg_visuals/AMZN_M.svg" : 
-                        (time === "1 Week" ? "svg_visuals/AMZN_WW.svg" : "svg_visuals/AMZN_AT.svg")))}/>
+                        src={time === "All Time" ? "/plot/window/amazon/alltime" : 
+                        (time === "1 Year" ? "/plot/window/amazon/year" : 
+                        (time === "1 Month" ? "/plot/window/amazon/month" : 
+                        (time === "1 Week" ? "/plot/window/amazon/week" : "/plot/window/amazon/alltime")))}/>
                     </div>
                 </div>
                 <div className='h-full flex flex-col justify-between items-start 
@@ -290,10 +290,10 @@ export default function MainPanel({time, setTicker}:MainPanelProps): React.React
                     <Label text='Apple Inc.'/>
                     <div className="h-full w-2xl" onClick={():void => showFullChart('AAPL',time)}>
                         <img className='h-full w-full object-cover bg-gray-100 rounded-b-3xl rounded-tr-3xl cursor-pointer' 
-                        src={time === "All Time" ? "svg_visuals/AAPL_AT.svg": 
-                        (time === "1 Year" ? "svg_visuals/AAPL_Y.svg" : 
-                        (time === "1 Month" ? "svg_visuals/AAPL_M.svg" : 
-                        (time === "1 Week" ? "svg_visuals/AAPL_WW.svg" : "svg_visuals/AAPL_AT.svg")))}/>
+                        src={time === "All Time" ? "/plot/window/apple/alltime": 
+                        (time === "1 Year" ? "/plot/window/apple/year" : 
+                        (time === "1 Month" ? "/plot/window/apple/month" : 
+                        (time === "1 Week" ? "/plot/window/apple/week" : "/plot/window/apple/alltime")))}/>
                     </div>
                 </div>
             </div>
@@ -305,10 +305,10 @@ export default function MainPanel({time, setTicker}:MainPanelProps): React.React
                     <Label text='Microsoft Corporation'/>
                     <div className="h-full w-2xl" onClick={():void => showFullChart('MSFT',time)}>
                         <img className='h-full w-full object-cover bg-gray-100 rounded-b-3xl rounded-tr-3xl cursor-pointer'
-                        src={time === "All Time" ? "svg_visuals/MSFT_AT.svg": 
-                        (time === "1 Year" ? "svg_visuals/MSFT_Y.svg" : 
-                        (time === "1 Month" ? "svg_visuals/MSFT_M.svg" : 
-                        (time === "1 Week" ? "svg_visuals/MSFT_WW.svg" : "svg_visuals/MSFT_AT.svg")))}/>
+                        src={time === "All Time" ? "/plot/window/microsoft/alltime": 
+                        (time === "1 Year" ? "/plot/window/microsoft/year": 
+                        (time === "1 Month" ? "/plot/window/microsoft/month" : 
+                        (time === "1 Week" ? "/plot/window/microsoft/week" : "/plot/window/microsoft/alltime")))}/>
                     </div>
                 </div>
                 <div className='h-full flex flex-col justify-between items-start 
@@ -316,10 +316,10 @@ export default function MainPanel({time, setTicker}:MainPanelProps): React.React
                     <Label text='NVIDIA Corporation'/>
                     <div className="h-full w-2xl" onClick={():void => showFullChart('NVDA',time)}>
                         <img className='h-full w-full object-cover bg-gray-100 rounded-b-3xl rounded-tr-3xl cursor-pointer'
-                        src={time === "All Time" ? "svg_visuals/NVDA_AT.svg": 
-                        (time === "1 Year" ? "svg_visuals/NVDA_Y.svg" : 
-                        (time === "1 Month" ? "svg_visuals/NVDA_M.svg" : 
-                        (time === "1 Week" ? "svg_visuals/NVDA_WW.svg" : "svg_visuals/NVDA_AT.svg")))}/>
+                        src={time === "All Time" ? "/plot/window/nvidia/alltime": 
+                        (time === "1 Year" ? "/plot/window/nvidia/year" : 
+                        (time === "1 Month" ? "/plot/window/nvidia/month" : 
+                        (time === "1 Week" ? "/plot/window/nvidia/week" : "/plot/window/nvidia/alltime")))}/>
                     </div>
                 </div>
             </div>
