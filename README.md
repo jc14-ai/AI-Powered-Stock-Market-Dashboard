@@ -1,4 +1,6 @@
 # PredictaBoard AI
+## A dashboard uses to display stock market charts, and also predicts the next price for a stock.
+
 ## Development Installation
   1. Clone the repository.
 
