@@ -50,12 +50,12 @@
 
       ```bash
       npm run dev
-  10. Navgate to server side directory then install express and dependencies.
+  10. Navigate to server side directory then install express and dependencies.
 
-     ```bash
-     cd ../backend
-     npm init -y
-     npm install express
+      ```bash
+      cd ../backend
+      npm init -y
+      npm install express
   11. Remove type attribute in package.json
 
       ```bash
